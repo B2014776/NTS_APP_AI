@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import '../LoginController/DiseaseDetectionController.dart';
 
 class diseaseDetection extends StatefulWidget {
+
+
   const diseaseDetection({super.key});
 
   @override
   State<diseaseDetection> createState() => _diseaseDetectionState();
 }
+
 class _diseaseDetectionState extends State<diseaseDetection> {
+  final DiseasedetectionController controller = DiseasedetectionController();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

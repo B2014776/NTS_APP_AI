@@ -5,6 +5,7 @@ import '../model/DiseaseDetectionModel.dart';
 class DiseasedetectionController {
   late TextEditingController username = TextEditingController();
   late TextEditingController password = TextEditingController();
+
 }
 
 class DiseaseController {
