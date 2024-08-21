@@ -13,6 +13,7 @@ class login extends StatefulWidget {
 
 class _loginState extends State<login> {
   final LoginController login = LoginController();
+  var test;
   bool isCheckLogin = false;
   @override
   Widget build(BuildContext context) {
