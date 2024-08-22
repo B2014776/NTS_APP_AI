@@ -1,24 +1,47 @@
-import 'dart:convert';
-import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 import '../model/DiseaseModel.dart';
-
-class DiseasedetectionController {
-  late TextEditingController username = TextEditingController();
-  late TextEditingController password = TextEditingController();
-}
+import '../model/MedicineModel.dart';
 
 class DiseaseController {
   Benh? benh;
+  List<Medicine> biologicalMedicines = [];
+  List<Medicine> chemicalMedicines = [];
+
+  DiseaseController() {
+    //
+    biologicalMedicines = [
+      Medicine(
+        name: 'Chitosan',
+        information: 'Chitosan là một loại polymer cation tự nhiên...',
+        usage: 'Sử dụng để điều trị tình trạng X.',
+      ),
+      Medicine(
+        name: 'Bacillus subtilis',
+        information: 'Một loại vi khuẩn Gram dương giúp kiểm soát nấm bệnh...',
+        usage: 'Sử dụng trong phòng ngừa bệnh.',
+      ),
+    ];
+
+    chemicalMedicines = [
+      Medicine(
+        name: 'Carbendazim',
+        information: 'Thuốc hóa học có tác dụng trị nấm mạnh.',
+        usage: 'Sử dụng cho tình trạng bệnh Y.',
+      ),
+      Medicine(
+        name: 'Propiconazole',
+        information: 'Thuốc hóa học giúp kiểm soát bệnh nấm trên lá.',
+        usage: 'Sử dụng khi triệu chứng bắt đầu xuất hiện.',
+      ),
+    ];
+  }
 
   Future<void> fetchBenhFromAPI() async {
-    final response = await http.get(Uri.parse('https://api-ai-l1r8.onrender.com/disease_iden_demo/Tungro'));
-
+    //
+    final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Tungro');
     if (response.statusCode == 200) {
-      Map<String, dynamic> data = json.decode(response.body);
-
-      benh = Benh.fromJson(data);
+      benh = Benh.fromJson(response.data);
     } else {
       throw Exception('Failed to load disease details');
     }
