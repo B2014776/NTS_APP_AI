@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/DiseaseDetectionModel.dart';
+import '../model/DiseaseModel.dart';
 import '../model/MedicineModel.dart';
 import 'MedicineDetails.dart';
 
