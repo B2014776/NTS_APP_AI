@@ -33,7 +33,7 @@ class CustomTextFieldV6 extends StatelessWidget {
     required this.title,
     required this.isRequired,
     required this.icon,
-    this.textStyle = const TextStyle(fontSize: 18),
+    this.textStyle = const TextStyle(fontSize: 16),
     this.hintText = '',
     this.customIcon = const Icon(Icons.text_fields),
   });
@@ -47,29 +47,34 @@ class CustomTextFieldV6 extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
             color: Colors.black,  // Màu chữ đen
           ),
         ),
         SizedBox(height: 5),  // Khoảng cách nhỏ giữa tiêu đề và ô nhập liệu
-        TextField(
-          controller: controller,
-          style: textStyle,  // Áp dụng cỡ chữ cho nội dung nhập
-          decoration: InputDecoration(
-            hintText: hintText,  // Văn bản gợi ý
-            prefixIcon: icon,  // Icon từ bên ngoài
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4),  // Bo tròn viền
-              borderSide: BorderSide(
-                color: Colors.grey,  // Màu viền khi chưa focus
+        SizedBox(
+          width: 300,  // Chiều rộng mong muốn của ô nhập liệu
+          height: 40,
+          child: TextField(
+            controller: controller,
+            style: textStyle,  // Áp dụng cỡ chữ cho nội dung nhập
+            decoration: InputDecoration(
+              hintText: hintText,
+              contentPadding: EdgeInsets.only(top: 12),  // Điều chỉnh vị trí văn bản// Văn bản gợi ý
+              prefixIcon: icon,  // Icon từ bên ngoài
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4),  // Bo tròn viền
+                borderSide: BorderSide(
+                  color: Colors.grey,  // Màu viền khi chưa focus
+                ),
               ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4),  // Bo tròn viền khi focus
-              borderSide: BorderSide(
-                color: Colors.black,  // Màu viền khi focus vào ô
-                width: 1.0,  // Độ dày viền khi focus
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4),  // Bo tròn viền khi focus
+                borderSide: BorderSide(
+                  color: Colors.black,  // Màu viền khi focus vào ô
+                  width: 1.0,  // Độ dày viền khi focus
+                ),
               ),
             ),
           ),
