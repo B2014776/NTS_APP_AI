@@ -178,53 +178,7 @@ class _loginState extends State<Signup> {
                             //   ),
                             // ),
 
-                            Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Căn giữa các phần tử và giãn đều
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left:
-                                            0.0), // Đẩy Checkbox và Text ra khỏi mép trái
-                                        child: Checkbox(
-                                          value: isCheckLogin,
-                                          onChanged: (bool? value) {
-                                            setState(() {
-                                              isCheckLogin = value ?? false;
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          width:
-                                          0), // Tạo khoảng cách giữa Checkbox và Text
-                                      Expanded(
-                                        child: Text(
-                                          "Nhớ mật khẩu",
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      right:
-                                      0.0), // Đẩy nút TextButton ra khỏi mép phải
-                                  child: GestureDetector(
-                                    onTap: (){},
-                                    child: Text(
-                                      'Quên mật khẩu?',
-                                      style: TextStyle(color: Colors.green, fontSize: 14),
-                                    ),
-                                  )
-                                ),
-                              ],
-                            ),
-
+                            SizedBox(height: 25,),
                             Container(
                               height: 40,
                               width: double.infinity,
@@ -244,25 +198,8 @@ class _loginState extends State<Signup> {
                                 ),
                               ),
                             ),
-                            SizedBox(height:8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Bạn chưa có tài khoản?",
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                                GestureDetector(
-                                  onTap: (){},
-                                  child: Text(
-                                      'Đăng ký',
-                                    style: TextStyle(color: Colors.green, fontSize: 14),
-                                  ),
-                                )
 
-                              ],
-                            ),
-
+                            SizedBox(height: 8,),
                             Text(
                               "Hoặc đăng nhập với",
                               style: TextStyle(fontSize: 16),
