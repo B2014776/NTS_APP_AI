@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-import '../model/DiseaseModel.dart';
-import '../model/MedicineModel.dart';
+import '../models/DiseaseModel.dart';
+import '../models/MedicineModel.dart';
 
 class DiseaseController {
   Benh? benh;
@@ -38,14 +38,30 @@ class DiseaseController {
   }
 
   Future<void> fetchBenhFromAPI() async {
-    //
-    final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Tungro');
-    if (response.statusCode == 200) {
-      benh = Benh.fromJson(response.data);
-    } else {
-      throw Exception('Failed to load disease details');
+    benh = Benh(
+      tenBenh: 'Bệnh đạo ôn',
+      thuongXuatHienTrenCay: 'Lá lúa',
+      trieuChung: 'Xuất hiện các vết đốm nhỏ màu nâu trên lá.',
+      nguyenNhan: 'Do nấm gây ra trong điều kiện ẩm ướt.',
+      dieuKien: 'Thời tiết ẩm ướt và mưa nhiều.',
+      truBenh: 'Sử dụng thuốc diệt nấm để trị bệnh.',
+      phongNgua: '- Dọn sạch tàn dư rơm rạ và cỏ dại mang mầm bệnh trên đồng ruộng. Gieo cấy các giống kháng hoặc chống chịu với bệnh đạo ôn.',
+    );
+
+
+    // Sau đó, thử gọi API
+    try {
+      final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Tungro');
+      if (response.statusCode == 200) {
+        benh = Benh.fromJson(response.data);
+
+      }
+    } catch (error) {
+      // Nếu có lỗi, bạn có thể giữ nguyên dữ liệu gán cứng và in ra lỗi (nếu cần)
+      print("Failed to load disease details: $error");
     }
   }
+
 
   String getBenhDetails() {
     if (benh != null) {
@@ -54,4 +70,5 @@ class DiseaseController {
       return "Chưa có dữ liệu bệnh.";
     }
   }
+
 }

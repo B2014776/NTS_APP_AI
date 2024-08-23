@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../LoginController/DiseaseDetectionController.dart';
-import '../model/DiseaseModel.dart';
-import '../model/MedicineModel.dart';
+import '../controllers/DiseaseDetectionController.dart';
+import '../models/DiseaseModel.dart';
+import '../models/MedicineModel.dart';
 import 'MedicineDetails.dart';
 
 class DiseaseDetection extends StatefulWidget {

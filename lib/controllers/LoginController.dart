@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../model/DiseaseModel.dart';
+import '../models/DiseaseModel.dart';
 
 class LoginController {
   late TextEditingController username = TextEditingController();

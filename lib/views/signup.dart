@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../LoginController/LoginController.dart';
+import '../controllers/LoginController.dart';
 import '../ultils/CustomTextField.dart';
 
 class Signup extends StatefulWidget {
