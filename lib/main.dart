@@ -1,3 +1,4 @@
+import 'package:apptestai/views/home.dart';
 import 'package:apptestai/views/login.dart';
 import 'package:apptestai/views/signup.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const Signup(),
-      home: const login(),
+      // home: const login(),
+      home:HomePage(),
     );
   }
 }
