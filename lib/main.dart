@@ -1,4 +1,4 @@
-import 'package:apptestai/views/DiseaseDetection.dart';
+import 'package:apptestai/views/detection/DiseaseDetection.dart';
 import 'package:apptestai/views/login.dart';
 import 'package:flutter/material.dart';
 

@@ -47,17 +47,13 @@ class DiseaseController {
       truBenh: 'Sử dụng thuốc diệt nấm để trị bệnh.',
       phongNgua: '- Dọn sạch tàn dư rơm rạ và cỏ dại mang mầm bệnh trên đồng ruộng. Gieo cấy các giống kháng hoặc chống chịu với bệnh đạo ôn.',
     );
-
-
-    // Sau đó, thử gọi API
     try {
-      final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Tungro');
+      final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Blast');
       if (response.statusCode == 200) {
         benh = Benh.fromJson(response.data);
 
       }
     } catch (error) {
-      // Nếu có lỗi, bạn có thể giữ nguyên dữ liệu gán cứng và in ra lỗi (nếu cần)
       print("Failed to load disease details: $error");
     }
   }
