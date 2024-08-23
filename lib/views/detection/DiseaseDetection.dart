@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:apptestai/views/detection/widgets/DetectionAppBar.dart';
 import 'package:apptestai/views/detection/widgets/GeneralInfo.dart';
 import 'package:apptestai/views/detection/widgets/PreventionTab.dart';
 import 'package:apptestai/views/detection/widgets/TreatmentTab.dart';
-import '../../controllers/DiseaseDetectionController.dart';
 import '../detection/widgets/SupportFooter.dart';
+
+import '../../controllers/detection/DiseaseDetectionController.dart';
+
 
 class DiseaseDetection extends StatefulWidget {
   const DiseaseDetection({super.key});

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-import '../models/DiseaseModel.dart';
-import '../models/MedicineModel.dart';
+import '../../models/DiseaseModel.dart';
+import '../../models/MedicineModel.dart';
 
 class DiseaseController {
   Benh? benh;

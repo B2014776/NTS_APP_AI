@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../controllers/DiseaseDetectionController.dart';
+import '../../../controllers/detection/DiseaseDetectionController.dart';
 
 class DetectionAppBar extends StatelessWidget implements PreferredSizeWidget {
   final DiseaseController controller;
@@ -28,9 +28,9 @@ class DetectionAppBar extends StatelessWidget implements PreferredSizeWidget {
       ],
       bottom: TabBar(
         tabs: [
-          Tab(text: 'Thông tin chung'),
-          Tab(text: 'Cách điều trị'),
-          Tab(text: 'Cách phòng ngừa'),
+          Flexible(child: Tab(text: 'Thông tin chung')),
+          Flexible(child: Tab(text: 'Cách điều trị')),
+          Flexible(child: Tab(text: 'Cách phòng ngừa')),
         ],
       ),
     );
