@@ -3,34 +3,42 @@ import '../../../controllers/detection/DiseaseDetectionController.dart';
 
 class DetectionAppBar extends StatelessWidget implements PreferredSizeWidget {
   final DiseaseController controller;
-  const DetectionAppBar({required this.controller});
+  final double appBarHeight; // Thêm biến chiều cao
+
+  const DetectionAppBar({required this.controller, this.appBarHeight = 80.0});
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight + kTextTabBarHeight); // Cập nhật chiều cao
+  Size get preferredSize => Size.fromHeight(appBarHeight);
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: Text(controller.benh?.tenBenh ?? 'Loading...'),
-      leading: Center(
-        child: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundImage: AssetImage('assets/f25dabbda140c250232a6b1a711d952c.png'),
+    return PreferredSize(
+      preferredSize: Size.fromHeight(appBarHeight),
+      child: AppBar(
+        backgroundColor: Colors.green,
+        title: Text(
+          controller.benh?.tenBenh ?? 'Loading...',
+          style: TextStyle(
+            color: Colors.white,
           ),
         ),
-      ],
-      bottom: TabBar(
-        tabs: [
-          Flexible(child: Tab(text: 'Thông tin chung')),
-          Flexible(child: Tab(text: 'Cách điều trị')),
-          Flexible(child: Tab(text: 'Cách phòng ngừa')),
+        leading: Center(
+          child: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircleAvatar(
+              backgroundImage:
+                  AssetImage('assets/d7ba6024f3f77dd57e3abe35fc9d8185.png'),
+            ),
+          ),
         ],
       ),
     );

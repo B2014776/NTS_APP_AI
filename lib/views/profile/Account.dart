@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:apptestai/controllers/profile/AccountController.dart';
 import 'package:apptestai/views/profile/widgets/AccountInfoCard.dart';
 import '../../ultils/CustomBottomNavigationBar.dart';
+import '../../../models/UserModel.dart'; // Đảm bảo import model User
 
 class Account extends StatefulWidget {
   @override
@@ -11,9 +12,7 @@ class Account extends StatefulWidget {
 class _AccountState extends State<Account> {
   final UserController _controller = UserController();
   bool _isLoading = true;
-  String _userName = '';
-  String _email = '';
-  String _phoneNumber = '';
+  User? _user;
 
   @override
   void initState() {
@@ -24,9 +23,7 @@ class _AccountState extends State<Account> {
   Future<void> _fetchUserData() async {
     await _controller.fetchUserFromAPI();
     setState(() {
-      _userName = _controller.user?.name ?? 'N/A';
-      _email = _controller.user?.email ?? 'N/A';
-      _phoneNumber = _controller.user?.phoneNumber ?? 'N/A';
+      _user = _controller.user;
       _isLoading = false;
     });
   }
@@ -34,34 +31,102 @@ class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        clipBehavior: Clip.none,
+      body: Column(
         children: [
-          // AppBar background
-          Container(
-            height: 150,
-            color: Colors.green,
+          // Stack for AppBar and AccountInfoCard
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              // AppBar background
+              Container(
+                height: 150,
+                color: Colors.green,
+              ),
+              // Positioned AccountInfoCard
+              Positioned(
+                top: 100,
+                left: 16,
+                right: 16,
+                child: _isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : _user != null
+                    ? AccountInfoCard(user: _user!)
+                    : Center(child: Text('No user data')),
+              ),
+            ],
           ),
 
-          // Positioned AccountInfoCard
-          Positioned(
-            top: 100,
-            left: 16,
-            right: 16,
-            child: _isLoading
-                ? Center(child: CircularProgressIndicator())
-                : AccountInfoCard(
-              userName: _userName,
-              email: _email,
-              phoneNumber: _phoneNumber,
+          SizedBox(height: 150),
+          // Adjust this to create space below AccountInfoCard
+
+          // List of history items
+          Expanded(
+            child: ListView(
+              children: [
+                ListTile(
+                  leading: Icon(
+                    Icons.call,
+                    color: Colors.redAccent,
+                  ),
+                  title: Text('Lịch sử cuộc gọi'),
+                  trailing: Icon(Icons.arrow_forward),
+                  onTap: () {
+                    // Điều hướng đến trang lịch sử cuộc gọi
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(
+                    Icons.message,
+                    color: Colors.green,
+                  ),
+                  title: Text('Lịch sử tin nhắn'),
+                  trailing: Icon(Icons.arrow_forward),
+                  onTap: () {
+                    // Điều hướng đến trang lịch sử tin nhắn
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(
+                    Icons.article,
+                    color: Colors.blue,
+                  ),
+                  title: Text('Lịch sử bài viết'),
+                  trailing: Icon(Icons.arrow_forward),
+                  onTap: () {
+                    // Điều hướng đến trang lịch sử bài viết
+                  },
+                ),
+                Divider(), // Separator for new section
+                ListTile(
+                  title: Text('Quản lý tài khoản', style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+                ListTile(
+                  leading: Icon(Icons.lock),
+                  title: Text('Đổi mật khẩu'),
+                  trailing: Icon(Icons.arrow_forward),
+                  onTap: () {
+                    // Điều hướng đến trang đổi mật khẩu
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text('Đăng xuất'),
+                  trailing: Icon(Icons.arrow_forward),
+                  onTap: () {
+                    // Xử lý đăng xuất
+                  },
+                ),
+              ],
             ),
           ),
         ],
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: 4, // Tài khoản là mục thứ 5
+        currentIndex: 4,
         onTap: (index) {
-          // Xử lý chuyển trang khi bấm vào các mục khác của bottom navigation
+          // Xử lý điều hướng cho BottomNavigationBar
         },
       ),
     );

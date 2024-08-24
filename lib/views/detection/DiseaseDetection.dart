@@ -8,7 +8,6 @@ import '../detection/widgets/SupportFooter.dart';
 
 import '../../controllers/detection/DiseaseDetectionController.dart';
 
-
 class DiseaseDetection extends StatefulWidget {
   const DiseaseDetection({super.key});
 
@@ -30,7 +29,7 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: DetectionAppBar(controller: _controller),
+        appBar: DetectionAppBar(controller: _controller, appBarHeight: 65.0),
         body: FutureBuilder<void>(
           future: _controller.fetchBenhFromAPI(),
           builder: (context, snapshot) {
@@ -41,6 +40,18 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
             } else {
               return Column(
                 children: [
+                  TabBar(
+                    indicatorColor: Colors.green[700],
+                    labelColor: Colors.green,
+                    unselectedLabelColor: Colors.black,
+                    isScrollable: true,
+                    tabAlignment: TabAlignment.start,
+                    tabs: [
+                      Tab(text: 'Thông tin chung'),
+                      Tab(text: 'Cách diều trị'),
+                      Tab(text: 'Cách phòng ngừa'),
+                    ],
+                  ),
                   Expanded(
                     child: TabBarView(
                       children: [

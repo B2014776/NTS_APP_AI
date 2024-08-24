@@ -5,21 +5,22 @@ class UserController {
   User? user;
 
   Future<void> fetchUserFromAPI() async {
-    await Future.delayed(Duration(seconds: 1));
+    user = User(
+      name: 'Ba Tung',
+      email: 'Tung@Tung.com',
+      phoneNumber: '0123456789',
+      avatarUrl: '01f5e88f2a3c9aa14282135a21d5f0a1.png',
+    );
     try {
-      final Map<String, dynamic> sampleData = {
-        'name': 'John Doe',
-        'email': 'johndoe@example.com',
-        'phoneNumber': '0123456789',
-      };
+      final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Blast');
+      if (response.statusCode == 200) {
+        user = User.fromJson(response.data);
 
-      user = User.fromJson(sampleData);
+      }
     } catch (error) {
-      print("Failed to load user details: $error");
+      print("Failed to load disease details: $error");
     }
   }
-
-
   Future<void> updateUserToAPI(User updatedUser) async {
     try {
       final response = await Dio().put(

@@ -13,8 +13,8 @@ class DiseaseController {
     biologicalMedicines = [
       Medicine(
         name: 'Chitosan',
-        information: 'Chitosan là một loại polymer cation tự nhiên...',
-        usage: 'Sử dụng để điều trị tình trạng X.',
+        information: 'Chitosan là một loại polymer cation tự nhiên, được lấy từ bộ xương cứng bên ngoài của động vật có vỏ, chẳng hạn như cua, tôm hùm và tôm. Đây là một chất có khả năng tái tạo và thúc đẩy hình thành mô mới khi bị thương hoặc bỏng',
+        usage: 'Chitosan là một loại polymer cation tự nhiên, được lấy từ bộ xương cứng bên ngoài của động vật có vỏ, chẳng hạn như cua, tôm hùm và tôm. Đây là một chất có khả năng tái tạo và thúc đẩy hình thành mô mới khi bị thương hoặc bỏng',
       ),
       Medicine(
         name: 'Bacillus subtilis',
@@ -26,8 +26,8 @@ class DiseaseController {
     chemicalMedicines = [
       Medicine(
         name: 'Carbendazim',
-        information: 'Thuốc hóa học có tác dụng trị nấm mạnh.',
-        usage: 'Sử dụng cho tình trạng bệnh Y.',
+        information: 'Chitosan là một loại polymer cation tự nhiên, được lấy từ bộ xương cứng bên ngoài của động vật có vỏ, chẳng hạn như cua, tôm hùm và tôm. Đây là một chất có khả năng tái tạo và thúc đẩy hình thành mô mới khi bị thương hoặc bỏng',
+        usage: 'Chitosan là một loại polymer cation tự nhiên, được lấy từ bộ xương cứng bên ngoài của động vật có vỏ, chẳng hạn như cua, tôm hùm và tôm. Đây là một chất có khả năng tái tạo và thúc đẩy hình thành mô mới khi bị thương hoặc bỏng',
       ),
       Medicine(
         name: 'Propiconazole',
@@ -41,11 +41,12 @@ class DiseaseController {
     benh = Benh(
       tenBenh: 'Bệnh đạo ôn',
       thuongXuatHienTrenCay: 'Lá lúa',
-      trieuChung: 'Xuất hiện các vết đốm nhỏ màu nâu trên lá.',
-      nguyenNhan: 'Do nấm gây ra trong điều kiện ẩm ướt.',
+      trieuChung: 'Bệnh đạo ôn là bệnh phổ biến ở cây lúa, gây ra các vết đốm hình thoi màu nâu hoặc xám trên lá, làm cây suy yếu và giảm năng suất. Triệu chứng bao gồm lá khô, cháy đầu lá, hạt lép,',
+      nguyenNhan: 'Nguyên nhân của bệnh đạo ôn là do nấm Magnaporthe oryzae gây ra. Nấm phát triển mạnh trong điều kiện thời tiết ẩm ướt, nhiệt độ cao, độ ẩm trên 90%, và mật độ lúa dày.',
       dieuKien: 'Thời tiết ẩm ướt và mưa nhiều.',
       truBenh: 'Sử dụng thuốc diệt nấm để trị bệnh.',
-      phongNgua: '- Dọn sạch tàn dư rơm rạ và cỏ dại mang mầm bệnh trên đồng ruộng. Gieo cấy các giống kháng hoặc chống chịu với bệnh đạo ôn.',
+      phongNgua: 'Bệnh đạo ôn là bệnh phổ biến ở cây lúa, gây ra các vết đốm hình thoi màu nâu hoặc xám trên lá, làm cây suy yếu và giảm năng suất. Triệu chứng bao gồm lá khô, cháy đầu lá, hạt lép, Bệnh đạo ôn là bệnh phổ biến ở cây lúa, gây ra các vết đốm hình thoi màu nâu hoặc xám trên lá, làm cây suy yếu và giảm năng suất. Triệu chứng bao gồm lá khô, cháy đầu lá, hạt lép, Bệnh đạo ôn là bệnh phổ biến ở cây lúa, gây ra các vết đốm hình thoi màu nâu hoặc xám trên lá, làm cây suy yếu và giảm năng suất. Triệu chứng bao gồm lá khô, cháy đầu lá, hạt lép,',
+      img: 'nhandien1.png',
     );
     try {
       final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Blast');

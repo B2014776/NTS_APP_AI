@@ -29,7 +29,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: Icon(
-              Icons.qr_code_scanner,
+              Icons.camera_alt,
               color: Colors.white,
             ),
           ),

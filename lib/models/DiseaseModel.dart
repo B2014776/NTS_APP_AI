@@ -6,6 +6,7 @@ class Benh {
   final String dieuKien;
   final String truBenh;
   final String phongNgua;
+  final String img;
 
   Benh({
     required this.tenBenh,
@@ -15,6 +16,7 @@ class Benh {
     required this.dieuKien,
     required this.truBenh,
     required this.phongNgua,
+    required this.img,
   });
 
   // Factory constructor to create an instance from JSON
@@ -27,6 +29,7 @@ class Benh {
       dieuKien: json['dieuKien'],
       truBenh: json['truBenh'],
       phongNgua: json['phongNgua'],
+      img: json['img'], // Bổ sung trong fromJson
     );
   }
 
@@ -40,12 +43,13 @@ class Benh {
       'dieuKien': dieuKien,
       'truBenh': truBenh,
       'phongNgua': phongNgua,
+      'img': img,
     };
   }
 
   // Override toString() to print object details
   @override
   String toString() {
-    return 'Benh(tenBenh: $tenBenh, thuongXuatHienTrenCay: $thuongXuatHienTrenCay, trieuChung: $trieuChung, nguyenNhan: $nguyenNhan, dieuKien: $dieuKien, truBenh: $truBenh, phongNgua: $phongNgua)';
+    return 'Benh(tenBenh: $tenBenh, thuongXuatHienTrenCay: $thuongXuatHienTrenCay, trieuChung: $trieuChung, nguyenNhan: $nguyenNhan, dieuKien: $dieuKien, truBenh: $truBenh, phongNgua: $phongNgua, img: $img)';
   }
 }

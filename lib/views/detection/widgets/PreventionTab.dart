@@ -35,6 +35,13 @@ class PreventionTab extends StatelessWidget {
                     benh!.phongNgua,
                     style: TextStyle(fontSize: 17),
                   ),
+                  SizedBox(height: 16),
+                  Image.asset(
+                    'assets/f25dabbda140c250232a6b1a711d952c.png',
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ],
               ),
             ),
