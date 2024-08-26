@@ -13,7 +13,7 @@ class GeneralInfo extends StatefulWidget {
 class _GeneralInfoState extends State<GeneralInfo> {
   bool isTrieuChungExpanded = false;
   bool isNguyenNhanExpanded = false;
-  final int textLimit = 100; // Giới hạn ký tự hiển thị ban đầu
+  final int textLimit = 100;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _GeneralInfoState extends State<GeneralInfo> {
                   ),
                   if (widget.benh!.trieuChung.length > textLimit)
                     Align(
-                      alignment: Alignment.centerRight, // Căn chỉnh nút sang bên phải
+                      alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
                           setState(() {
@@ -85,7 +85,7 @@ class _GeneralInfoState extends State<GeneralInfo> {
                   ),
                   if (widget.benh!.nguyenNhan.length > textLimit)
                     Align(
-                      alignment: Alignment.centerRight, // Căn chỉnh nút sang bên phải
+                      alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
                           setState(() {

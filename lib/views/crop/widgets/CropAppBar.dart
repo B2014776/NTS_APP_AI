@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../../controllers/detection/DiseaseDetectionController.dart';
+import '../../../controllers/crop/CropController.dart';
 
-class DetectionAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final DiseaseController controller;
+class CropAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final CropController controller;
   final double appBarHeight;
 
-  const DetectionAppBar({required this.controller, this.appBarHeight = 80.0});
+  const CropAppBar({required this.controller, this.appBarHeight = 80.0});
 
   @override
   Size get preferredSize => Size.fromHeight(appBarHeight);
@@ -17,7 +17,7 @@ class DetectionAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         backgroundColor: Colors.green,
         title: Text(
-          controller.benh?.tenBenh ?? 'Loading...',
+          controller.loaiCayTrong?.tenLoai ?? 'Loading...',
           style: TextStyle(
             color: Colors.white,
           ),
@@ -31,15 +31,6 @@ class DetectionAppBar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage:
-                  AssetImage('assets/d7ba6024f3f77dd57e3abe35fc9d8185.png'),
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -10,9 +10,18 @@ class MedicineDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(medicine.name),
+        title: Text(
+          medicine.name,
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.green,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -27,7 +36,8 @@ class MedicineDetails extends StatelessWidget {
                   children: [
                     Text(
                       '1. Giới thiệu:',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8),
                     Padding(
@@ -45,7 +55,8 @@ class MedicineDetails extends StatelessWidget {
                     SizedBox(height: 16),
                     Text(
                       '2. Hướng dẫn sử dụng:',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8),
                     Padding(
