@@ -67,7 +67,7 @@ class _GeneralInfoState extends State<GeneralInfo> {
                       ),
                     ),
                   SizedBox(height: 16),
-                  CropInfoGrid(),
+                  CropInfoGrid(loaiCayTrong: widget.loaiCayTrong!),
                 ],
               ),
             ),

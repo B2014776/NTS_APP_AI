@@ -65,8 +65,8 @@ class _AccountInfoCardState extends State<AccountInfoCard> {
             ),
           ),
           Positioned(
-            top: -35, // Adjust the position to move CircleAvatar up
-            left: MediaQuery.of(context).size.width / 2 - 175, // Center horizontally
+            top: -35,
+            left: MediaQuery.of(context).size.width / 2 - 175,
             child: CircleAvatar(
               radius: 35,
               backgroundImage: AssetImage(

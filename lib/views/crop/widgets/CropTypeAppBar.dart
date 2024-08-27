@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import '../../../controllers/crop/CropController.dart';
 
-class CropAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final CropController controller;
+class CropTypeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double appBarHeight;
 
-  const CropAppBar({required this.controller, this.appBarHeight = 75.0});
+  const CropTypeAppBar({ this.appBarHeight = 65.0});
 
   @override
   Size get preferredSize => Size.fromHeight(appBarHeight);
@@ -17,9 +16,10 @@ class CropAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         backgroundColor: Colors.green,
         title: Text(
-          controller.loaiCayTrong?.tenLoai ?? 'Loading...',
+          'Các giống cây trồng',
           style: TextStyle(
             color: Colors.white,
+            fontWeight: FontWeight.bold
           ),
         ),
         leading: Center(

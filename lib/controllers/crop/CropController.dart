@@ -1,49 +1,81 @@
 import 'package:dio/dio.dart';
 import '../../models/CropModel.dart';
+import '../../models/CropTypeModel.dart';
+import '../../models/DiseaseModel.dart';
 
 class CropController {
   LoaiCayTrong? loaiCayTrong;
-  List<LoaiCayTrong> cropsList = [];
 
-  CropController() {
-    cropsList = [
-      LoaiCayTrong(
-        id: 1,
-        tenLoai: 'Cây cà chua',
-        moTa: 'Cây cà chua là cây thảo, sống theo mùa. Thân tròn, phân cành nhiều. Lá có cuống dài, phiến lá xẻ lông chim, số lượng thùy không ổn định, thường có răng cưa.',
-        dieuKienThoiTiet: 'Nhiệt độ từ 20°C đến 35°C, lượng mưa nhiều.',
-        thoiGianTruongThanh: 120,
-        sanLuongTrungBinh: 8.5,
-        img: '554d3ac0c24467cbb3b39a0cb4a0c0eb.png',
-      ),
-      LoaiCayTrong(
-        id: 2,
-        tenLoai: 'Ngô',
-        moTa: 'Ngô là loại cây trồng phổ biến, dễ trồng và có khả năng chịu hạn.',
-        dieuKienThoiTiet: 'Nhiệt độ từ 18°C đến 32°C, độ ẩm trung bình.',
-        thoiGianTruongThanh: 100,
-        sanLuongTrungBinh: 5.0,
-        img: '554d3ac0c24467cbb3b39a0cb4a0c0eb.png',
-      ),
-    ];
-  }
+  CropController() {}
 
   Future<void> fetchCropsFromAPI() async {
     loaiCayTrong = LoaiCayTrong(
       id: 1,
       tenLoai: 'Cây cà chua',
-      moTa: 'Cây cà chua là cây thảo, sống theo mùa. Thân tròn, phân cành nhiều. Lá có cuống dài, phiến lá xẻ lông chim, số lượng thùy không ổn định, thường có răng cưa.',
+      moTa:
+          'Cây cà chua là cây thảo, sống theo mùa. Thân tròn, phân cành nhiều. Lá có cuống dài, phiến lá xẻ lông chim, số lượng thùy không ổn định, thường có răng cưa.',
       dieuKienThoiTiet: 'Nhiệt độ từ 20°C đến 35°C, lượng mưa nhiều.',
       thoiGianTruongThanh: 120,
       sanLuongTrungBinh: 8.5,
       img: '554d3ac0c24467cbb3b39a0cb4a0c0eb.png',
+      giongCayTrongList: [
+        GiongCayTrong(
+          id: 1,
+          tenGiong: 'Cà chua Bi',
+          dacDiemNoiBat: 'Chịu nhiệt tốt, thích hợp trồng ngoài trời.',
+          xuatXu: 'Italia',
+          nangSuat: '7 tấn/ha',
+          img: '087e9716ffd60b02c5928039ca4d5bbb.png',
+        ),
+        GiongCayTrong(
+          id: 2,
+          tenGiong: 'Cà chua Roman',
+          dacDiemNoiBat: 'Ngọt, dễ trồng, cho trái nhỏ.',
+          xuatXu: 'Mỹ',
+          nangSuat: '6 tấn/ha',
+          img: 'dab56e733268a1dfb0d0a9e95a2971de.png',
+        ),
+        GiongCayTrong(
+          id: 3,
+          tenGiong: 'Cà chua Beafteak',
+          dacDiemNoiBat: 'Ngọt, dễ trồng, cho trái nhỏ.',
+          xuatXu: 'Mỹ',
+          nangSuat: '7 tấn/ha',
+          img: 'ead89b6c783ed9a280ebfe96d72b1d77.png',
+        ),
+      ],
+      sauBenhList: [
+        Benh(
+          tenBenh: 'Sâu cuốn lá',
+          thuongXuatHienTrenCay: 'Lá, quả',
+          trieuChung: ' Sâu cuốn lá ăn biểu bì mặt trên và diệp lục của lá dọc theo gân lá tạo thành những vệt trắng dài, các vệt này có thể nối liền với nhau thành từng mảng làm giảm diện tích quang hợp, đặc biệt là trên lá đòng hoặc lá công năng sẽ làm giảm năng suất rõ rệt.',
+          nguyenNhan: 'Nấm Beauveria bassianae, Nomurea rileyi',
+          dieuKien: 'Nhiều mưa, độ ẩm cao.',
+          truBenh: 'Xác định sự xuất hiện của bướm sâu cuốn lá trên ruộng để lựa chọn thời điểm xử lý thuốc là một việc làm vô cùng cần thiết, vì vậy bà con nên thăm đồng thường xuyên.',
+          phongNgua:
+              'Trồng cây với khoảng cách rộng, tránh tưới nước quá nhiều.',
+          img: 'c41187629afebe90269e0e954e69f1eb.png',
+        ),
+        Benh(
+          tenBenh: 'Bệnh héo xanh',
+          thuongXuatHienTrenCay: 'Thân cây',
+          trieuChung: ' Sâu cuốn lá ăn biểu bì mặt trên và diệp lục của lá dọc theo gân lá tạo thành những vệt trắng dài, các vệt này có thể nối liền với nhau thành từng mảng làm giảm diện tích quang hợp, đặc biệt là trên lá đòng hoặc lá công năng sẽ làm giảm năng suất rõ rệt.',
+          nguyenNhan: 'Nấm Beauveria bassianae, Nomurea rileyi',
+          dieuKien: 'Nhiệt độ cao, độ ẩm thấp.',
+          truBenh: 'Sử dụng thuốc kháng sinh.',
+          phongNgua: 'Trồng giống kháng bệnh, giữ độ ẩm đất ổn định.',
+          img: 'c41187629afebe90269e0e954e69f1eb.png',
+        ),
+      ],
     );
 
     try {
-      final response = await Dio().get('https://example-api/test');
+      final response = await Dio().get('https://example-api/crops');
       if (response.statusCode == 200) {
         List<dynamic> data = response.data;
-        cropsList = data.map((json) => LoaiCayTrong.fromJson(json)).toList();
+        if (data.isNotEmpty) {
+          loaiCayTrong = LoaiCayTrong.fromJson(data.first);
+        }
       }
     } catch (error) {
       print("Failed to load crops data: $error");
@@ -51,13 +83,10 @@ class CropController {
   }
 
   String getCropDetails(int id) {
-    try {
-      LoaiCayTrong crop = cropsList.firstWhere((c) => c.id == id);
-      return "Tên cây trồng: ${crop.tenLoai}\nMô tả: ${crop.moTa}\nĐiều kiện thời tiết: ${crop.dieuKienThoiTiet}\nThời gian trưởng thành: ${crop.thoiGianTruongThanh} ngày\nSản lượng trung bình: ${crop.sanLuongTrungBinh} tấn/ha";
-    } catch (e) {
-      // Trả về thông báo khi không tìm thấy cây trồng với ID
-      return "Không tìm thấy cây trồng với ID: $id";
+    if (loaiCayTrong != null && loaiCayTrong!.id == id) {
+      return "Tên loại cây trồng: ${loaiCayTrong!.tenLoai}\nMô tả: ${loaiCayTrong!.moTa}\nĐiều kiện thời tiết: ${loaiCayTrong!.dieuKienThoiTiet}\nThời gian trưởng thành: ${loaiCayTrong!.thoiGianTruongThanh} ngày\nSản lượng trung bình: ${loaiCayTrong!.sanLuongTrungBinh} tấn/ha\nGiống cây trồng: ${loaiCayTrong!.giongCayTrongList.map((g) => g.tenGiong).join(', ')}";
+    } else {
+      return "Không tìm thấy loại cây trồng với ID: $id";
     }
   }
-
 }

@@ -29,7 +29,7 @@ class Benh {
       dieuKien: json['dieuKien'],
       truBenh: json['truBenh'],
       phongNgua: json['phongNgua'],
-      img: json['img'], // Bổ sung trong fromJson
+      img: json['img'],
     );
   }
 

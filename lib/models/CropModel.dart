@@ -1,3 +1,6 @@
+import 'CropTypeModel.dart';
+import 'DiseaseModel.dart';
+
 class LoaiCayTrong {
   final int id;
   final String tenLoai;
@@ -6,6 +9,8 @@ class LoaiCayTrong {
   final int thoiGianTruongThanh;
   final double sanLuongTrungBinh;
   final String img;
+  final List<GiongCayTrong> giongCayTrongList;
+  final List<Benh> sauBenhList;
 
   LoaiCayTrong({
     required this.id,
@@ -15,6 +20,8 @@ class LoaiCayTrong {
     required this.thoiGianTruongThanh,
     required this.sanLuongTrungBinh,
     required this.img,
+    required this.giongCayTrongList,
+    required this.sauBenhList,
   });
 
   factory LoaiCayTrong.fromJson(Map<String, dynamic> json) {
@@ -24,20 +31,14 @@ class LoaiCayTrong {
       moTa: json['moTa'],
       dieuKienThoiTiet: json['dieuKienThoiTiet'],
       thoiGianTruongThanh: json['thoiGianTruongThanh'],
-      sanLuongTrungBinh: json['sanLuongTrungBinh'].toDouble(),
+      sanLuongTrungBinh: json['sanLuongTrungBinh'],
       img: json['img'],
+      giongCayTrongList: (json['giongCayTrongList'] as List<dynamic>)
+          .map((item) => GiongCayTrong.fromJson(item as Map<String, dynamic>))
+          .toList(),
+      sauBenhList: (json['danhSachBenh'] as List<dynamic>)
+          .map((item) => Benh.fromJson(item as Map<String, dynamic>))
+          .toList(),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'tenLoai': tenLoai,
-      'moTa': moTa,
-      'dieuKienThoiTiet': dieuKienThoiTiet,
-      'thoiGianTruongThanh': thoiGianTruongThanh,
-      'sanLuongTrungBinh': sanLuongTrungBinh,
-      'img': img,
-    };
   }
 }
