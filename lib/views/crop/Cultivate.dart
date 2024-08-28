@@ -61,54 +61,32 @@ class _CultivateState extends State<Cultivate> {
                   SizedBox(height: 8),
                   Text(
                     "Bước Thực Hiện: ", // Display steps
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold, // Make the title bold
-                    ),
+                    style: TextStyle(fontSize: 16),
                   ),
                   Text('${kyThuat.buocThucHien}'),
                   SizedBox(height: 8),
                   Text(
-                    "Phân Bón Sử Dụng: ",
+                    "Phân Bón Sử Dụng: ${kyThuat.phanBonSuDung}",
                     // Display fertilizers used
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold, // Make the title bold
-                    ),
-                  ),
-                  Text(
-                    '${kyThuat.phanBonSuDung}'
+                    style: TextStyle(fontSize: 16),
                   ),
                   SizedBox(height: 8),
                   Text(
-                    "Tưới Nước: ", // Display watering
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold, // Make the title bold
-                    ),
+                    "Tưới Nước: ${kyThuat.tuoiNuoc}", // Display watering
+                    style: TextStyle(fontSize: 16),
                   ),
-                  Text('${kyThuat.tuoiNuoc}'),
+
                   SizedBox(height: 8),
                   Text(
-                    "Chăm Sóc: ", // Display care instructions
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold, // Make the title bold
-                    ),
-                  ),
-                  Text(
-                    '${kyThuat.chamSoc}'
+                    "Chăm Sóc: ${kyThuat.chamSoc}", // Display care instructions
+                    style: TextStyle(fontSize: 16),
                   ),
                   SizedBox(height: 8),
                   Text(
-                    "Thời Gian Thực Hiện:",
+                    "Thời Gian Thực Hiện: ${kyThuat.thoiGianThucHien}",
                     // Display execution time
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold, // Make the title bold
-                    ),
+                    style: TextStyle(fontSize: 16),
                   ),
-                  Text('${kyThuat.thoiGianThucHien}'),
                 ],
               ),
             );
