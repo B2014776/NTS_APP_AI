@@ -1,14 +1,25 @@
+import 'package:apptestai/views/Agri_expert/Infor.dart';
+import 'package:apptestai/views/Agri_expert/List_views.dart';
+import 'package:apptestai/views/Chat.dart';
+import 'package:apptestai/views/Community.dart';
+import 'package:apptestai/views/Post.dart';
 import 'package:apptestai/views/home.dart';
-import 'package:apptestai/views/login.dart';
-import 'package:apptestai/views/signup.dart';
+import 'package:apptestai/views/User/login.dart';
+import 'package:apptestai/views/User/signup.dart';
+import 'package:apptestai/views/no_disease.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
+  runApp( MyApp(camera: firstCamera));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final CameraDescription camera;
+  const MyApp({required this.camera});
 
   // This widget is the root of your application.
   @override
@@ -21,8 +32,14 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const Signup(),
-      // home: const login(),
+      //  home: const login(),
       home:HomePage(),
+      // home: AgriExpert(),
+      // home: NoDisease(),
+      // home: InforExpert(),
+      // home: ChatScreen(),
+      // home: Post(),
+      // /home: Community(),
     );
   }
 }

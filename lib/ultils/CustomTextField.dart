@@ -1,5 +1,109 @@
 import 'package:flutter/material.dart';
 
+class CustomTextFieldV3 extends StatelessWidget {
+  final String labelText;
+  final String hintText;
+  final IconData prefixIcon;
+  final String validatorValue;
+  final TextEditingController controller;
+  final void Function(String)? onChanged;
+
+  const CustomTextFieldV3(
+      {super.key,
+        required this.labelText,
+        required this.hintText,
+        required this.prefixIcon,
+        required this.validatorValue,
+        required this.controller,
+        required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: TextField(
+                      controller: controller,
+                      onChanged: onChanged,
+                      onTapOutside: (even) {
+                        FocusScope.of(context).unfocus();
+                      },
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFFB7B7B7),
+                            width: 0.7,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Color(0xFFB7B7B7),
+                            width: 0.7,
+                          ),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        // labelText: labelText,
+                        // labelStyle: const TextStyle(
+                        //   color: Colors.grey,
+                        //   fontSize: 14,
+                        // ),
+                        hintText: hintText,
+                        hintStyle: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14,
+                        ),
+                        prefixIcon: Icon(
+                          prefixIcon,
+                          color: Colors.blueAccent,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                  if (validatorValue
+                      .isNotEmpty) // Kiểm tra xem validatorValue có rỗng không
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                      child: Text(
+                        validatorValue,
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                            decoration: TextDecoration.none,
+                            fontSize: 11,
+                            color: Colors.red,
+                            fontWeight: FontWeight.normal),
+                      ),
+                    )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
 class CustomTextFieldV5 extends StatefulWidget {
   final TextEditingController controller;
   final String title;
