@@ -1,8 +1,9 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:apptestai/controllers/profile/AccountController.dart';
 import 'package:apptestai/views/profile/widgets/AccountInfoCard.dart';
 import '../../ultils/CustomBottomNavigationBar.dart';
-import '../../../models/UserModel.dart'; // Đảm bảo import model User
+import '../../../models/UserModel.dart';
 
 class Account extends StatefulWidget {
   @override
@@ -13,6 +14,12 @@ class _AccountState extends State<Account> {
   final UserController _controller = UserController();
   bool _isLoading = true;
   User? _user;
+
+  final CameraDescription camera = CameraDescription(
+    name: 'camera',
+    lensDirection: CameraLensDirection.back,
+    sensorOrientation: 0,
+  );
 
   @override
   void initState() {
@@ -127,7 +134,7 @@ class _AccountState extends State<Account> {
         currentIndex: 4,
         onTap: (index) {
           // Xử lý điều hướng cho BottomNavigationBar
-        },
+        }, camera: camera,
       ),
     );
   }
