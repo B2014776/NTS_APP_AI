@@ -841,20 +841,34 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(30, 120, 30, 0),
+              padding: const EdgeInsets.fromLTRB(30, 120, 30, 0),
               child: Container(
                 height: 50,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: CustomTextFieldV3(
-                  labelText: 'Tìm kiếm',
-                  hintText: 'Tìm kiếm',
-                  prefixIcon: CupertinoIcons.search,
-                  validatorValue: '',
-                  controller: search,
-                  onChanged: (value) {},
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: "Tìm kiếm",
+                    hintStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    prefixIcon: Icon(CupertinoIcons.search),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                    contentPadding: EdgeInsets.only(
+                        left: 15, bottom: 11, top: 11, right: 15),
+                  ),
+                  validator: (value) {
+                    // Validation logic
+                  },
+                  // controller: controller,
+                  // onChanged: onChanged,
                 ),
               ),
             ),
