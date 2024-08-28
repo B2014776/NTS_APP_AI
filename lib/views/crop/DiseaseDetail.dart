@@ -1,18 +1,35 @@
 import 'package:flutter/material.dart';
-import '../../../models/CropModel.dart';
 import '../../models/DiseaseModel.dart'; // Import the model
 
-class DiseaseDetail extends StatelessWidget {
+class DiseaseDetail extends StatefulWidget {
   final Benh benh;
 
   DiseaseDetail({required this.benh});
+
+  @override
+  _DiseaseDetailState createState() => _DiseaseDetailState();
+}
+
+class _DiseaseDetailState extends State<DiseaseDetail> {
+  bool _showFullTrieuChung = false;
+  bool _showFullNguyenNhan = false;
+  bool _showFullDieuKien = false;
+  bool _showFullTruBenh = false;
+  bool _showFullPhongNgua = false;
+
+  String _truncateText(String text, bool showFull) {
+    if (text.length <= 100 || showFull) {
+      return text;
+    }
+    return text.substring(0, 100) + '...';
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          benh.tenBenh,
+          widget.benh.tenBenh,
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -30,7 +47,7 @@ class DiseaseDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
-                'assets/${benh.img}',
+                'assets/${widget.benh.img}',
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -39,132 +56,113 @@ class DiseaseDetail extends StatelessWidget {
                 },
               ),
               SizedBox(height: 16),
-
-              // Thông tin về bệnh
-              Card(
-                elevation: 2.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Triệu chứng',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        benh.trieuChung,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
+              // Triệu chứng
+              _buildExpandableCard(
+                title: 'Triệu chứng',
+                content: widget.benh.trieuChung,
+                showFull: _showFullTrieuChung,
+                onTap: () {
+                  setState(() {
+                    _showFullTrieuChung = !_showFullTrieuChung;
+                  });
+                },
               ),
-              Card(
-                elevation: 2.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Nguyên nhân',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        benh.nguyenNhan,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
+              // Nguyên nhân
+              _buildExpandableCard(
+                title: 'Nguyên nhân',
+                content: widget.benh.nguyenNhan,
+                showFull: _showFullNguyenNhan,
+                onTap: () {
+                  setState(() {
+                    _showFullNguyenNhan = !_showFullNguyenNhan;
+                  });
+                },
               ),
-              Card(
-                elevation: 2.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Điều kiện',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        benh.dieuKien,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
+              // Điều kiện
+              _buildExpandableCard(
+                title: 'Điều kiện',
+                content: widget.benh.dieuKien,
+                showFull: _showFullDieuKien,
+                onTap: () {
+                  setState(() {
+                    _showFullDieuKien = !_showFullDieuKien;
+                  });
+                },
               ),
-              Card(
-                elevation: 2.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Trị bệnh',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        benh.truBenh,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
+              // Trị bệnh
+              _buildExpandableCard(
+                title: 'Trị bệnh',
+                content: widget.benh.truBenh,
+                showFull: _showFullTruBenh,
+                onTap: () {
+                  setState(() {
+                    _showFullTruBenh = !_showFullTruBenh;
+                  });
+                },
               ),
-              Card(
-                elevation: 2.0,
-                margin: EdgeInsets.symmetric(vertical: 8.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Phòng ngừa',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Text(
-                        benh.phongNgua,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
+              // Phòng ngừa
+              _buildExpandableCard(
+                title: 'Phòng ngừa',
+                content: widget.benh.phongNgua,
+                showFull: _showFullPhongNgua,
+                onTap: () {
+                  setState(() {
+                    _showFullPhongNgua = !_showFullPhongNgua;
+                  });
+                },
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget _buildExpandableCard({
+    required String title,
+    required String content,
+    required bool showFull,
+    required VoidCallback onTap,
+  }) {
+    return Card(
+      elevation: 2.0,
+      margin: EdgeInsets.symmetric(vertical: 8.0),
+      color: Color.fromARGB(255, 225, 255, 201),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              _truncateText(content, showFull),
+              style: TextStyle(fontSize: 16),
+            ),
+            if (content.length > 100)
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: onTap,
+                  child: Text(
+                    showFull ? 'Thu gọn' : 'Xem thêm',
+                    style: TextStyle(
+                      color: Colors.orangeAccent,
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+
   }
 }

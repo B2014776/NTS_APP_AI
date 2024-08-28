@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import '../../models/CropModel.dart';
 import '../../models/CropTypeModel.dart';
+import '../../models/CultivateModel.dart';
 import '../../models/DiseaseModel.dart';
 
 class CropController {
@@ -48,10 +49,12 @@ class CropController {
         Benh(
           tenBenh: 'Sâu cuốn lá',
           thuongXuatHienTrenCay: 'Lá, quả',
-          trieuChung: ' Sâu cuốn lá ăn biểu bì mặt trên và diệp lục của lá dọc theo gân lá tạo thành những vệt trắng dài, các vệt này có thể nối liền với nhau thành từng mảng làm giảm diện tích quang hợp, đặc biệt là trên lá đòng hoặc lá công năng sẽ làm giảm năng suất rõ rệt.',
+          trieuChung:
+              ' Sâu cuốn lá ăn biểu bì mặt trên và diệp lục của lá dọc theo gân lá tạo thành những vệt trắng dài, các vệt này có thể nối liền với nhau thành từng mảng làm giảm diện tích quang hợp, đặc biệt là trên lá đòng hoặc lá công năng sẽ làm giảm năng suất rõ rệt.',
           nguyenNhan: 'Nấm Beauveria bassianae, Nomurea rileyi',
           dieuKien: 'Nhiều mưa, độ ẩm cao.',
-          truBenh: 'Xác định sự xuất hiện của bướm sâu cuốn lá trên ruộng để lựa chọn thời điểm xử lý thuốc là một việc làm vô cùng cần thiết, vì vậy bà con nên thăm đồng thường xuyên.',
+          truBenh:
+              'Xác định sự xuất hiện của bướm sâu cuốn lá trên ruộng để lựa chọn thời điểm xử lý thuốc là một việc làm vô cùng cần thiết, vì vậy bà con nên thăm đồng thường xuyên.',
           phongNgua:
               'Trồng cây với khoảng cách rộng, tránh tưới nước quá nhiều.',
           img: 'c41187629afebe90269e0e954e69f1eb.png',
@@ -59,12 +62,26 @@ class CropController {
         Benh(
           tenBenh: 'Bệnh héo xanh',
           thuongXuatHienTrenCay: 'Thân cây',
-          trieuChung: ' Sâu cuốn lá ăn biểu bì mặt trên và diệp lục của lá dọc theo gân lá tạo thành những vệt trắng dài, các vệt này có thể nối liền với nhau thành từng mảng làm giảm diện tích quang hợp, đặc biệt là trên lá đòng hoặc lá công năng sẽ làm giảm năng suất rõ rệt.',
+          trieuChung:
+              ' Sâu cuốn lá ăn biểu bì mặt trên và diệp lục của lá dọc theo gân lá tạo thành những vệt trắng dài, các vệt này có thể nối liền với nhau thành từng mảng làm giảm diện tích quang hợp, đặc biệt là trên lá đòng hoặc lá công năng sẽ làm giảm năng suất rõ rệt.',
           nguyenNhan: 'Nấm Beauveria bassianae, Nomurea rileyi',
           dieuKien: 'Nhiệt độ cao, độ ẩm thấp.',
           truBenh: 'Sử dụng thuốc kháng sinh.',
           phongNgua: 'Trồng giống kháng bệnh, giữ độ ẩm đất ổn định.',
           img: 'c41187629afebe90269e0e954e69f1eb.png',
+        ),
+      ],
+      kyThuatTrongList: [
+        KyThuatTrong(
+          id: '1',
+          tenKyThuatTrong: 'Kỹ thuật trồng cà chua Bi',
+          buocThucHien:
+              '1. Chọn giống chất lượng cao. 2. Gieo hạt vào bầu đất. 3. Tưới nước thường xuyên và giữ độ ẩm. 4. Đặt cây ở nơi có ánh sáng mặt trời đầy đủ.',
+          phanBonSuDung: 'Sử dụng phân NPK 16-16-8 và phân hữu cơ.',
+          tuoiNuoc: 'Tưới nước đều đặn mỗi ngày, không để đất khô quá lâu.',
+          chamSoc:
+              'Tỉa cành và lá già, giữ khoảng cách giữa các cây để thoáng khí.',
+          thoiGianThucHien: 'Khoảng 90-100 ngày',
         ),
       ],
     );

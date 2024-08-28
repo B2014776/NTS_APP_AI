@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/CropModel.dart';
 import '../CropType.dart';
+import '../Cultivate.dart';
 import '../Disease.dart';
 
 class InfoCard extends StatelessWidget {
@@ -83,9 +84,18 @@ class CropInfoGrid extends StatelessWidget {
           title: 'Kỹ Thuật Trồng',
           imgPath: 'assets/ky_thuat_trong.png',
           onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Cultivate(
+                  kyThuatTrongList: loaiCayTrong.kyThuatTrongList,
+                ),
+              ),
+            );
 
           },
         ),
+
         InfoCard(
           title: 'Thời Tiết',
           imgPath: 'assets/thoi_tiet.png',

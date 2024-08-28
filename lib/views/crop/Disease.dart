@@ -42,7 +42,7 @@ class _DiseaseState extends State<Disease> {
         ),
         backgroundColor: Colors.green,
         iconTheme: IconThemeData(
-          color: Colors.white, // Set the color of the back arrow
+          color: Colors.white,
         ),
       ),
 

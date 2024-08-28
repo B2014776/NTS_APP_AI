@@ -1,3 +1,5 @@
+import 'package:apptestai/models/CultivateModel.dart';
+
 import 'CropTypeModel.dart';
 import 'DiseaseModel.dart';
 
@@ -11,6 +13,7 @@ class LoaiCayTrong {
   final String img;
   final List<GiongCayTrong> giongCayTrongList;
   final List<Benh> sauBenhList;
+  final List<KyThuatTrong> kyThuatTrongList;
 
   LoaiCayTrong({
     required this.id,
@@ -22,6 +25,7 @@ class LoaiCayTrong {
     required this.img,
     required this.giongCayTrongList,
     required this.sauBenhList,
+    required this.kyThuatTrongList
   });
 
   factory LoaiCayTrong.fromJson(Map<String, dynamic> json) {
@@ -36,8 +40,11 @@ class LoaiCayTrong {
       giongCayTrongList: (json['giongCayTrongList'] as List<dynamic>)
           .map((item) => GiongCayTrong.fromJson(item as Map<String, dynamic>))
           .toList(),
-      sauBenhList: (json['danhSachBenh'] as List<dynamic>)
+      sauBenhList: (json['sauBenhList'] as List<dynamic>)
           .map((item) => Benh.fromJson(item as Map<String, dynamic>))
+          .toList(),
+      kyThuatTrongList: (json['kyThuatTrongList'] as List<dynamic>)
+          .map((item) => KyThuatTrong.fromJson(item as Map<String, dynamic>))
           .toList(),
     );
   }
