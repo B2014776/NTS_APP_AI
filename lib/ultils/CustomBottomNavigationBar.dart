@@ -1,3 +1,4 @@
+import 'package:apptestai/views/profile/Account.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import '../views/Agri_expert/List_views.dart';
@@ -52,7 +53,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AgriExpert(), // Chuyển đến trang Community
+              builder: (context) => Account(), // Chuyển đến trang Community
             ),
           );
         }
