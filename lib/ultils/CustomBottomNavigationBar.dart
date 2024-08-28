@@ -1,17 +1,64 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import '../views/Agri_expert/List_views.dart';
+import '../views/Community.dart';
+import '../views/camera.dart';
+import '../views/home.dart';
+
 
 class CustomBottomNavigationBar extends StatelessWidget {
+  final CameraDescription camera;
   final int currentIndex;
   final Function(int) onTap;
 
-  CustomBottomNavigationBar({required this.currentIndex, required this.onTap});
+  const CustomBottomNavigationBar({required this.camera, required this.currentIndex, required this.onTap,});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       currentIndex: currentIndex,
-      onTap: onTap,
+      onTap: (index) {
+        // Xử lý điều hướng theo index
+        if (index == 0) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(), // Chuyển đến trang HomePage
+            ),
+          );
+        } else if (index == 1) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Community(), // Chuyển đến trang Community
+            ),
+          );
+        } else if (index==2){
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CameraScreen(camera: camera,),
+              ),
+            );
+        } else if (index == 3) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AgriExpert(), // Chuyển đến trang Community
+            ),
+          );
+        } else if (index == 4) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AgriExpert(), // Chuyển đến trang Community
+            ),
+          );
+        }
+        // Thêm điều kiện cho các index khác nếu cần
+        onTap(index); // Gọi hàm onTap nếu bạn có xử lý thêm ngoài điều hướng
+      },
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
@@ -29,7 +76,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: Icon(
-              Icons.camera_alt,
+              Icons.qr_code_scanner,
               color: Colors.white,
             ),
           ),

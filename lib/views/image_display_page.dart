@@ -17,6 +17,8 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
   double? _probability;
   bool _isLoading = false;
 
+
+
   Future<void> _uploadImage() async {
     setState(() {
       _isLoading = true; // Set loading state to true
@@ -24,42 +26,64 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
 
     final request = http.MultipartRequest(
       'POST',
-      Uri.parse('https://app-latest-999g.onrender.com/predict/'), // Replace with your FastAPI endpoint
+      Uri.parse('https://api-ai-1-6b81.onrender.com/predict'), // Replace with your FastAPI endpoint
     );
+
+    // Thêm tệp vào yêu cầu
     request.files.add(
       await http.MultipartFile.fromPath(
-        'file', // This should match the parameter name in your FastAPI endpoint
+        'file', // Tên tham số phải khớp với endpoint FastAPI của bạn
         widget.imagePath,
       ),
     );
 
-    final response = await request.send();
+    // Tạo thông tin xác thực Basic Authentication
+    String username = 'admin';
+    String password = 'laptrinh';
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
-    if (response.statusCode == 200) {
-      final responseBody = await response.stream.bytesToString();
-      final decodedResponse = json.decode(responseBody);
+    // Thêm tiêu đề xác thực vào yêu cầu
+    request.headers['Authorization'] = basicAuth;
 
+    try {
+      // Gửi yêu cầu
+      final response = await request.send();
+
+      // Kiểm tra phản hồi từ server
+      if (response.statusCode == 200) {
+        final responseBody = await response.stream.bytesToString();
+        final decodedResponse = json.decode(responseBody);
+
+        setState(() {
+          _className = decodedResponse['class_name']; // Kết quả lớp dự đoán
+          _probability = decodedResponse['probability']; // Xác suất dự đoán
+        });
+      } else {
+        setState(() {
+          _className = 'Upload failed';
+          _probability = null;
+        });
+      }
+    } catch (e) {
       setState(() {
-        _className = decodedResponse['class_name'];
-        _probability = decodedResponse['probability'];
-      });
-    } else {
-      setState(() {
-        _className = 'Upload failed';
+        _className = 'Error occurred';
         _probability = null;
       });
+      print('Error: $e');
+    } finally {
+      setState(() {
+        _isLoading = false; // Set loading state to false
+      });
     }
-
-    setState(() {
-      _isLoading = false; // Set loading state to false
-    });
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Captured Image'),
+        title: Text('Ảnh đã chụp', style: TextStyle(fontSize: 25),),
         backgroundColor: Colors.green,
       ),
       body: Column(
@@ -96,7 +120,7 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
                 IconButton(
                   icon: Icon(Icons.check_circle_outline, color: Colors.green),
                   onPressed: _uploadImage,
-                  iconSize: 40,
+                  iconSize: 80,
                 ),
               ],
             ),

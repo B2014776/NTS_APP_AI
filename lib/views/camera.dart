@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-// import 'package:gallery_saver/gallery_saver.dart';
+
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'image_display_page.dart';  // Import trang hiển thị hình ảnh
 
@@ -53,28 +54,32 @@ class _CameraScreenState extends State<CameraScreen> {
     try {
       await _initializeControllerFuture;
 
-      // Capture the picture and get the file path
+      // Chụp ảnh và lấy tệp XFile
       final XFile picture = await _controller.takePicture();
 
-      // Save the captured picture to the gallery
-      // await GallerySaver.saveImage(picture.path);
+      // Lưu ảnh vào thư mục cục bộ
+      final Directory appDir = await getApplicationDocumentsDirectory();
+      final String newPath = '${appDir.path}/${DateTime.now().millisecondsSinceEpoch}.jpg';
 
-      // Update the image path to show the captured image
+      // Di chuyển ảnh đến đường dẫn mới
+      File(picture.path).copy(newPath);
+
+      // Cập nhật đường dẫn ảnh để hiển thị ảnh đã chụp
       setState(() {
-        _imagePath = picture.path;
+        _imagePath = newPath;
       });
 
-      // Navigate to the ImageDisplayPage
+      // Chuyển đến ImageDisplayPage để hiển thị ảnh
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ImageDisplayPage(imagePath: picture.path),
+          builder: (context) => ImageDisplayPage(imagePath: newPath),
         ),
       );
     } catch (e) {
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to capture picture: $e')),
+        SnackBar(content: Text('Không thể chụp ảnh: $e')),
       );
     }
   }
@@ -126,6 +131,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   top: 20,
                   left: 20,
                   child: IconButton(
+                    iconSize: 30,
                     icon: Icon(Icons.close, color: Colors.white),
                     onPressed: () {
                       Navigator.pop(context);
@@ -136,6 +142,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   top: 20,
                   right: 20,
                   child: IconButton(
+                    iconSize: 30,
                     icon: Icon(Icons.help_outline, color: Colors.white),
                     onPressed: () {
                       showDialog(
@@ -170,17 +177,17 @@ class _CameraScreenState extends State<CameraScreen> {
                 IconButton(
                   icon: Icon(Icons.image, color: Colors.white),
                   onPressed: _pickImageFromGallery,
-                    iconSize: 40
+                    iconSize: 30
                 ),
                 IconButton(
                   icon: Icon(Icons.camera, color: Colors.white),
-                  iconSize: 60,
+                  iconSize: 80,
                   onPressed: _capturePicture,
                 ),
                 IconButton(
                   icon: Icon(_isFlashOn ? Icons.flash_on : Icons.flash_off,
                       color: Colors.white),
-                  iconSize: 40,
+                  iconSize: 30,
                   onPressed: _toggleFlash,
                 ),
               ],
