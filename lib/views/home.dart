@@ -1,27 +1,75 @@
+import 'package:apptestai/ultils/CustomBottomNavigationBar.dart';
+import 'package:apptestai/ultils/CustomTextField.dart';
+import 'package:camera/camera.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'Custom_drawer.dart'; // Đảm bảo nhập đúng đường dẫn của file CustomDrawer
+import '../ultils/Custom_drawer.dart';
+import 'camera.dart'; // Đảm bảo nhập đúng đường dẫn của file CustomDrawer
 
 class HomePage extends StatefulWidget {
+  // final CameraDescription camera;
+  // const HomePage({required this.camera});
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  late TextEditingController search = TextEditingController();
+  // Biến trạng thái có thể khai báo ở đây
+  int _currentIndex = 0; // Giả sử Community là chỉ mục 1
+
+  // Dummy CameraDescription để truyền vào CustomBottomNavigationBar
+  final CameraDescription camera = CameraDescription(
+    name: 'camera',
+    lensDirection: CameraLensDirection.back,
+    sensorOrientation: 0,
+  );
+
+  void _onTap(int index) {
+    // Thực hiện các hành động khi một mục được nhấn
+    // Ví dụ: cập nhật chỉ mục hiện tại
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey, // Gán GlobalKey cho Scaffold để điều khiển Drawer
       drawer: CustomDrawer(), // Đặt CustomDrawer ở đây
-
+      floatingActionButton: SizedBox(
+        width: 129.0,
+        height: 46.0,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black45, ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: FloatingActionButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            backgroundColor:Colors.white,
+            onPressed: (){},
+            child: 
+              Row(
+                children: [
+                  Image.asset('assets/Thongminh.png'),
+                  Expanded(child: Text('Trợ lý nhà nông', textAlign: TextAlign.center,)),
+                ],
+              ),
+          ),
+        ),
+      ),
       body: Center(
         child: Stack(
           children: [
             Column(
               children: [
-
                 Container(
                   width: double.infinity,
                   height: 148,
@@ -123,6 +171,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(height: 0,),
                         Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.white, // Nền màu trắng cho container
@@ -182,7 +231,12 @@ class _HomePageState extends State<HomePage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Giá cả thị trường', style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),),
+                                Row(
+                                  children: [
+                                    SizedBox(width: 10,),
+                                    Text('Giá cả thị trường', style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),),
+                                  ],
+                                ),
                                 SizedBox(height: 20,),
                                 SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
@@ -293,6 +347,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(height: 10,),
                         Container(
+                          height: 168,
                           decoration:
                             BoxDecoration(
                               color: Colors.white,
@@ -405,53 +460,210 @@ class _HomePageState extends State<HomePage> {
 
                           ),
                         ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(width: 10,),
+                                  Text('Các loại sâu bệnh', style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.w500),),
+                                ],
+                              ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child:
+                                  Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child:
+                                            Container(
+                                                width: 120,
+                                                height: 80,
+                                                decoration:
+                                                BoxDecoration(
+                                                  borderRadius: BorderRadius.circular(10),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.grey.withOpacity(0.5),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 2,
+                                                      offset: const Offset(0, 3), // changes position of shadow
+                                                    ),
+                                                  ],
+                                                  image: DecorationImage(
+                                                    image: AssetImage('assets/Saubo2.png'), // Đường dẫn đến ảnh
+                                                    fit: BoxFit.cover, // Tùy chọn hiển thị ảnh (cover, contain, etc.)
+                                                  ),
+                                                ),
+                                            ),
+                                          ),
+                                          Text('Rầy nâu', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),)
 
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child:
+                                            Container(
+                                              width: 120,
+                                              height: 80,
+                                              decoration:
+                                              BoxDecoration(
+                                                borderRadius: BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 2,
+                                                    offset: const Offset(0, 3), // changes position of shadow
+                                                  ),
+                                                ],
+                                                image: DecorationImage(
+                                                  image: AssetImage('assets/Saubo3.png'), // Đường dẫn đến ảnh
+                                                  fit: BoxFit.cover, // Tùy chọn hiển thị ảnh (cover, contain, etc.)
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Text('Rầy nâu', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),)
+
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child:
+                                            Container(
+                                              width: 120,
+                                              height: 80,
+                                              decoration:
+                                              BoxDecoration(
+                                                borderRadius: BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 2,
+                                                    offset: const Offset(0, 3), // changes position of shadow
+                                                  ),
+                                                ],
+                                                image: DecorationImage(
+                                                  image: AssetImage('assets/Saubo4.png'), // Đường dẫn đến ảnh
+                                                  fit: BoxFit.cover, // Tùy chọn hiển thị ảnh (cover, contain, etc.)
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Text('Rầy nâu', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),)
+
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child:
+                                            Container(
+                                              width: 120,
+                                              height: 80,
+                                              decoration:
+                                              BoxDecoration(
+                                                borderRadius: BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 2,
+                                                    offset: const Offset(0, 3), // changes position of shadow
+                                                  ),
+                                                ],
+                                                image: DecorationImage(
+                                                  image: AssetImage('assets/Saubo5.png'), // Đường dẫn đến ảnh
+                                                  fit: BoxFit.cover, // Tùy chọn hiển thị ảnh (cover, contain, etc.)
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Text('Rầy nâu', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),)
+
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child:
+                                            Container(
+                                              width: 120,
+                                              height: 80,
+                                              decoration:
+                                              BoxDecoration(
+                                                borderRadius: BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.grey.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 2,
+                                                    offset: const Offset(0, 3), // changes position of shadow
+                                                  ),
+                                                ],
+                                                image: DecorationImage(
+                                                  image: AssetImage('assets/Saubo6.png'), // Đường dẫn đến ảnh
+                                                  fit: BoxFit.cover, // Tùy chọn hiển thị ảnh (cover, contain, etc.)
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Text('Rầy nâu', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),)
+
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ],
             ),
+            Padding(
+              padding:
+                EdgeInsets.fromLTRB(30, 120, 30, 0),
+              child:
+                Container(
+
+                  height: 50,
+                  decoration: BoxDecoration(color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: CustomTextFieldV3(
+                      labelText: 'Tìm kiếm',
+                      hintText: 'Tìm kiếm',
+                      prefixIcon: CupertinoIcons.search,
+                      validatorValue: '',
+                      controller: search,
+                      onChanged: (value){},),
+                ),
+            ),
           ],
         ),
       ),
 
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Trang chủ',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.public),
-            label: 'Cộng đồng',
-          ),
-          BottomNavigationBarItem(
-            icon: Container(
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.green, // Màu xanh đậm của nút trung tâm
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.qr_code_scanner,
-                color: Colors.white,
-              ),
-            ),
-            label: '', // Nút giữa không có nhãn
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.headset_mic),
-            label: 'Chuyên gia',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Tài khoản',
-          ),
-        ],
-        selectedItemColor: Colors.green,
-        unselectedItemColor: Colors.grey,
+      bottomNavigationBar: CustomBottomNavigationBar(
+        camera: camera,
+        currentIndex: _currentIndex,
+        onTap: _onTap,
       ),
     );
   }

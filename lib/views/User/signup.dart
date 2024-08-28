@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+<<<<<<< HEAD:lib/views/signup.dart
 import '../controllers/LoginController.dart';
 import '../ultils/CustomTextField.dart';
+=======
+import '../../LoginController/LoginController.dart';
+import '../../ultils/CustomTextField.dart';
+>>>>>>> origin/myphuong:lib/views/User/signup.dart
 
-class login extends StatefulWidget {
-  const login({super.key});
+class Signup extends StatefulWidget {
+  const Signup({super.key});
 
   @override
-  State<login> createState() => _loginState();
+  State<Signup> createState() => _loginState();
 }
 
-class _loginState extends State<login> {
+class _loginState extends State<Signup> {
   final LoginController login = LoginController();
   var test;
   bool isCheckLogin = false;
@@ -67,7 +72,7 @@ class _loginState extends State<login> {
                         decoration: BoxDecoration(
                           color: Colors.white, // Màu nền
                           borderRadius:
-                              BorderRadius.circular(10), // Bo tròn các góc
+                          BorderRadius.circular(10), // Bo tròn các góc
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey
@@ -80,11 +85,12 @@ class _loginState extends State<login> {
                         ),
                         // color: Colors.white,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                         // width: double.infinity,
 
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+
                           children: [
                             Padding(
                               padding: EdgeInsets.only(
@@ -100,18 +106,46 @@ class _loginState extends State<login> {
                             SizedBox(height: 6),
                             CustomTextFieldV6(
                               controller: login.username,
-                              title: 'Tên tài khoản',
+                              title: 'Tài khoản',
                               isRequired: false,
                               icon: Icon(
                                 Icons.account_circle_outlined,
                                 color: Colors.green,
                               ),
                               textStyle:
-                                  TextStyle(fontSize: 14), // Thay đổi cỡ chữ
+                              TextStyle(fontSize: 14), // Thay đổi cỡ chữ
                               hintText: 'Nhập tên tài khoản',
-                              // customIcon: Image.asset('assets/iconAccount.png'),  // Icon từ tệp bên ngoài
+
                             ),
-                            SizedBox(height: 8),
+                            SizedBox(height: 5),
+                            CustomTextFieldV6(
+                              controller: login.phone,
+                              title: 'Số điện thoại',
+                              isRequired: false,
+                              icon: Icon(
+                                Icons.phone,
+                                color: Colors.green,
+                              ),
+                              textStyle:
+                              TextStyle(fontSize: 14), // Thay đổi cỡ chữ
+                              hintText: 'Nhập số điện thoại',
+                              // Icon từ tệp bên ngoài
+                            ),
+                            SizedBox(height: 5),
+                            CustomTextFieldV6(
+                              controller: login.email,
+                              title: 'Email',
+                              isRequired: false,
+                              icon: Icon(
+                                Icons.email_outlined,
+                                color: Colors.green,
+                              ),
+                              textStyle:
+                              TextStyle(fontSize: 14), // Thay đổi cỡ chữ
+                              hintText: 'Nhập địa chỉ email',
+                              // Icon từ tệp bên ngoài
+                            ),
+                            SizedBox(height: 5),
                             CustomTextFieldV6(
                               controller: login.password,
                               title: 'Mật khẩu',
@@ -121,10 +155,23 @@ class _loginState extends State<login> {
                                 color: Colors.green,
                               ),
                               textStyle:
-                                  TextStyle(fontSize: 14), // Thay đổi cỡ chữ
-                              hintText: 'Nhập mật khẩu vào đây',
-                              customIcon: Image.asset(
-                                  'assets/iconPassword.png'), // Icon từ tệp bên ngoài
+                              TextStyle(fontSize: 14), // Thay đổi cỡ chữ
+                              hintText: 'Nhập mật khẩu',
+                              // Icon từ tệp bên ngoài
+                            ),
+                            SizedBox(height: 5),
+                            CustomTextFieldV6(
+                              controller: login.enterpassword,
+                              title: 'Nhập lại mật khẩu',
+                              isRequired: false,
+                              icon: Icon(
+                                Icons.lock_outline,
+                                color: Colors.green,
+                              ),
+                              textStyle:
+                              TextStyle(fontSize: 14), // Thay đổi cỡ chữ
+                              hintText: 'Nhập lại mật khẩu',
+                              // Icon từ tệp bên ngoài
                             ),
                             //
                             // TextField(
@@ -136,56 +183,7 @@ class _loginState extends State<login> {
                             //   ),
                             // ),
 
-                            Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Căn giữa các phần tử và giãn đều
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            left:
-                                                0.0), // Đẩy Checkbox và Text ra khỏi mép trái
-                                        child: Checkbox(
-                                          value: isCheckLogin,
-                                          onChanged: (bool? value) {
-                                            setState(() {
-                                              isCheckLogin = value ?? false;
-                                            });
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(
-                                          width:
-                                              0), // Tạo khoảng cách giữa Checkbox và Text
-                                      Expanded(
-                                        child: Text(
-                                          "Nhớ mật khẩu",
-                                          style: TextStyle(fontSize: 14),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      right:
-                                          0.0), // Đẩy nút TextButton ra khỏi mép phải
-                                  child: TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Quên Mật Khẩu ?",
-                                      style: TextStyle(
-                                          color: Colors.green, fontSize: 14),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 0,
-                            ),
+                            SizedBox(height: 25,),
                             Container(
                               height: 40,
                               width: double.infinity,
@@ -197,7 +195,7 @@ class _loginState extends State<login> {
                               child: MaterialButton(
                                 onPressed: () {},
                                 child: Text(
-                                  "Đăng Nhập",
+                                  "Đăng ký",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
@@ -205,30 +203,14 @@ class _loginState extends State<login> {
                                 ),
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "Bạn chưa có tài khoản?",
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                                TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Đăng ký",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
-                                          color: Color(0xff006400)),
-                                    )),
-                              ],
-                            ),
+
+                            SizedBox(height: 8,),
                             Text(
                               "Hoặc đăng nhập với",
                               style: TextStyle(fontSize: 16),
                             ),
                             SizedBox(
-                              height: 8,
+                              height: 5,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -237,19 +219,19 @@ class _loginState extends State<login> {
                                   padding: EdgeInsets
                                       .zero, // Xóa khoảng cách bên trong nút
                                   minWidth:
-                                      0, // Đặt chiều rộng tối thiểu của nút
+                                  0, // Đặt chiều rộng tối thiểu của nút
                                   onPressed: () {},
                                   child: SvgPicture.asset(
                                       'assets/ic_facebook_logo.svg'),
                                 ),
                                 SizedBox(
                                     width:
-                                        0), // Đảm bảo không có khoảng cách giữa hai nút
+                                    0), // Đảm bảo không có khoảng cách giữa hai nút
                                 MaterialButton(
                                   padding: EdgeInsets
                                       .zero, // Xóa khoảng cách bên trong nút
                                   minWidth:
-                                      0, // Đặt chiều rộng tối thiểu của nút
+                                  0, // Đặt chiều rộng tối thiểu của nút
                                   onPressed: () {},
                                   child: SvgPicture.asset(
                                       'assets/ic_google_logo.svg'),
