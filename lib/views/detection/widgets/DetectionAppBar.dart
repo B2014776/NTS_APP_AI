@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import '../../../controllers/detection/DiseaseDetectionController.dart';
 
 class DetectionAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final DiseaseController controller;
   final double appBarHeight;
+  final String diseaseName; // Thêm biến để nhận tên bệnh
 
-  const DetectionAppBar({required this.controller, this.appBarHeight = 80.0});
+  const DetectionAppBar({
+    Key? key,
+    required this.diseaseName, // Nhận tên bệnh từ response
+    this.appBarHeight = 80.0,
+  }) : super(key: key);
 
   @override
   Size get preferredSize => Size.fromHeight(appBarHeight);
@@ -17,7 +20,7 @@ class DetectionAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         backgroundColor: Colors.green,
         title: Text(
-          controller.benh?.tenBenh ?? 'Loading...',
+          diseaseName.isNotEmpty ? diseaseName : 'Loading...', // Hiển thị tên bệnh từ response
           style: TextStyle(
             color: Colors.white,
           ),
@@ -35,8 +38,7 @@ class DetectionAppBar extends StatelessWidget implements PreferredSizeWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: CircleAvatar(
-              backgroundImage:
-                  AssetImage('assets/d7ba6024f3f77dd57e3abe35fc9d8185.png'),
+              backgroundImage: AssetImage('assets/d7ba6024f3f77dd57e3abe35fc9d8185.png'),
             ),
           ),
         ],

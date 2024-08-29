@@ -1,66 +1,83 @@
 import 'package:dio/dio.dart';
-
 import '../../models/DiseaseModel.dart';
 import '../../models/MedicineModel.dart';
 
 class DiseaseController {
   Benh? benh;
-  List<Medicine> biologicalMedicines = [];
-  List<Medicine> chemicalMedicines = [];
 
-  DiseaseController() {
-    //
-    biologicalMedicines = [
-      Medicine(
-        name: 'Chitosan',
-        information: 'Chitosan là một loại polymer cation tự nhiên, được lấy từ bộ xương cứng bên ngoài của động vật có vỏ, chẳng hạn như cua, tôm hùm và tôm. Đây là một chất có khả năng tái tạo và thúc đẩy hình thành mô mới khi bị thương hoặc bỏng',
-        usage: 'Chitosan là một loại polymer cation tự nhiên, được lấy từ bộ xương cứng bên ngoài của động vật có vỏ, chẳng hạn như cua, tôm hùm và tôm. Đây là một chất có khả năng tái tạo và thúc đẩy hình thành mô mới khi bị thương hoặc bỏng',
-      ),
-      Medicine(
-        name: 'Bacillus subtilis',
-        information: 'Một loại vi khuẩn Gram dương giúp kiểm soát nấm bệnh...',
-        usage: 'Sử dụng trong phòng ngừa bệnh.',
-      ),
-    ];
+  DiseaseController() {}
 
-    chemicalMedicines = [
-      Medicine(
-        name: 'Carbendazim',
-        information: 'Chitosan là một loại polymer cation tự nhiên, được lấy từ bộ xương cứng bên ngoài của động vật có vỏ, chẳng hạn như cua, tôm hùm và tôm. Đây là một chất có khả năng tái tạo và thúc đẩy hình thành mô mới khi bị thương hoặc bỏng',
-        usage: 'Chitosan là một loại polymer cation tự nhiên, được lấy từ bộ xương cứng bên ngoài của động vật có vỏ, chẳng hạn như cua, tôm hùm và tôm. Đây là một chất có khả năng tái tạo và thúc đẩy hình thành mô mới khi bị thương hoặc bỏng',
-      ),
-      Medicine(
-        name: 'Propiconazole',
-        information: 'Thuốc hóa học giúp kiểm soát bệnh nấm trên lá.',
-        usage: 'Sử dụng khi triệu chứng bắt đầu xuất hiện.',
-      ),
-    ];
-  }
+  Future<Map<String, dynamic>> uploadImageAndFetchDetailsTemp(
+      String imagePath) async {
+    Map<String, dynamic> result = {};
 
-  Future<void> fetchBenhFromAPI() async {
     benh = Benh(
       tenBenh: 'Bệnh đạo ôn',
       thuongXuatHienTrenCay: 'Lá lúa',
-      trieuChung: 'Bệnh đạo ôn là bệnh phổ biến ở cây lúa, gây ra các vết đốm hình thoi màu nâu hoặc xám trên lá, làm cây suy yếu và giảm năng suất. Triệu chứng bao gồm lá khô, cháy đầu lá, hạt lép,',
-      nguyenNhan: 'Nguyên nhân của bệnh đạo ôn là do nấm Magnaporthe oryzae gây ra. Nấm phát triển mạnh trong điều kiện thời tiết ẩm ướt, nhiệt độ cao, độ ẩm trên 90%, và mật độ lúa dày.',
-      dieuKien: 'Thời tiết ẩm ướt và mưa nhiều.',
-      truBenh: 'Sử dụng thuốc diệt nấm để trị bệnh.',
-      phongNgua: 'Bệnh đạo ôn là bệnh phổ biến ở cây lúa, gây ra các vết đốm hình thoi màu nâu hoặc xám trên lá, làm cây suy yếu và giảm năng suất. Triệu chứng bao gồm lá khô, cháy đầu lá, hạt lép, Bệnh đạo ôn là bệnh phổ biến ở cây lúa, gây ra các vết đốm hình thoi màu nâu hoặc xám trên lá, làm cây suy yếu và giảm năng suất. Triệu chứng bao gồm lá khô, cháy đầu lá, hạt lép, Bệnh đạo ôn là bệnh phổ biến ở cây lúa, gây ra các vết đốm hình thoi màu nâu hoặc xám trên lá, làm cây suy yếu và giảm năng suất. Triệu chứng bao gồm lá khô, cháy đầu lá, hạt lép,',
+      trieuChung:
+          'Bệnh đạo ôn là bệnh phổ biến ở cây lúa, gây ra các đốm nâu và thối lá.',
+      nguyenNhan:
+          'Nguyên nhân của bệnh đạo ôn là do nấm Magnaporthe oryzae gây ra, phát triển mạnh trong điều kiện ẩm ướt.',
+      dieuKien:
+          'Bệnh phát triển nhanh trong điều kiện thời tiết ẩm ướt và mưa nhiều.',
+      truBenh:
+          'Sử dụng thuốc diệt nấm như Carbendazim và Propiconazole để điều trị bệnh đạo ôn.',
+      phongNgua:
+          'Các biện pháp phòng ngừa bao gồm sử dụng thuốc phòng bệnh và cải thiện điều kiện thoát nước.',
       img: 'nhandien1.png',
+      thuocSinhHoc: [
+        ThuocTriBenh(
+          tenThuoc: 'Chitosan',
+          thongTin:
+              'Chitosan là một loại polymer cation tự nhiên được chiết xuất từ vỏ tôm, cua, hoặc nấm. Nó có khả năng kháng nấm và vi khuẩn, giúp tăng cường sức đề kháng của cây trồng.',
+          cachSuDung:
+              'Chitosan được sử dụng để phòng ngừa và điều trị các bệnh do nấm và vi khuẩn gây ra.',
+          img: 'e1e1afe61c77b69bc5d67a8852100e94.png',
+        )
+      ],
+      thuocHoaHoc: [
+        ThuocTriBenh(
+          tenThuoc: 'Carbendazim',
+          thongTin:
+              'Carbendazim là một loại thuốc diệt nấm hiệu quả được sử dụng để kiểm soát nhiều loại bệnh nấm khác nhau trên cây trồng.',
+          cachSuDung:
+              'Sử dụng Carbendazim khi bệnh nấm xuất hiện trên cây để kiểm soát và giảm thiểu thiệt hại.',
+          img: 'e1e1afe61c77b69bc5d67a8852100e94.png',
+        ),
+      ],
     );
-    try {
-      final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Blast');
-      if (response.statusCode == 200) {
-        benh = Benh.fromJson(response.data);
 
-      }
-    } catch (error) {
-      print("Failed to load disease details: $error");
-    }
+    return result;
   }
 
+  Future<Map<String, dynamic>> uploadImageAndFetchDetails(
+      String imagePath) async {
+    Map<String, dynamic> result = {};
 
-  String getBenhDetails() {
+    try {
+      Dio dio = Dio();
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(imagePath, filename: "image.jpg"),
+      });
+
+      final response = await dio.post(
+        'https://api-ai-1-6b81.onrender.com/predict/',
+        data: formData,
+      );
+
+      if (response.statusCode == 200) {
+        result = response.data; // Assume the response data is a Map
+      } else {
+        result['error'] = 'Failed to fetch data';
+      }
+    } catch (error) {
+      result['error'] = 'Error: $error';
+    }
+
+    return result;
+  }
+
+  String getBenhDetails(dynamic benh) {
     if (benh != null) {
       return "Tên bệnh: ${benh!.tenBenh}\nTriệu chứng: ${benh!.trieuChung}\nNguyên nhân: ${benh!.nguyenNhan}";
     } else {
@@ -69,3 +86,5 @@ class DiseaseController {
   }
 
 }
+
+

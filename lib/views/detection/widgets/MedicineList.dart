@@ -3,7 +3,7 @@ import '../../../models/MedicineModel.dart';
 import '../MedicineDetails.dart';
 
 class MedicineList extends StatelessWidget {
-  final List<Medicine> medicines;
+  final List<ThuocTriBenh> medicines;
 
   MedicineList({required this.medicines});
 
@@ -16,13 +16,13 @@ class MedicineList extends StatelessWidget {
       itemBuilder: (context, index) {
         final medicine = medicines[index];
         return ListTile(
-          title: Text(medicine.name),
+          title: Text(medicine.tenThuoc),
           trailing: Icon(Icons.arrow_forward),
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => MedicineDetails(medicine: medicine),
+                builder: (context) => MedicineDetails(thuocTriBenh: medicine),
               ),
             );
           },

@@ -1,32 +1,36 @@
-class Medicine {
-  final String name;
-  final String information;
-  final String usage;
+class ThuocTriBenh {
+  final String tenThuoc;
+  final String thongTin;
+  final String cachSuDung;
+  final String img;
 
-  Medicine({
-    required this.name,
-    required this.information,
-    required this.usage,
+  ThuocTriBenh({
+    required this.tenThuoc,
+    required this.thongTin,
+    required this.cachSuDung,
+    required this.img
   });
 
-  factory Medicine.fromJson(Map<String, dynamic> json) {
-    return Medicine(
-      name: json['name'],
-      information: json['information'],
-      usage: json['usage'],
+  factory ThuocTriBenh.fromJson(Map<String, dynamic> json) {
+    return ThuocTriBenh(
+      tenThuoc: json['tenThuoc'],
+      thongTin: json['thongTin'],
+      cachSuDung: json['cachSuDung'],
+      img: json['img'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
-      'information': information,
-      'usage': usage,
+      'tenThuoc': tenThuoc,
+      'thongTin': thongTin,
+      'cachSuDung': cachSuDung,
+      'img': img,
     };
   }
 
   @override
   String toString() {
-    return 'Medicine(name: $name, information: $information, usage: $usage)';
+    return 'ThuocTriBenh(tenThuoc: $tenThuoc, thongTin: $thongTin, cachSuDung: $cachSuDung, img: $img)';
   }
 }

@@ -21,6 +21,12 @@ class _GeneralInfoState extends State<GeneralInfo> {
       return Center(child: Text("No data available."));
     }
 
+    // Kiểm tra dữ liệu và thay thế bằng 'N/A' nếu không có
+    String tenBenh = widget.benh?.tenBenh ?? 'N/A';
+    String imgPath = widget.benh?.img ?? 'a196eb3c8f43db5f22c2de4c258e4953.png';
+    String trieuChung = widget.benh?.trieuChung ?? 'N/A';
+    String nguyenNhan = widget.benh?.nguyenNhan ?? 'N/A';
+
     return Column(
       children: [
         Expanded(
@@ -31,7 +37,7 @@ class _GeneralInfoState extends State<GeneralInfo> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    'assets/${widget.benh!.img}',
+                    'assets/$imgPath',
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -46,12 +52,12 @@ class _GeneralInfoState extends State<GeneralInfo> {
                   SizedBox(height: 8),
                   Text(
                     isTrieuChungExpanded
-                        ? widget.benh!.trieuChung
-                        : widget.benh!.trieuChung.length > textLimit
-                        ? widget.benh!.trieuChung.substring(0, textLimit) + '...'
-                        : widget.benh!.trieuChung,
+                        ? trieuChung
+                        : trieuChung.length > textLimit
+                        ? trieuChung.substring(0, textLimit) + '...'
+                        : trieuChung,
                   ),
-                  if (widget.benh!.trieuChung.length > textLimit)
+                  if (trieuChung.length > textLimit)
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
@@ -61,7 +67,7 @@ class _GeneralInfoState extends State<GeneralInfo> {
                           });
                         },
                         child: Text(
-                            isTrieuChungExpanded ? 'Thu gọn' : 'Xem thêm',
+                          isTrieuChungExpanded ? 'Thu gọn' : 'Xem thêm',
                           style: TextStyle(
                             color: Colors.orangeAccent,
                           ),
@@ -78,12 +84,12 @@ class _GeneralInfoState extends State<GeneralInfo> {
                   SizedBox(height: 8),
                   Text(
                     isNguyenNhanExpanded
-                        ? widget.benh!.nguyenNhan
-                        : widget.benh!.nguyenNhan.length > textLimit
-                        ? widget.benh!.nguyenNhan.substring(0, textLimit) + '...'
-                        : widget.benh!.nguyenNhan,
+                        ? nguyenNhan
+                        : nguyenNhan.length > textLimit
+                        ? nguyenNhan.substring(0, textLimit) + '...'
+                        : nguyenNhan,
                   ),
-                  if (widget.benh!.nguyenNhan.length > textLimit)
+                  if (nguyenNhan.length > textLimit)
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(

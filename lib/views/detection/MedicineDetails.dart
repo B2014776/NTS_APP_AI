@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import '../../models/MedicineModel.dart';
 
 class MedicineDetails extends StatelessWidget {
-  final Medicine medicine;
+  final ThuocTriBenh thuocTriBenh;
 
-  const MedicineDetails({super.key, required this.medicine});
+  const MedicineDetails({super.key, required this.thuocTriBenh});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          medicine.name,
+          thuocTriBenh.tenThuoc,
           style: TextStyle(
             color: Colors.white,
           ),
@@ -36,13 +36,12 @@ class MedicineDetails extends StatelessWidget {
                   children: [
                     Text(
                       '1. Giới thiệu:',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(medicine.information),
+                      child: Text(thuocTriBenh.thongTin ?? 'No information available'),
                     ),
                     Center(
                       child: Image.asset(
@@ -55,13 +54,12 @@ class MedicineDetails extends StatelessWidget {
                     SizedBox(height: 16),
                     Text(
                       '2. Hướng dẫn sử dụng:',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(medicine.usage),
+                      child: Text(thuocTriBenh.cachSuDung ?? 'No usage information available'),
                     ),
                     SizedBox(height: 16),
                   ],
@@ -110,3 +108,4 @@ class MedicineDetails extends StatelessWidget {
     );
   }
 }
+

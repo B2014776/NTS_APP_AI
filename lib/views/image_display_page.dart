@@ -1,7 +1,8 @@
+import 'package:apptestai/controllers/detection/DiseaseDetectionController.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'dart:convert'; // Import for json decoding
-import 'package:http/http.dart' as http; // Import for HTTP requests
+
+import 'detection/DiseaseDetection.dart';
 
 class ImageDisplayPage extends StatefulWidget {
   final String imagePath;
@@ -16,74 +17,52 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
   String? _className;
   double? _probability;
   bool _isLoading = false;
-
-
+  final DiseaseController _diseaseController = DiseaseController();
 
   Future<void> _uploadImage() async {
     setState(() {
-      _isLoading = true; // Set loading state to true
+      _isLoading = true;
     });
 
-    final request = http.MultipartRequest(
-      'POST',
-      Uri.parse('https://api-ai-1-6b81.onrender.com/predict'), // Replace with your FastAPI endpoint
-    );
-
-    // Thêm tệp vào yêu cầu
-    request.files.add(
-      await http.MultipartFile.fromPath(
-        'file', // Tên tham số phải khớp với endpoint FastAPI của bạn
-        widget.imagePath,
-      ),
-    );
-
-    // Tạo thông tin xác thực Basic Authentication
-    String username = 'admin';
-    String password = 'laptrinh';
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
-
-    // Thêm tiêu đề xác thực vào yêu cầu
-    request.headers['Authorization'] = basicAuth;
-
     try {
-      // Gửi yêu cầu
-      final response = await request.send();
-
-      // Kiểm tra phản hồi từ server
-      if (response.statusCode == 200) {
-        final responseBody = await response.stream.bytesToString();
-        final decodedResponse = json.decode(responseBody);
-
+      final decodedResponse = await _diseaseController.uploadImageAndFetchDetails(widget.imagePath);
+      print("decodedResponse : $decodedResponse");
+      if (decodedResponse.containsKey('error')) {
         setState(() {
-          _className = decodedResponse['class_name']; // Kết quả lớp dự đoán
-          _probability = decodedResponse['probability']; // Xác suất dự đoán
+          _className = decodedResponse['error'];
+          _probability = null;
         });
       } else {
         setState(() {
-          _className = 'Upload failed';
-          _probability = null;
+          _className = decodedResponse['class_name'];
+          _probability = decodedResponse['probability'];
         });
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DiseaseDetection(response: decodedResponse),
+          ),
+        );
       }
     } catch (e) {
+      print('An error occurred: $e');
       setState(() {
-        _className = 'Error occurred';
+        _className = 'An error occurred';
         _probability = null;
       });
-      print('Error: $e');
     } finally {
       setState(() {
-        _isLoading = false; // Set loading state to false
+        _isLoading = false;
       });
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ảnh đã chụp', style: TextStyle(fontSize: 25),),
+        title: Text('Ảnh đã chụp', style: TextStyle(fontSize: 25)),
         backgroundColor: Colors.green,
       ),
       body: Column(

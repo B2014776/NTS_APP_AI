@@ -3,6 +3,7 @@ import '../../models/CropModel.dart';
 import '../../models/CropTypeModel.dart';
 import '../../models/CultivateModel.dart';
 import '../../models/DiseaseModel.dart';
+import '../../models/MedicineModel.dart';
 
 class CropController {
   LoaiCayTrong? loaiCayTrong;
@@ -58,6 +59,26 @@ class CropController {
           phongNgua:
               'Trồng cây với khoảng cách rộng, tránh tưới nước quá nhiều.',
           img: 'c41187629afebe90269e0e954e69f1eb.png',
+          thuocSinhHoc: [
+            ThuocTriBenh(
+              tenThuoc: 'Chitosan',
+              thongTin:
+              'Chitosan là một loại polymer cation tự nhiên được chiết xuất từ vỏ tôm, cua, hoặc nấm. Nó có khả năng kháng nấm và vi khuẩn, giúp tăng cường sức đề kháng của cây trồng.',
+              cachSuDung:
+              'Chitosan được sử dụng để phòng ngừa và điều trị các bệnh do nấm và vi khuẩn gây ra.',
+              img: 'e1e1afe61c77b69bc5d67a8852100e94.png',
+            )
+          ],
+          thuocHoaHoc: [
+            ThuocTriBenh(
+              tenThuoc: 'Carbendazim',
+              thongTin:
+              'Carbendazim là một loại thuốc diệt nấm hiệu quả được sử dụng để kiểm soát nhiều loại bệnh nấm khác nhau trên cây trồng.',
+              cachSuDung:
+              'Sử dụng Carbendazim khi bệnh nấm xuất hiện trên cây để kiểm soát và giảm thiểu thiệt hại.',
+              img: 'e1e1afe61c77b69bc5d67a8852100e94.png',
+            ),
+          ],
         ),
         Benh(
           tenBenh: 'Bệnh héo xanh',
@@ -69,6 +90,26 @@ class CropController {
           truBenh: 'Sử dụng thuốc kháng sinh.',
           phongNgua: 'Trồng giống kháng bệnh, giữ độ ẩm đất ổn định.',
           img: 'c41187629afebe90269e0e954e69f1eb.png',
+          thuocSinhHoc: [
+            ThuocTriBenh(
+              tenThuoc: 'Chitosan',
+              thongTin:
+              'Chitosan là một loại polymer cation tự nhiên được chiết xuất từ vỏ tôm, cua, hoặc nấm. Nó có khả năng kháng nấm và vi khuẩn, giúp tăng cường sức đề kháng của cây trồng.',
+              cachSuDung:
+              'Chitosan được sử dụng để phòng ngừa và điều trị các bệnh do nấm và vi khuẩn gây ra.',
+              img: 'e1e1afe61c77b69bc5d67a8852100e94.png',
+            )
+          ],
+          thuocHoaHoc: [
+            ThuocTriBenh(
+              tenThuoc: 'Carbendazim',
+              thongTin:
+              'Carbendazim là một loại thuốc diệt nấm hiệu quả được sử dụng để kiểm soát nhiều loại bệnh nấm khác nhau trên cây trồng.',
+              cachSuDung:
+              'Sử dụng Carbendazim khi bệnh nấm xuất hiện trên cây để kiểm soát và giảm thiểu thiệt hại.',
+              img: 'e1e1afe61c77b69bc5d67a8852100e94.png',
+            ),
+          ],
         ),
       ],
       kyThuatTrongList: [

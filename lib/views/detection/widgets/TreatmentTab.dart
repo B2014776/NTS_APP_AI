@@ -3,8 +3,8 @@ import '../../../models/MedicineModel.dart';
 import 'MedicineList.dart';
 
 class TreatmentTab extends StatelessWidget {
-  final List<Medicine> biologicalMedicines;
-  final List<Medicine> chemicalMedicines;
+  final List<ThuocTriBenh> biologicalMedicines;
+  final List<ThuocTriBenh> chemicalMedicines;
 
   TreatmentTab({required this.biologicalMedicines, required this.chemicalMedicines});
 
