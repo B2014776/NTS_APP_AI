@@ -3,6 +3,7 @@ import 'package:apptestai/views/Agri_expert/List_views.dart';
 import 'package:apptestai/views/Chat.dart';
 import 'package:apptestai/views/Community.dart';
 import 'package:apptestai/views/Post.dart';
+import 'package:apptestai/views/detection/DiseaseDetection.dart';
 import 'package:apptestai/views/home.dart';
 import 'package:apptestai/views/User/login.dart';
 import 'package:apptestai/views/User/signup.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
       // home: ChatScreen(),
       // home: Post(),
       // /home: Community(),
+      // home: DiseaseDetection(),
     );
   }
 }

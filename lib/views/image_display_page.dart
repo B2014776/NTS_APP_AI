@@ -1,7 +1,10 @@
+import 'package:apptestai/controllers/detection/DiseaseDetectionController.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert'; // Import for json decoding
-import 'package:http/http.dart' as http; // Import for HTTP requests
+import 'package:http/http.dart' as http;
+
+import 'detection/DiseaseDetection.dart'; // Import for HTTP requests
 
 class ImageDisplayPage extends StatefulWidget {
   final String imagePath;
@@ -24,59 +27,64 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
       _isLoading = true; // Set loading state to true
     });
 
+    print('Uploading image from path: ${widget.imagePath}');
+    DiseaseController controller = DiseaseController();
+    controller.fetchBenhFromAPI();
+
     final request = http.MultipartRequest(
       'POST',
-      Uri.parse('https://api-ai-1-6b81.onrender.com/predict'), // Replace with your FastAPI endpoint
+      Uri.parse('https://api-ai-1-6b81.onrender.com/predict/'), // Replace with your FastAPI endpoint
     );
 
-    // Thêm tệp vào yêu cầu
     request.files.add(
       await http.MultipartFile.fromPath(
-        'file', // Tên tham số phải khớp với endpoint FastAPI của bạn
+        'file', // This should match the parameter name in your FastAPI endpoint
         widget.imagePath,
       ),
     );
 
-    // Tạo thông tin xác thực Basic Authentication
-    String username = 'admin';
-    String password = 'laptrinh';
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
-
-    // Thêm tiêu đề xác thực vào yêu cầu
-    request.headers['Authorization'] = basicAuth;
-
     try {
-      // Gửi yêu cầu
       final response = await request.send();
+      print('Response status code: ${response.statusCode}');
 
-      // Kiểm tra phản hồi từ server
       if (response.statusCode == 200) {
         final responseBody = await response.stream.bytesToString();
+        print('Response body: $responseBody');
+
         final decodedResponse = json.decode(responseBody);
+        print('Decoded response: $decodedResponse');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DiseaseDetection(),
+          ),
+        );
 
         setState(() {
-          _className = decodedResponse['class_name']; // Kết quả lớp dự đoán
-          _probability = decodedResponse['probability']; // Xác suất dự đoán
+          _className = decodedResponse['class_name'];
+          _probability = decodedResponse['probability'];
         });
       } else {
+        print('Upload failed with status code: ${response.statusCode}');
         setState(() {
           _className = 'Upload failed';
           _probability = null;
         });
       }
     } catch (e) {
+      print('An error occurred: $e');
       setState(() {
-        _className = 'Error occurred';
+        _className = 'An error occurred';
         _probability = null;
       });
-      print('Error: $e');
     } finally {
       setState(() {
         _isLoading = false; // Set loading state to false
       });
+      print('Upload process completed');
     }
   }
+
 
 
   @override
