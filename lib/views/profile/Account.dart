@@ -24,14 +24,11 @@ class _AccountState extends State<Account> {
   @override
   void initState() {
     super.initState();
-    _fetchUserData();
-  }
-
-  Future<void> _fetchUserData() async {
-    await _controller.fetchUserFromAPI();
-    setState(() {
-      _user = _controller.user;
-      _isLoading = false;
+    _controller.fetchUserFromAPI().then((_) {
+      setState(() {
+        _user = _controller.user;
+        _isLoading = false;
+      });
     });
   }
 
@@ -40,16 +37,13 @@ class _AccountState extends State<Account> {
     return Scaffold(
       body: Column(
         children: [
-          // Stack for AppBar and AccountInfoCard
           Stack(
             clipBehavior: Clip.none,
             children: [
-              // AppBar background
               Container(
                 height: 150,
                 color: Colors.green,
               ),
-              // Positioned AccountInfoCard
               Positioned(
                 top: 100,
                 left: 16,
@@ -57,16 +51,12 @@ class _AccountState extends State<Account> {
                 child: _isLoading
                     ? Center(child: CircularProgressIndicator())
                     : _user != null
-                    ? AccountInfoCard(user: _user!)
-                    : Center(child: Text('No user data')),
+                        ? AccountInfoCard(user: _user!)
+                        : Center(child: Text('No user data')),
               ),
             ],
           ),
-
           SizedBox(height: 150),
-          // Adjust this to create space below AccountInfoCard
-
-          // List of history items
           Expanded(
             child: ListView(
               children: [
@@ -78,7 +68,7 @@ class _AccountState extends State<Account> {
                   title: Text('Lịch sử cuộc gọi'),
                   trailing: Icon(Icons.arrow_forward),
                   onTap: () {
-                    // Điều hướng đến trang lịch sử cuộc gọi
+
                   },
                 ),
                 Divider(),
@@ -90,7 +80,7 @@ class _AccountState extends State<Account> {
                   title: Text('Lịch sử tin nhắn'),
                   trailing: Icon(Icons.arrow_forward),
                   onTap: () {
-                    // Điều hướng đến trang lịch sử tin nhắn
+
                   },
                 ),
                 Divider(),
@@ -102,19 +92,20 @@ class _AccountState extends State<Account> {
                   title: Text('Lịch sử bài viết'),
                   trailing: Icon(Icons.arrow_forward),
                   onTap: () {
-                    // Điều hướng đến trang lịch sử bài viết
+
                   },
                 ),
-                Divider(), // Separator for new section
+                Divider(),
                 ListTile(
-                  title: Text('Quản lý tài khoản', style: TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text('Quản lý tài khoản',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 ListTile(
                   leading: Icon(Icons.lock),
                   title: Text('Đổi mật khẩu'),
                   trailing: Icon(Icons.arrow_forward),
                   onTap: () {
-                    // Điều hướng đến trang đổi mật khẩu
+
                   },
                 ),
                 ListTile(
@@ -122,7 +113,7 @@ class _AccountState extends State<Account> {
                   title: Text('Đăng xuất'),
                   trailing: Icon(Icons.arrow_forward),
                   onTap: () {
-                    // Xử lý đăng xuất
+
                   },
                 ),
               ],
@@ -134,7 +125,8 @@ class _AccountState extends State<Account> {
         currentIndex: 4,
         onTap: (index) {
           // Xử lý điều hướng cho BottomNavigationBar
-        }, camera: camera,
+        },
+        camera: camera,
       ),
     );
   }
