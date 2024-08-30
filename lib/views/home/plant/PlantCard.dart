@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class PlantCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10), // More rounded corners
           side: BorderSide(color: Colors.grey.shade300, width: 1), // Border color and width
         ),
-        elevation: 4, // Increased elevation for better shadow
+        elevation: 0, // Increased elevation for better shadow
         child: Padding(
           padding: const EdgeInsets.all(12.0), // Increased padding
           child: Column(
@@ -45,7 +46,7 @@ class PlantCard extends StatelessWidget {
                   ),
                   const SizedBox(width: 10), // Space between image and text
                   Expanded(
-                    child: Text(
+                    child: AutoSizeText(
                       plantName,
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.w600), // Larger font size

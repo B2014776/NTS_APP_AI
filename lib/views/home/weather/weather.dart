@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class Weather extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
       ),
-      child: Text(
+      child: AutoSizeText(
         label,
         style: const TextStyle(fontSize: 16, color: Colors.black),
       ),
@@ -41,14 +42,14 @@ class Weather extends StatelessWidget {
                   const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      AutoSizeText(
                         'Cần Thơ, Việt Nam',
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
                         ),
                       ),
-                      Text(
+                      AutoSizeText(
                         '35°C',
                         style: TextStyle(
                           fontSize: 57,

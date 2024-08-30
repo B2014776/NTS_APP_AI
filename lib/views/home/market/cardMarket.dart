@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_line/dotted_line.dart';
 
@@ -13,19 +14,14 @@ class _CardMarketState extends State<CardMarket> {
   Widget build(BuildContext context) {
     return Container(
       width: 240,
-      padding: const EdgeInsets.all(12), // Increased padding for better spacing
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        // Slightly more rounded corners
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 6,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Colors.grey.shade300, // Border color
+          width: 1, // Border width
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,91 +31,92 @@ class _CardMarketState extends State<CardMarket> {
             children: [
               Image.asset(
                 'assets/thanhlong.png',
-                width: 40, // Slightly larger image for better visibility
-                height: 40,
-                fit: BoxFit.cover, // Ensure image maintains aspect ratio
+                width: 45, // Larger image for better visibility
+                height: 45,
+                fit: BoxFit.cover,
               ),
-              const SizedBox(width: 8), // Space between image and text
+              const SizedBox(width: 12), // Increased space between image and text
               const Expanded(
-                child: Text(
+                child: AutoSizeText(
                   'Thanh long',
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 18, // Slightly larger text
+                    fontWeight: FontWeight.w700,
                     color: Colors.black87,
                   ),
-                  overflow: TextOverflow.ellipsis, // Handle long text
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10), // Increased space below the image-row
-          DottedLine(
+          const SizedBox(height: 12), // Increased space below the image-row
+          const DottedLine(
             direction: Axis.horizontal,
             lineLength: double.infinity,
-            lineThickness: 1.0,
-            dashLength: 6.0,
-            // Longer dashes
+            lineThickness: 1.2, // Slightly thicker line
+            dashLength: 5.0,
             dashColor: Colors.blueGrey,
-            dashGradient: const [Colors.blueGrey, Colors.blue],
-            dashRadius: 0.0,
-            dashGapLength: 6.0,
-            // Increased gap length
+            dashGapLength: 4.0,
             dashGapColor: Colors.transparent,
           ),
-          const SizedBox(height: 10), // Space between dotted line and content
+          const SizedBox(height: 12), // Space between dotted line and content
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              const AutoSizeText(
                 '500,000 VNĐ/kg',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.green,
                 ),
+                maxLines: 1,
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(8),
+                  color: Colors.grey.shade100, // Softer background color
+                  borderRadius: BorderRadius.circular(10), // More rounded corners
                 ),
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
                       Icons.arrow_drop_down,
-                      color: Colors.orange,
+                      color: Colors.redAccent, // Color adjustment
                       size: 24,
                     ),
-                    SizedBox(width: 4), // Reduced space for tighter look
-                    Text(
+                    SizedBox(width: 4),
+                    AutoSizeText(
                       '0',
-                      style: TextStyle(fontSize: 16, color: Colors.orange),
+                      style: TextStyle(fontSize: 16, color: Colors.redAccent),
+                      maxLines: 1,
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 8), // Space between rows
-          const Text(
+          const SizedBox(height: 10), // Space between rows
+          const AutoSizeText(
             'Xoài cát chu',
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 17, // Slightly larger font size
               fontWeight: FontWeight.bold,
               color: Colors.deepOrange,
             ),
+            maxLines: 1,
           ),
-          const SizedBox(height: 4), // Space between text elements
-          const Text(
+          const SizedBox(height: 6), // Space between text elements
+          const AutoSizeText(
             'Vĩnh Long',
             style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
+              fontSize: 15, // Slightly larger font size
+              fontWeight: FontWeight.w600, // Slightly bolder font
               color: Colors.black54,
             ),
+            maxLines: 1,
           ),
         ],
       ),
