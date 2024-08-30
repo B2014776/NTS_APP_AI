@@ -5,11 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../ultils/Custom_drawer.dart';
-import 'camera.dart'; // Đảm bảo nhập đúng đường dẫn của file CustomDrawer
+import 'camera.dart';
 
 class HomePage extends StatefulWidget {
-  // final CameraDescription camera;
-  // const HomePage({required this.camera});
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -18,8 +16,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController search = TextEditingController();
 
-  // Biến trạng thái có thể khai báo ở đây
-  int _currentIndex = 0; // Giả sử Community là chỉ mục 1
+  int _currentIndex = 0;
 
   // Dummy CameraDescription để truyền vào CustomBottomNavigationBar
   final CameraDescription camera = const CameraDescription(
@@ -29,8 +26,6 @@ class _HomePageState extends State<HomePage> {
   );
 
   void _onTap(int index) {
-    // Thực hiện các hành động khi một mục được nhấn
-    // Ví dụ: cập nhật chỉ mục hiện tại
     setState(() {
       _currentIndex = index;
     });
@@ -40,7 +35,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      // Gán GlobalKey cho Scaffold để điều khiển Drawer
       drawer: CustomDrawer(),
       // Đặt CustomDrawer ở đây
       floatingActionButton: SizedBox(
@@ -85,8 +79,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          _scaffoldKey.currentState
-                              ?.openDrawer(); // Mở Drawer khi nhấn vào menu
+                          _scaffoldKey.currentState?.openDrawer();
                         },
                         icon: const Icon(
                           Icons.menu_outlined,
@@ -192,8 +185,9 @@ class _HomePageState extends State<HomePage> {
                                       TextButton(
                                         onPressed: () {},
                                         style: TextButton.styleFrom(
-                                          backgroundColor: Color(0xffCCFFCC),
-                                          minimumSize: Size(150, 50),
+                                          backgroundColor:
+                                              const Color(0xffCCFFCC),
+                                          minimumSize: const Size(150, 50),
                                         ),
                                         child: const Text(
                                           '10 ngày',
@@ -214,51 +208,67 @@ class _HomePageState extends State<HomePage> {
                           height: 0,
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            // Nền màu trắng cho container
                             borderRadius: BorderRadius.circular(5),
-                            // Bo góc Container
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.3),
-                                // Màu đổ bóng với độ mờ
                                 spreadRadius: 1,
-                                // Bán kính lan rộng của bóng
-                                blurRadius: 3,
-                                // Độ mờ của bóng
-                                offset: const Offset(0,
-                                    3), // Vị trí của bóng (0 theo chiều ngang, 3 theo chiều dọc)
+                                blurRadius: 2,
+                                offset: const Offset(0, 3),
                               ),
                             ],
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              const Text(
-                                'Dự báo sâu bệnh hôm nay',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
+                              Row(
+                                children: [
+                                  const Expanded(
+                                    child: Text(
+                                      'Dự báo sâu bệnh hôm nay',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  TextButton(
+                                      onPressed: () {},
+                                      child: const Row(
+                                        children: [
+                                          Text(
+                                            'Tất cả',
+                                            style: TextStyle(
+                                                color: Colors.orange,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.normal),
+                                          ),
+                                          Icon(
+                                            Icons.chevron_right,
+                                            color: Colors.orange,
+                                            size: 18,
+                                          ),
+                                        ],
+                                      ))
+                                ],
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 10.0),
+                                padding: const EdgeInsets.only(top: 10.0),
                                 child: Row(
                                   children: [
                                     Image.asset('assets/Sau_benh.png'),
-                                    Expanded(
-                                      child: Container(
+                                    const Expanded(
+                                      child: SizedBox(
                                         height: 120,
-                                        // Đặt chiều cao cụ thể cho khung chứa văn bản
-                                        child: const SingleChildScrollView(
+                                        child: SingleChildScrollView(
                                           child: Text(
-                                            'Hãy cẩn thận với bọ ngựa, Chúng có thân dài, mảnh, với đầu hình tam giác có thể xoay được và đôi mắt lớn giúp bọ ngựa quan sát con mồi từ nhiều góc độ khác nhau.',
+                                            style: TextStyle(),
+                                            'Hãy cẩn thận với bọ ngựa, Chúng có thân dài, mảnh, với đầu ..',
                                           ),
                                         ),
                                       ),
@@ -269,48 +279,54 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 1,
-                        ),
                         Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            // Nền màu trắng cho container
                             borderRadius: BorderRadius.circular(5),
-                            // Bo góc Container
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.grey.withOpacity(0.3),
-                                // Màu đổ bóng với độ mờ
                                 spreadRadius: 2,
-                                // Bán kính lan rộng của bóng
                                 blurRadius: 5,
-                                // Độ mờ của bóng
-                                offset: const Offset(0,
-                                    3), // Vị trí của bóng (0 theo chiều ngang, 3 theo chiều dọc)
+                                offset: const Offset(0, 3),
                               ),
                             ],
                           ),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Row(
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
+                                  const Text(
                                     'Giá cả thị trường',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 16,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.bold),
                                   ),
+                                  TextButton(
+                                      onPressed: () {},
+                                      child: const Row(
+                                        children: [
+                                          Text(
+                                            'Tất cả',
+                                            style: TextStyle(
+                                                color: Colors.orange,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.normal),
+                                          ),
+                                          Icon(
+                                            Icons.chevron_right,
+                                            color: Colors.orange,
+                                            size: 18,
+                                          ),
+                                        ],
+                                      ))
                                 ],
-                              ),
-                              const SizedBox(
-                                height: 20,
                               ),
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
@@ -321,23 +337,17 @@ class _HomePageState extends State<HomePage> {
                                       height: 20,
                                     ),
                                     Container(
-                                      height: 110, // Chiều cao của Container
-                                      width: 200, // Chiều rộng của Container
+                                      height: 110,
+                                      width: 200,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
-                                        // Nền màu trắng cho container
                                         borderRadius: BorderRadius.circular(5),
-                                        // Bo góc Container
                                         boxShadow: [
                                           BoxShadow(
                                             color: Colors.grey.withOpacity(0.5),
-                                            // Màu đổ bóng với độ mờ
                                             spreadRadius: 2,
-                                            // Bán kính lan rộng của bóng
                                             blurRadius: 5,
-                                            // Độ mờ của bóng
-                                            offset: const Offset(0,
-                                                3), // Vị trí của bóng (0 theo chiều ngang, 3 theo chiều dọc)
+                                            offset: const Offset(0, 3),
                                           ),
                                         ],
                                       ),
@@ -849,7 +859,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: TextFormField(
                   decoration: const InputDecoration(
-                    labelText: "Tìm kiếm",
+                    labelText: "Nhập từ khóa ...",
                     hintStyle: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

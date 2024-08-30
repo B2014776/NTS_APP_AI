@@ -41,6 +41,7 @@ dependencies:
 #  image_gallery_saver: ^1.7.0
   flutter_svg: ^2.0.9
   dio: ^5.0.10
+  device_preview: ^1.2.0
 
 dev_dependencies:
   flutter_test:
