@@ -27,7 +27,7 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
     super.initState();
     // Lấy data từ response
     final benhDataMap = widget.response['data'] as Map<String, dynamic>?;
-
+    print('benhDataMap: $benhDataMap');
     if (benhDataMap != null) {
       _benhData = Benh.fromJson(benhDataMap);
       print('_benhData: $_benhData');
@@ -78,14 +78,14 @@ class _DiseaseDetectionState extends State<DiseaseDetection> {
                     GeneralInfo(benh: _benhData!)
                   else
                     Center(child: Text('No data')),
-                  // TreatmentTab(
-                  //   biologicalMedicines: _biologicalMedicines,
-                  //   chemicalMedicines: _chemicalMedicines,
-                  // ),
-                  // if (_benhData != null)
-                  //   PreventionTab(benh: _benhData!)
-                  // else
-                  //   Center(child: Text('No data')),
+                  TreatmentTab(
+                    biologicalMedicines: _biologicalMedicines,
+                    chemicalMedicines: _chemicalMedicines,
+                  ),
+                  if (_benhData != null)
+                    PreventionTab(benh: _benhData!)
+                  else
+                    Center(child: Text('No data')),
                 ],
               ),
             ),

@@ -29,14 +29,14 @@ class Benh {
   // Factory constructor to create an instance from JSON
   factory Benh.fromJson(Map<String, dynamic> json) {
     return Benh(
-      tenBenh: json['tenBenh'] ?? 'Chưa có tên bệnh',
-      thuongXuatHienTrenCay: json['thuongXuatHienTrenCay'] ?? 'Chưa có thông tin',
-      trieuChung: json['trieuChung'] ?? 'Chưa có triệu chứng',
-      nguyenNhan: json['nguyenNhan'] ?? 'Chưa có nguyên nhân',
-      dieuKien: json['dieuKien'] ?? 'Chưa có điều kiện',
-      truBenh: json['truBenh'] ?? 'Chưa có trị bệnh',
-      phongNgua: json['phongNgua'] ?? 'Chưa có phòng ngừa',
-      img: json['img'] ?? '01f5e88f2a3c9aa14282135a21d5f0a1.png',
+      tenBenh: json['tenBenh'] ?? 'N/A',
+      thuongXuatHienTrenCay: json['thuongXuatHienTrenCay'] ?? 'N/A',
+      trieuChung: json['trieuChung'] ?? 'N/A',
+      nguyenNhan: json['nguyenNhan'] ?? 'N/A',
+      dieuKien: json['dieuKien'] ?? 'N/A',
+      truBenh: json['truBenh'] ?? 'N/A',
+      phongNgua: json['phongNgua'] ?? 'N/A',
+      img: json['img'] ?? 'leaf_blast0.jpg',
       thuocSinhHoc: (json['thuocSinhHoc'] as List<dynamic>?)
           ?.map((item) => ThuocTriBenh.fromJson(item as Map<String, dynamic>))
           .toList() ?? [],
