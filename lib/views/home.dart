@@ -1,11 +1,9 @@
 import 'package:apptestai/ultils/CustomBottomNavigationBar.dart';
-import 'package:apptestai/views/detection/widgets/market.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../ultils/Custom_drawer.dart';
-import 'camera.dart';
 import 'home/market/cardMarketList.dart';
 
 class HomePage extends StatefulWidget {
@@ -693,7 +691,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
 
-        bottomNavigationBar: CustomBottomNavigationBar(
+      bottomNavigationBar: CustomBottomNavigationBar(
         camera: camera,
         currentIndex: _currentIndex,
         onTap: _onTap,

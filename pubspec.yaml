@@ -100,9 +100,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
-  fonts:
-    - family: Raleway
-      fonts:
-        - asset: packages/awesome_package/fonts/Raleway-Regular.ttf
-        - asset: packages/awesome_package/fonts/Raleway-Italic.ttf
-          style: italic
+

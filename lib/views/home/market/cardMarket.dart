@@ -39,7 +39,7 @@ class _CardMarketState extends State<CardMarket> {
               ),
               const Text(
                 'Thanh long',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
             ],
           ),
