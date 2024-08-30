@@ -1,7 +1,5 @@
 
-import 'package:apptestai/views/detection/DiseaseDetection.dart';
-import 'package:apptestai/views/profile/Account.dart';
-import 'package:apptestai/views/crop/Crop.dart';
+
 import 'package:apptestai/views/home/home.dart';
 
 import 'package:flutter/material.dart';
@@ -65,7 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

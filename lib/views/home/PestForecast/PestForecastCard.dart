@@ -35,7 +35,6 @@ class PestForecastCard extends StatelessWidget {
                   height: 80,
                 ),
               ),
-              // Column for the title and description
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

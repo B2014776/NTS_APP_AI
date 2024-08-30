@@ -1,24 +1,35 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'cardMarket.dart';
 
-class cardMarketList extends StatefulWidget {
-  const cardMarketList({super.key});
+class CardMarketList extends StatefulWidget {
+  const CardMarketList({super.key});
 
   @override
-  State<cardMarketList> createState() => _cardMarketListState();
+  State<CardMarketList> createState() => _CardMarketListState();
 }
 
-class _cardMarketListState extends State<cardMarketList> {
+class _CardMarketListState extends State<CardMarketList> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       width: double.infinity,
-      decoration: const BoxDecoration(),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12), // Rounded corners
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 6,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,49 +38,54 @@ class _cardMarketListState extends State<cardMarketList> {
                 'Giá cả thị trường',
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ).animate().fade().scale(),
               TextButton(
-                  onPressed: () {},
-                  child: const Row(
-                    children: [
-                      Text(
-                        'Tất cả',
-                        style: TextStyle(
-                            color: Colors.orange,
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal),
-                      ),
-                      Icon(
-                        Icons.chevron_right,
-                        color: Colors.orange,
-                        size: 18,
-                      ),
-                    ],
-                  ))
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero, // Remove default padding
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Tất cả',
+                      style: TextStyle(
+                          color: Colors.orange,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(width: 4),
+                    Icon(
+                      Icons.chevron_right,
+                      color: Colors.orange,
+                      size: 20,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
+          const SizedBox(height: 12), // Space between header and content
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(vertical: 2),
+            padding: const EdgeInsets.symmetric(vertical: 6),
             child: Row(
-              children: [
-                ...List.generate(
-                  10,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(right: 10, left: 5),
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                      transform: Matrix4.identity()
-                        ..scale(1.02)
-                        ..translate(0.0, 0.0),
-                      child: const CardMarket(),
-                    ),
+              children: List.generate(
+                10,
+                    (index) => Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    transform: Matrix4.identity()
+                      ..scale(1.02)
+                      ..translate(0.0, 0.0),
+                    child: const CardMarket(),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ],

@@ -22,7 +22,6 @@ class Plant extends StatelessWidget {
         ],
       ),
       child: Column(
-
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 0.0, 0.0, 0.0),
@@ -62,13 +61,12 @@ class Plant extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 160,
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
                   PlantCard(
-                    imagePath: 'assets/cachua.png',
+                    imagePath: 'assets/thanhlong.png',
                     plantName: 'Cây cà chua',
                     plantType: 'cây ăn quả',
                     plantingMethod: 'gieo trồng, tưới nước...',
