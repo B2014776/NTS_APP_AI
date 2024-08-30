@@ -1,11 +1,13 @@
 import 'package:apptestai/ultils/CustomBottomNavigationBar.dart';
 import 'package:apptestai/ultils/CustomTextField.dart';
+import 'package:apptestai/views/home/widgets/PestForecast.dart';
+import 'package:apptestai/views/home/widgets/Plant.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../ultils/Custom_drawer.dart';
-import 'camera.dart';
+import '../../ultils/Custom_drawer.dart';
+import '../camera.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -207,78 +209,7 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 0,
                         ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
-                                spreadRadius: 1,
-                                blurRadius: 2,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  const Expanded(
-                                    child: Text(
-                                      'Dự báo sâu bệnh hôm nay',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  TextButton(
-                                      onPressed: () {},
-                                      child: const Row(
-                                        children: [
-                                          Text(
-                                            'Tất cả',
-                                            style: TextStyle(
-                                                color: Colors.orange,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.normal),
-                                          ),
-                                          Icon(
-                                            Icons.chevron_right,
-                                            color: Colors.orange,
-                                            size: 18,
-                                          ),
-                                        ],
-                                      ))
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: Row(
-                                  children: [
-                                    Image.asset('assets/Sau_benh.png'),
-                                    const Expanded(
-                                      child: SizedBox(
-                                        height: 120,
-                                        child: SingleChildScrollView(
-                                          child: Text(
-                                            style: TextStyle(),
-                                            'Hãy cẩn thận với bọ ngựa, Chúng có thân dài, mảnh, với đầu ..',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        PestForecast(),
                         Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10),
@@ -476,157 +407,7 @@ class _HomePageState extends State<HomePage> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          height: 168,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                          ),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    // Nền màu trắng cho container
-                                    borderRadius: BorderRadius.circular(5),
-                                    // Bo góc Container
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        // Màu đổ bóng với độ mờ
-                                        spreadRadius: 2,
-                                        // Bán kính lan rộng của bóng
-                                        blurRadius: 5,
-                                        // Độ mờ của bóng
-                                        offset: const Offset(0,
-                                            3), // Vị trí của bóng (0 theo chiều ngang, 3 theo chiều dọc)
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Image.asset('assets/cachua.png'),
-                                        const SizedBox(
-                                          width: 7,
-                                        ),
-                                        const Column(
-                                          children: [
-                                            Text(
-                                              'Cà chua',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            Text('Loại cây: cây ăn quả'),
-                                            Text(
-                                                'Cách trồng: Gieo hạt, tưới nước,...'),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    // Nền màu trắng cho container
-                                    borderRadius: BorderRadius.circular(5),
-                                    // Bo góc Container
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        // Màu đổ bóng với độ mờ
-                                        spreadRadius: 2,
-                                        // Bán kính lan rộng của bóng
-                                        blurRadius: 5,
-                                        // Độ mờ của bóng
-                                        offset: const Offset(0,
-                                            3), // Vị trí của bóng (0 theo chiều ngang, 3 theo chiều dọc)
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Image.asset('assets/cachua.png'),
-                                        const SizedBox(
-                                          width: 7,
-                                        ),
-                                        const Column(
-                                          children: [
-                                            Text(
-                                              'Cà chua',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            Text('Loại cây: cây ăn quả'),
-                                            Text(
-                                                'Cách trồng: Gieo hạt, tưới nước,...'),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    // Nền màu trắng cho container
-                                    borderRadius: BorderRadius.circular(5),
-                                    // Bo góc Container
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        // Màu đổ bóng với độ mờ
-                                        spreadRadius: 2,
-                                        // Bán kính lan rộng của bóng
-                                        blurRadius: 5,
-                                        // Độ mờ của bóng
-                                        offset: const Offset(0,
-                                            3), // Vị trí của bóng (0 theo chiều ngang, 3 theo chiều dọc)
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Image.asset('assets/cachua.png'),
-                                        const SizedBox(
-                                          width: 7,
-                                        ),
-                                        const Column(
-                                          children: [
-                                            Text(
-                                              'Cà chua',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            Text('Loại cây: cây ăn quả'),
-                                            Text(
-                                                'Cách trồng: Gieo hạt, tưới nước,...'),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        Plant(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

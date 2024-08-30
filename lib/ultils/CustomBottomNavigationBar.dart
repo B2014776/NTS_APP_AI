@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../views/Agri_expert/List_views.dart';
 import '../views/Community.dart';
 import '../views/camera.dart';
-import '../views/home.dart';
+import '../views/home/home.dart';
 
 
 class CustomBottomNavigationBar extends StatelessWidget {
