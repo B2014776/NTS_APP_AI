@@ -1,3 +1,4 @@
+import 'package:apptestai/views/home/MenuItems/Menuitems.dart';
 import 'package:apptestai/views/home/plant/Plant.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../ultils/CustomBottomNavigationBar.dart';
 import '../../ultils/Custom_drawer.dart';
-import 'PestForecast/PestForecast.dart';
 import 'market/cardMarketList.dart';
 import 'weather/weather.dart';
 
@@ -20,7 +20,6 @@ class _HomePageState extends State<HomePage> {
 
   int _currentIndex = 0;
 
-  // Dummy CameraDescription to pass to CustomBottomNavigationBar
   final CameraDescription camera = const CameraDescription(
     name: 'camera',
     lensDirection: CameraLensDirection.back,
@@ -39,24 +38,17 @@ class _HomePageState extends State<HomePage> {
       key: _scaffoldKey,
       drawer: CustomDrawer(),
       floatingActionButton: SizedBox(
-        // width: 130.0,
-        // height: 50.0,
         child: FloatingActionButton.extended(
           onPressed: () {},
           backgroundColor: Colors.white,
-          // elevation: 4,
-          // shape: RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.circular(15.0), // Softer corners
-          //   side: const BorderSide(color: Colors.black26), // Lighter border
-          // ),
+          elevation: 4,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0), // Softer corners
+            side: const BorderSide(color: Colors.black26), // Lighter border
+          ),
           icon: Image.asset('assets/Thongminh.png'),
           label: const Text(
             '',
-            // style: TextStyle(
-            //   color: Colors.black,
-            //   fontWeight: FontWeight.bold,
-            //   fontSize: 14,
-            // ),
           ),
         ),
       ),
@@ -109,12 +101,12 @@ class _HomePageState extends State<HomePage> {
               ),
               const Expanded(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(vertical: 16),
                   child: Column(
                     children: [
+                      SizedBox(height: 20),
                       Weather(),
                       SizedBox(height: 16),
-                      PestForecast(),
+                      Menuitems(),
                       SizedBox(height: 16),
                       CardMarketList(),
                       SizedBox(height: 16),
@@ -131,7 +123,8 @@ class _HomePageState extends State<HomePage> {
               height: 50,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(30), // Softer rounded corners
+                borderRadius: BorderRadius.circular(30),
+                // Softer rounded corners
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.25),
@@ -153,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                   prefixIcon: Icon(CupertinoIcons.search),
                   border: InputBorder.none,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
               ),
             ),
