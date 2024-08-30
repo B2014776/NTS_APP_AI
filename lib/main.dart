@@ -1,4 +1,9 @@
-import 'package:apptestai/views/home.dart';
+
+import 'package:apptestai/views/detection/DiseaseDetection.dart';
+import 'package:apptestai/views/profile/Account.dart';
+import 'package:apptestai/views/crop/Crop.dart';
+import 'package:apptestai/views/home/home.dart';
+
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:google_fonts/google_fonts.dart';

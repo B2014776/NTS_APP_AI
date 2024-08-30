@@ -27,7 +27,7 @@ class _CardMarketState extends State<CardMarket> {
         ],
       ),
       child: Column(
-        spacing: 10,
+
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,7 +58,7 @@ class _CardMarketState extends State<CardMarket> {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            spacing: 6,
+
             children: [
               Row(
                 children: [
