@@ -22,7 +22,7 @@ class Plant extends StatelessWidget {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(16.0, 0.0, 0.0, 0.0),
