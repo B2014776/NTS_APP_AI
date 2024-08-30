@@ -42,6 +42,9 @@ dependencies:
   flutter_svg: ^2.0.9
   dio: ^5.0.10
   device_preview: ^1.2.0
+  dotted_line: ^3.2.2
+  flutter_animate: ^4.5.0
+  animated_bottom_navigation_bar: ^1.3.3
 
 dev_dependencies:
   flutter_test:

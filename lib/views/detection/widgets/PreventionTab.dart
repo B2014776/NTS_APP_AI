@@ -9,7 +9,7 @@ class PreventionTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (benh == null) {
-      return Center(child: Text("No data available."));
+      return const Center(child: Text("No data available."));
     }
 
     return Column(
@@ -21,7 +21,7 @@ class PreventionTab extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
+                  const Center(
                     child: Text(
                       'Cách Phòng ngừa',
                       style: TextStyle(
@@ -30,12 +30,12 @@ class PreventionTab extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Text(
                     benh!.phongNgua,
                     style: TextStyle(fontSize: 17),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Image.asset(
                     'assets/f25dabbda140c250232a6b1a711d952c.png',
                     height: 200,

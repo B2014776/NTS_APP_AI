@@ -18,7 +18,7 @@ class _GeneralInfoState extends State<GeneralInfo> {
   @override
   Widget build(BuildContext context) {
     if (widget.benh == null) {
-      return Center(child: Text("No data available."));
+      return const Center(child: Text("No data available."));
     }
 
     // Kiểm tra dữ liệu và thay thế bằng 'N/A' nếu không có
@@ -45,11 +45,11 @@ class _GeneralInfoState extends State<GeneralInfo> {
                   SizedBox(height: 16),
 
                   // Triệu chứng
-                  Text(
+                  const Text(
                     '1. Triệu chứng:',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     isTrieuChungExpanded
                         ? trieuChung
@@ -68,20 +68,20 @@ class _GeneralInfoState extends State<GeneralInfo> {
                         },
                         child: Text(
                           isTrieuChungExpanded ? 'Thu gọn' : 'Xem thêm',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.orangeAccent,
                           ),
                         ),
                       ),
                     ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
                   // Nguyên nhân
-                  Text(
+                  const Text(
                     '2. Nguyên nhân:',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     isNguyenNhanExpanded
                         ? nguyenNhan
@@ -100,7 +100,7 @@ class _GeneralInfoState extends State<GeneralInfo> {
                         },
                         child: Text(
                           isNguyenNhanExpanded ? 'Thu gọn' : 'Xem thêm',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.orangeAccent,
                           ),
                         ),

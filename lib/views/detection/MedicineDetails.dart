@@ -12,13 +12,13 @@ class MedicineDetails extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           thuocTriBenh.tenThuoc,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
         backgroundColor: Colors.green,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
@@ -34,14 +34,16 @@ class MedicineDetails extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       '1. Giới thiệu:',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(thuocTriBenh.thongTin ?? 'No information available'),
+                      child: Text(
+                          thuocTriBenh.thongTin ?? 'No information available'),
                     ),
                     Center(
                       child: Image.asset(
@@ -51,23 +53,25 @@ class MedicineDetails extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    SizedBox(height: 16),
-                    Text(
+                    const SizedBox(height: 16),
+                    const Text(
                       '2. Hướng dẫn sử dụng:',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Text(thuocTriBenh.cachSuDung ?? 'No usage information available'),
+                      child: Text(thuocTriBenh.cachSuDung ??
+                          'No usage information available'),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                   ],
                 ),
               ),
             ),
           ),
-          Divider(thickness: 1, color: Colors.grey),
+          const Divider(thickness: 1, color: Colors.grey),
           _buildSupportFooter(),
         ],
       ),
@@ -96,7 +100,7 @@ class MedicineDetails extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Image.asset(
             'assets/a196eb3c8f43db5f22c2de4c258e4953.png',
             width: 75,
@@ -108,4 +112,3 @@ class MedicineDetails extends StatelessWidget {
     );
   }
 }
-

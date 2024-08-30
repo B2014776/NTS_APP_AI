@@ -17,11 +17,11 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Colors.green,
         title:
           Padding(
-            padding: EdgeInsets.fromLTRB(160, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(160, 0, 0, 0),
             child: Row(
               children: [
-                Text(Name, style: TextStyle(fontSize: 20, color: Colors.white),),
-                SizedBox(width: 8,),
+                Text(Name, style: const TextStyle(fontSize: 20, color: Colors.white),),
+                const SizedBox(width: 8,),
                 CircleAvatar(
                   radius: 25,
                   backgroundImage: NetworkImage(ImageUrl,),

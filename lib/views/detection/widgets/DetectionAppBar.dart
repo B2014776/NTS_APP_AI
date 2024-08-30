@@ -21,22 +21,22 @@ class DetectionAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.green,
         title: Text(
           diseaseName.isNotEmpty ? diseaseName : 'Loading...', // Hiển thị tên bệnh từ response
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
         leading: Center(
           child: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: CircleAvatar(
               backgroundImage: AssetImage('assets/d7ba6024f3f77dd57e3abe35fc9d8185.png'),
             ),
