@@ -18,7 +18,7 @@ class SupportFooter extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -26,25 +26,25 @@ class SupportFooter extends StatelessWidget {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6.0),
                   ),
                 ),
-                icon: Icon(Icons.chat, color: Colors.white),
-                label: Text('Chatbot', style: TextStyle(color: Colors.white)),
+                icon: const Icon(Icons.chat, color: Colors.white),
+                label: const Text('Chatbot', style: TextStyle(color: Colors.white)),
               ),
               ElevatedButton.icon(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
-                  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6.0),
                   ),
                 ),
-                icon: Icon(Icons.phone, color: Colors.white),
-                label: Text('Liên hệ chuyên gia', style: TextStyle(color: Colors.white)),
+                icon: const Icon(Icons.phone, color: Colors.white),
+                label: const Text('Liên hệ chuyên gia', style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
