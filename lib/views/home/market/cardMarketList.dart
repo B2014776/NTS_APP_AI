@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import 'cardMarket.dart';
 
@@ -28,7 +29,7 @@ class _cardMarketListState extends State<cardMarketList> {
                     color: Colors.black,
                     fontSize: 17,
                     fontWeight: FontWeight.w700),
-              ),
+              ).animate().fade().scale(),
               TextButton(
                   onPressed: () {},
                   child: const Row(
@@ -46,8 +47,7 @@ class _cardMarketListState extends State<cardMarketList> {
                         size: 18,
                       ),
                     ],
-                  )
-              )
+                  ))
             ],
           ),
           SingleChildScrollView(
@@ -58,7 +58,7 @@ class _cardMarketListState extends State<cardMarketList> {
                 ...List.generate(
                   10,
                   (index) => Padding(
-                    padding: const EdgeInsets.only(right: 10,left: 5),
+                    padding: const EdgeInsets.only(right: 10, left: 5),
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut,

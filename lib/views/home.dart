@@ -693,7 +693,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
 
-      bottomNavigationBar: CustomBottomNavigationBar(
+        bottomNavigationBar: CustomBottomNavigationBar(
         camera: camera,
         currentIndex: _currentIndex,
         onTap: _onTap,
