@@ -11,6 +11,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../ultils/Custom_drawer.dart';
 import '../camera.dart';
 import 'PestForecast/PestForecast.dart';
+import 'news/News.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -221,6 +222,7 @@ class _HomePageState extends State<HomePage> {
                           height: 10,
                         ),
                         Plant(),
+                        NewsPage(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
