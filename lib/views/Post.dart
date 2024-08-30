@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class Post extends StatefulWidget {
   final String caption = 'Những cánh hoa mỏng manh rực rỡ, khoe sắc lung linh như nắng sớm, khiến lòng người say đắm và mê mẩn.';
-  final String AvatarUrl ='https://i.pinimg.com/564x/23/a2/af/23a2afc145916eb61ce3b45c20efaa5b.jpg';
-  final String ImageUrl ='https://i.pinimg.com/564x/23/a2/af/23a2afc145916eb61ce3b45c20efaa5b.jpg';
+  final String avatarUrl ='https://i.pinimg.com/564x/23/a2/af/23a2afc145916eb61ce3b45c20efaa5b.jpg';
+  final String imageUrl ='https://i.pinimg.com/564x/23/a2/af/23a2afc145916eb61ce3b45c20efaa5b.jpg';
   final String name = 'Nguyễn Văn A';
   final String time = '1 Giờ';
   final String like = '5';
@@ -29,7 +29,7 @@ class _PostState extends State<Post> {
           ),
         ),
       ),
-      padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -37,29 +37,35 @@ class _PostState extends State<Post> {
           Row(
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: CircleAvatar(
                   radius: 25,
-                  backgroundImage: NetworkImage(widget.AvatarUrl),
+                  backgroundImage: NetworkImage(widget.avatarUrl),
                   backgroundColor: Colors.grey[200],
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.name, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+                  Text(
+                    widget.name,
+                    style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                  ),
                   Row(
                     children: [
-                      Icon(Icons.access_alarm, size: 20),
-                      Text(widget.time, style: TextStyle(fontSize: 16)),
+                      const Icon(Icons.access_time, size: 20), // Đổi từ Icons.access_alarm thành Icons.access_time
+                      Text(
+                        widget.time,
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ],
                   ),
                 ],
               ),
             ],
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           GestureDetector(
             onTap: () {
               setState(() {
@@ -67,84 +73,64 @@ class _PostState extends State<Post> {
               });
             },
             child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 0, 10, 0),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Text(
                 widget.caption,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
                 maxLines: _isExpanded ? null : 2,
                 overflow: _isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
               ),
             ),
           ),
-          SizedBox(height: 10),
           if (!_isExpanded)
             Align(
               alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: TextButton(
-                  onPressed: () {
-                    setState(() {
-                      _isExpanded = true;
-                    });
-                  },
-                  child: Text('Xem thêm', style: TextStyle(color: Colors.blue)),
-                ),
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    _isExpanded = true;
+                  });
+                },
+                child: const Text('Xem thêm', style: TextStyle(color: Colors.blue)),
               ),
             ),
+          const SizedBox(height: 10),
           Center(
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(0),
-              child: Container(
+              borderRadius: BorderRadius.circular(8), // Thay đổi borderRadius để nhìn tinh tế hơn
+              child: SizedBox(
                 width: double.infinity,
                 height: 288,
                 child: Image.network(
-                  widget.ImageUrl,
+                  widget.imageUrl,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-                child: Row(
-                  children: [
-                    Icon(Icons.favorite_border_outlined, size: 25),
-                    SizedBox(width: 5),
-                    Text(widget.like, style: TextStyle(fontSize: 18)),
-                    SizedBox(width: 5),
-                    Text('Thích', style: TextStyle(fontSize: 18)),
-                  ],
-                ),
-              ),
-              SizedBox(width: 35),
-              Row(
-                children: [
-                  Icon(Icons.mode_comment_outlined, size: 20),
-                  SizedBox(width: 5),
-                  Text(widget.comment, style: TextStyle(fontSize: 18)),
-                  SizedBox(width: 5),
-                  Text('Bình luận', style: TextStyle(fontSize: 18)),
-                ],
-              ),
-              SizedBox(width: 35),
-              Row(
-                children: [
-                  Icon(Icons.share_outlined, size: 20),
-                  SizedBox(width: 5),
-                  Text(widget.share, style: TextStyle(fontSize: 18)),
-                  SizedBox(width: 5),
-                  Text('Chia sẻ', style: TextStyle(fontSize: 18)),
-                ],
-              ),
+              _buildActionIcon(Icons.favorite_border_outlined, widget.like, 'Thích'),
+              _buildActionIcon(Icons.mode_comment_outlined, widget.comment, 'Bình luận'),
+              _buildActionIcon(Icons.share_outlined, widget.share, 'Chia sẻ'),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildActionIcon(IconData icon, String count, String label) {
+    return Row(
+      children: [
+        Icon(icon, size: 20),
+        const SizedBox(width: 5),
+        Text(count, style: const TextStyle(fontSize: 18)),
+        const SizedBox(width: 5),
+        Text(label, style: const TextStyle(fontSize: 18)),
+      ],
     );
   }
 }

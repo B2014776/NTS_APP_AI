@@ -6,24 +6,21 @@ import 'camera.dart'; // Giả sử CameraScreen cần sử dụng CameraDescrip
 
 class Community extends StatefulWidget {
   final String avatarUrl = 'https://congthuong-cdn.mastercms.vn/stores/news_dataimages/2023/082023/02/11/in_article/hoang-trong-thuy20230802114258.jpg?rt=20230802114259';
+
   @override
   _CommunityState createState() => _CommunityState();
 }
 
 class _CommunityState extends State<Community> {
-  // Biến trạng thái có thể khai báo ở đây
   int _currentIndex = 1; // Giả sử Community là chỉ mục 1
 
-  // Dummy CameraDescription để truyền vào CustomBottomNavigationBar
-  final CameraDescription camera = CameraDescription(
+  final CameraDescription camera = const CameraDescription(
     name: 'camera',
     lensDirection: CameraLensDirection.back,
     sensorOrientation: 0,
   );
 
   void _onTap(int index) {
-    // Thực hiện các hành động khi một mục được nhấn
-    // Ví dụ: cập nhật chỉ mục hiện tại
     setState(() {
       _currentIndex = index;
     });
@@ -34,7 +31,7 @@ class _CommunityState extends State<Community> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
-        title: Text(
+        title: const Text(
           'Cộng đồng',
           style: TextStyle(
             fontSize: 25,
@@ -43,40 +40,25 @@ class _CommunityState extends State<Community> {
           ),
         ),
         centerTitle: true,
+        elevation: 4.0, // Thêm hiệu ứng bóng cho AppBar
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(15, 10, 15, 0),
-                child: Row(
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          children: [
+            _buildHeader(),
+            const SizedBox(height: 15),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
-                    CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(widget.avatarUrl),
-                      backgroundColor: Colors.grey[200],
-                    ),
-                    SizedBox(width: 20),
-                    Expanded( // Dùng Expanded để ngăn lỗi RenderFlex vô hạn
-                      child: Text(
-                        'Bạn đang nghĩ gì?',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    Icon(
-                      Icons.broken_image_outlined,
-                      size: 30,
-                      color: Colors.green,
-                    ),
+                    Post(),
+                    Post(),
                   ],
                 ),
               ),
-              SizedBox(height: 10),
-              Post(),
-              Post(),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
@@ -84,6 +66,36 @@ class _CommunityState extends State<Community> {
         currentIndex: _currentIndex,
         onTap: _onTap,
       ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        CircleAvatar(
+          radius: 25,
+          backgroundImage: NetworkImage(widget.avatarUrl),
+          backgroundColor: Colors.grey[200],
+        ),
+        const SizedBox(width: 15),
+        const Expanded(
+          child: Text(
+            'Bạn đang nghĩ gì?',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
+          ),
+        ),
+        IconButton(
+          icon: const Icon(Icons.image_outlined, size: 30, color: Colors.green),
+          onPressed: () {
+            // Xử lý sự kiện khi nhấn vào icon
+          },
+        ),
+      ],
     );
   }
 }

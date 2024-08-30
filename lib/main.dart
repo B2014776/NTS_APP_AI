@@ -1,13 +1,8 @@
-
-import 'package:apptestai/views/detection/DiseaseDetection.dart';
-import 'package:apptestai/views/profile/Account.dart';
-import 'package:apptestai/views/crop/Crop.dart';
 import 'package:apptestai/views/home/home.dart';
-
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import 'ultils/Custom.dart';
 
 void main() {
   runApp(
@@ -20,7 +15,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,6 +22,9 @@ class MyApp extends StatelessWidget {
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
       theme: ThemeData(
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -62,7 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[

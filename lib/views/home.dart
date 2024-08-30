@@ -1,11 +1,9 @@
 import 'package:apptestai/ultils/CustomBottomNavigationBar.dart';
-import 'package:apptestai/views/detection/widgets/market.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../ultils/Custom_drawer.dart';
-import 'camera.dart';
 import 'home/market/cardMarketList.dart';
 
 class HomePage extends StatefulWidget {
@@ -103,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Container(
                           width: double.infinity,
-                          color: Color(0xffF5FFFD),
+                          color: const Color(0xffF5FFFD),
                           child: Column(
                             children: [
                               Row(
@@ -280,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        const cardMarketList(),
+                        const CardMarketList(),
                         const SizedBox(
                           height: 10,
                         ),
@@ -693,7 +691,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
 
-        bottomNavigationBar: CustomBottomNavigationBar(
+      bottomNavigationBar: CustomBottomNavigationBar(
         camera: camera,
         currentIndex: _currentIndex,
         onTap: _onTap,

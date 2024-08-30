@@ -13,119 +13,114 @@ class _CardMarketState extends State<CardMarket> {
   Widget build(BuildContext context) {
     return Container(
       width: 240,
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(12), // Increased padding for better spacing
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12),
+        // Slightly more rounded corners
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),
             spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 1),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Column(
-
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(
                 'assets/thanhlong.png',
-                width: 30,
-                height: 30,
+                width: 40, // Slightly larger image for better visibility
+                height: 40,
+                fit: BoxFit.cover, // Ensure image maintains aspect ratio
               ),
-              const Text(
-                'Thanh long',
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700),
+              const SizedBox(width: 8), // Space between image and text
+              const Expanded(
+                child: Text(
+                  'Thanh long',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  overflow: TextOverflow.ellipsis, // Handle long text
+                ),
               ),
             ],
           ),
+          const SizedBox(height: 10), // Increased space below the image-row
           DottedLine(
             direction: Axis.horizontal,
             lineLength: double.infinity,
             lineThickness: 1.0,
-            dashLength: 4.0,
-            dashColor: Colors.black,
-            dashGradient: const [Colors.red, Colors.blue],
+            dashLength: 6.0,
+            // Longer dashes
+            dashColor: Colors.blueGrey,
+            dashGradient: const [Colors.blueGrey, Colors.blue],
             dashRadius: 0.0,
-            dashGapLength: 4.0,
+            dashGapLength: 6.0,
+            // Increased gap length
             dashGapColor: Colors.transparent,
-            dashGapGradient: const [Colors.red, Colors.blue],
-            dashGapRadius: 0.0,
           ),
-          Column(
+          const SizedBox(height: 10), // Space between dotted line and content
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
             children: [
-              Row(
-                children: [
-                  const Expanded(
-                    flex: 1,
-                    child: Text(
-                      '500,000 VNĐ/kg',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(222, 239, 239, 239),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.orange,
-                          size: 24,
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          '0',
-                          style: TextStyle(fontSize: 14, color: Colors.orange),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+              const Text(
+                '500,000 VNĐ/kg',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
               ),
-              const Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Text(
-                      'Xoài cát chu',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.orange,
+                      size: 24,
                     ),
-                  ),
-                  Text(
-                    '-',
-                    style: TextStyle(fontSize: 14, color: Colors.deepOrangeAccent),
-                  ),
-                ],
+                    SizedBox(width: 4), // Reduced space for tighter look
+                    Text(
+                      '0',
+                      style: TextStyle(fontSize: 16, color: Colors.orange),
+                    ),
+                  ],
+                ),
               ),
-              const Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Text(
-                      'Vĩnh Long',
-                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Text(
-                    'Vĩnh Long',
-                    style: TextStyle(fontSize: 14, color: Colors.black),
-                  ),
-                ],
-              )
             ],
-          )
+          ),
+          const SizedBox(height: 8), // Space between rows
+          const Text(
+            'Xoài cát chu',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.deepOrange,
+            ),
+          ),
+          const SizedBox(height: 4), // Space between text elements
+          const Text(
+            'Vĩnh Long',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              color: Colors.black54,
+            ),
+          ),
         ],
       ),
     );
