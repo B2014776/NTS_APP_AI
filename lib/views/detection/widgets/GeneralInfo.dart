@@ -18,7 +18,7 @@ class _GeneralInfoState extends State<GeneralInfo> {
   @override
   Widget build(BuildContext context) {
     if (widget.benh == null) {
-      return Center(child: Text("No data available."));
+      return const Center(child: Text("No data available."));
     }
 
     // Kiểm tra dữ liệu và thay thế bằng 'N/A' nếu không có
