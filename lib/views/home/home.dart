@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../ultils/CustomBottomNavigationBar.dart';
 import '../../ultils/Custom_drawer.dart';
 import 'market/cardMarketList.dart';
+import 'news/News.dart';
 import 'weather/weather.dart';
 
 class HomePage extends StatefulWidget {
@@ -99,18 +100,20 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              const Expanded(
+              Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(height: 20),
-                      Weather(),
-                      SizedBox(height: 16),
-                      Menuitems(),
-                      SizedBox(height: 16),
-                      CardMarketList(),
-                      SizedBox(height: 16),
-                      Plant(),
+                      const SizedBox(height: 20),
+                      const Weather(),
+                      const SizedBox(height: 16),
+                      const Menuitems(),
+                      const SizedBox(height: 16),
+                      const CardMarketList(),
+                      const SizedBox(height: 16),
+                      const Plant(),
+                      const SizedBox(height: 16),
+                      NewsPage(),
                     ],
                   ),
                 ),
