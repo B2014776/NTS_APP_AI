@@ -37,7 +37,7 @@ class _GeneralInfoState extends State<GeneralInfo> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    'assets/$imgPath',
+                    'assets/screen_shot_20190829_at_1_32_57_pm.png',
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,

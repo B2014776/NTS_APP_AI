@@ -6,9 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-      builder: (context) => const MyApp(), // Wrap your app
-    ),
+    const MyApp()
+    // DevicePreview(
+    //   builder: (context) => const MyApp(), // Wrap your app
+    // ),
   );
 }
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
+      // builder: DevicePreview.appBuilder,
       theme: ThemeData(
         textTheme: GoogleFonts.latoTextTheme(
           Theme
