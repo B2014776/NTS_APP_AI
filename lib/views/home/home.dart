@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart'; // Import the image_picker package
 import 'package:apptestai/views/home/MenuItems/Menuitems.dart';
 import 'package:apptestai/views/home/plant/Plant.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import '../../ultils/CustomBottomNavigationBar.dart';
@@ -27,10 +27,30 @@ class _HomePageState extends State<HomePage> {
     sensorOrientation: 0,
   );
 
+  final ImagePicker _picker = ImagePicker();
+
   void _onTap(int index) {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  Future<void> _openGallery() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      // Handle the selected image (e.g., display it, upload it, etc.)
+      print('Image path: ${image.path}');
+    }
+  }
+
+  Future<void> _openCamera() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+
+    if (image != null) {
+      // Handle the captured image (e.g., display it, upload it, etc.)
+      print('Image path: ${image.path}');
+    }
   }
 
   @override
@@ -38,20 +58,33 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: CustomDrawer(),
-      floatingActionButton: SizedBox(
-        child: FloatingActionButton.extended(
-          onPressed: () {},
-          backgroundColor: Colors.white,
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0), // Softer corners
-            side: const BorderSide(color: Colors.black26), // Lighter border
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: _openCamera,
+            // Open camera on press
+            backgroundColor: Colors.white,
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0), // Softer corners
+              side: const BorderSide(color: Colors.black26), // Lighter border
+            ),
+            child: const Icon(Icons.camera_alt), // Camera icon
           ),
-          icon: Image.asset('assets/Thongminh.png'),
-          label: const AutoSizeText(
-            '',
+          const SizedBox(height: 16), // Spacing between buttons
+          FloatingActionButton(
+            onPressed: _openGallery,
+            // Open gallery on press
+            backgroundColor: Colors.white,
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0), // Softer corners
+              side: const BorderSide(color: Colors.black26), // Lighter border
+            ),
+            child: const Icon(Icons.photo_library), // Gallery icon
           ),
-        ),
+        ],
       ),
       body: Stack(
         children: [
@@ -183,7 +216,7 @@ class _HomePageState extends State<HomePage> {
                   prefixIcon: Icon(CupertinoIcons.search),
                   border: InputBorder.none,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
               ),
             ),
