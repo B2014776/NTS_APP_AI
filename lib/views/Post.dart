@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -48,16 +49,20 @@ class _PostState extends State<Post> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  AutoSizeText(
                     widget.name,
                     style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Row(
                     children: [
-                      const Icon(Icons.access_time, size: 20), // Đổi từ Icons.access_alarm thành Icons.access_time
-                      Text(
+                      const Icon(Icons.access_time, size: 20),
+                      AutoSizeText(
                         widget.time,
                         style: const TextStyle(fontSize: 16),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
@@ -74,7 +79,7 @@ class _PostState extends State<Post> {
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
+              child: AutoSizeText(
                 widget.caption,
                 style: const TextStyle(fontSize: 16),
                 maxLines: _isExpanded ? null : 2,
@@ -91,7 +96,7 @@ class _PostState extends State<Post> {
                     _isExpanded = true;
                   });
                 },
-                child: const Text('Xem thêm', style: TextStyle(color: Colors.blue)),
+                child: const AutoSizeText('Xem thêm', style: TextStyle(color: Colors.blue)),
               ),
             ),
           const SizedBox(height: 10),
@@ -127,9 +132,9 @@ class _PostState extends State<Post> {
       children: [
         Icon(icon, size: 20),
         const SizedBox(width: 5),
-        Text(count, style: const TextStyle(fontSize: 18)),
+        AutoSizeText(count, style: const TextStyle(fontSize: 18), maxLines: 1),
         const SizedBox(width: 5),
-        Text(label, style: const TextStyle(fontSize: 18)),
+        AutoSizeText(label, style: const TextStyle(fontSize: 18), maxLines: 1),
       ],
     );
   }

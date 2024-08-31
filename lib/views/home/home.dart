@@ -1,9 +1,9 @@
 import 'package:apptestai/views/home/MenuItems/Menuitems.dart';
 import 'package:apptestai/views/home/plant/Plant.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../ultils/CustomBottomNavigationBar.dart';
 import '../../ultils/Custom_drawer.dart';
 import 'market/cardMarketList.dart';
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
             side: const BorderSide(color: Colors.black26), // Lighter border
           ),
           icon: Image.asset('assets/Thongminh.png'),
-          label: const Text(
+          label: const AutoSizeText(
             '',
           ),
         ),
@@ -92,11 +92,41 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const Spacer(),
-                    SvgPicture.asset(
-                      'assets/iconNTLogo.svg',
-                      width: 30,
-                      height: 30,
-                    ),
+                    Stack(
+                      children: <Widget>[
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.notifications,
+                            size: 32,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Positioned(
+                          right: 9,
+                          top: 5,
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 16,
+                              minHeight: 16,
+                            ),
+                            child: const Text(
+                              '2',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -127,7 +157,6 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
-                // Softer rounded corners
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.25),

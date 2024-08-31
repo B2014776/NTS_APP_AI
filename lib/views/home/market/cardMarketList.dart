@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -34,11 +35,11 @@ class _CardMarketListState extends State<CardMarketList> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              const AutoSizeText(
                 'Giá cả thị trường',
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold),
               ).animate().fade().scale(),
               TextButton(
@@ -49,11 +50,11 @@ class _CardMarketListState extends State<CardMarketList> {
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    AutoSizeText(
                       'Tất cả',
                       style: TextStyle(
                           color: Colors.orange,
-                          fontSize: 15,
+                          fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
                     SizedBox(width: 4),
@@ -74,7 +75,7 @@ class _CardMarketListState extends State<CardMarketList> {
             child: Row(
               children: List.generate(
                 10,
-                    (index) => Padding(
+                (index) => Padding(
                   padding: const EdgeInsets.only(right: 12),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),

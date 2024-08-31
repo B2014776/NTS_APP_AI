@@ -1,4 +1,5 @@
 import 'package:apptestai/views/Post.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import '../ultils/CustomBottomNavigationBar.dart';
@@ -80,7 +81,7 @@ class _CommunityState extends State<Community> {
         ),
         const SizedBox(width: 15),
         const Expanded(
-          child: Text(
+          child: AutoSizeText(
             'Bạn đang nghĩ gì?',
             style: TextStyle(
               fontSize: 18,

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -59,18 +60,30 @@ class _NewsPageState extends State<NewsPage> {
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.3),
+            spreadRadius: 1,
+            blurRadius: 2,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
       width: double.infinity,
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              const AutoSizeText(
                 'Tin tức',
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ).animate().fade().scale(),
               TextButton(
                   onPressed: () {},
@@ -92,13 +105,14 @@ class _NewsPageState extends State<NewsPage> {
                   ))
             ],
           ),
+          const SizedBox(height: 10),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(vertical: 2),
+            padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
               children: categories.map((category) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 6.0),
                   child: ElevatedButton(
                     onPressed: () => onCategorySelected(category.id),
                     style: ElevatedButton.styleFrom(
@@ -109,10 +123,16 @@ class _NewsPageState extends State<NewsPage> {
                           ? Colors.white
                           : Colors.grey,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 6.0),
+                          horizontal: 18.0, vertical: 8.0),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0),
+                        borderRadius: BorderRadius.circular(8.0),
+                        side: BorderSide(
+                          color: category.id == selectedCategoryId
+                              ? Colors.green
+                              : Colors.grey.shade300,
+                        ),
                       ),
+                      elevation: category.id == selectedCategoryId ? 5 : 2,
                     ),
                     child: Text(category.tenDanhMuc),
                   ),
@@ -120,51 +140,79 @@ class _NewsPageState extends State<NewsPage> {
               }).toList(),
             ),
           ),
+          const SizedBox(height: 10),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.symmetric(vertical: 2),
+            padding: const EdgeInsets.symmetric(vertical: 4),
             child: Row(
               children: filteredNews.map((newsItem) {
                 return Card(
                   margin: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 4.0),
+                      horizontal: 10.0, vertical: 6.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  elevation: 3,
+                  shadowColor: Colors.grey.withOpacity(0.5),
                   child: SizedBox(
-                    width: 300, // Adjust width as needed
+                    width: 280, // Adjust width as needed
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          width: double.infinity,
-                          height: 120,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.vertical(top: Radius.circular(8.0)),
-                            child: Image.asset(
-                              'assets/${newsItem.img}',
-                              fit: BoxFit.cover,
+                        Stack(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              height: 140,
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(10.0)),
+                                child: Image.asset(
+                                  'assets/${newsItem.img}',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
-                          ),
+                            Container(
+                              width: double.infinity,
+                              height: 140,
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(10.0)),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.black.withOpacity(0.6),
+                                    Colors.transparent
+                                  ],
+                                  begin: Alignment.bottomCenter,
+                                  end: Alignment.topCenter,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              AutoSizeText(
                                 newsItem.tieuDe,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16.0,
+                                  color: Colors.black87,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              SizedBox(height: 4.0),
-                              Text(
+                              const SizedBox(height: 6.0),
+                              AutoSizeText(
                                 newsItem.noiDung,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                    fontSize: 14.0, color: Colors.grey[600]),
+                                    fontSize: 14.0, color: Colors.grey[700]),
                               ),
                             ],
                           ),
