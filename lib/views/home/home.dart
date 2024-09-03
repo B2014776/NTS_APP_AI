@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart'; // Import the image_picker package
-import 'package:apptestai/views/home/MenuItems/Menuitems.dart';
-import 'package:apptestai/views/home/plant/Plant.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import '../../ultils/CustomBottomNavigationBar.dart';
 import '../../ultils/Custom_drawer.dart';
+import 'MenuItems/Menuitems.dart';
+import 'map/map.dart';
 import 'market/cardMarketList.dart';
 import 'news/News.dart';
+import 'plant/Plant.dart';
 import 'weather/weather.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +19,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController searchController = TextEditingController();
-
   int _currentIndex = 0;
 
   final CameraDescription camera = const CameraDescription(
@@ -39,7 +39,6 @@ class _HomePageState extends State<HomePage> {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-      // Handle the selected image (e.g., display it, upload it, etc.)
       print('Image path: ${image.path}');
     }
   }
@@ -48,7 +47,6 @@ class _HomePageState extends State<HomePage> {
     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
 
     if (image != null) {
-      // Handle the captured image (e.g., display it, upload it, etc.)
       print('Image path: ${image.path}');
     }
   }
@@ -63,26 +61,22 @@ class _HomePageState extends State<HomePage> {
         children: [
           FloatingActionButton(
             onPressed: _openCamera,
-            // Open camera on press
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.green,
             elevation: 4,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0), // Softer corners
-              side: const BorderSide(color: Colors.black26), // Lighter border
+              borderRadius: BorderRadius.circular(15.0),
             ),
-            child: const Icon(Icons.camera_alt), // Camera icon
+            child: const Icon(Icons.camera_alt, color: Colors.white),
           ),
-          const SizedBox(height: 16), // Spacing between buttons
+          const SizedBox(height: 16),
           FloatingActionButton(
             onPressed: _openGallery,
-            // Open gallery on press
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.blue,
             elevation: 4,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0), // Softer corners
-              side: const BorderSide(color: Colors.black26), // Lighter border
+              borderRadius: BorderRadius.circular(15.0),
             ),
-            child: const Icon(Icons.photo_library), // Gallery icon
+            child: const Icon(Icons.photo_library, color: Colors.white),
           ),
         ],
       ),
@@ -164,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -182,6 +176,7 @@ class _HomePageState extends State<HomePage> {
                       const Plant(),
                       const SizedBox(height: 16),
                       NewsPage(),
+                      // DiseaseMapPage()
                     ],
                   ),
                 ),
@@ -189,7 +184,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(30, 120, 30, 0),
+            padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
             child: Container(
               height: 50,
               decoration: BoxDecoration(
@@ -216,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                   prefixIcon: Icon(CupertinoIcons.search),
                   border: InputBorder.none,
                   contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
               ),
             ),

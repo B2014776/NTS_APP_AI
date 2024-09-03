@@ -4,11 +4,11 @@ import 'package:device_preview/device_preview.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const MyApp()
-      // DevicePreview(
-      //   builder: (context) =>  // Wrap your app
-      // ),
-      );
+  runApp(
+      const MyApp()
+    // DevicePreview(builder: (context) => const MyApp() // Wrap your app
+    //     ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,9 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      locale: DevicePreview.locale(context),
+      title: 'NTSOFT - AI',
+      // locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
+
       theme: ThemeData(
         textTheme: GoogleFonts.latoTextTheme(
           Theme.of(context).textTheme,

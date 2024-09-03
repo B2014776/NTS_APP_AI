@@ -26,7 +26,6 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
     try {
       final decodedResponse =
           await _diseaseController.uploadImageAndFetchDetails(widget.imagePath);
-      print("decodedResponse : $decodedResponse");
       if (decodedResponse.containsKey('error')) {
         setState(() {
           _className = decodedResponse['error'];
@@ -46,7 +45,6 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
         );
       }
     } catch (e) {
-      print('An error occurred: $e');
       setState(() {
         _className = 'An error occurred';
         _probability = null;
@@ -73,7 +71,8 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
               child: Image.file(
                 File(widget.imagePath),
                 width: double.infinity,
-                fit: BoxFit.fitHeight,
+                height: double.infinity,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -104,17 +103,16 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
                 ],
               ),
             ),
-          const SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16.0 ),
             child: ElevatedButton.icon(
               onPressed: _uploadImage,
               icon: const Icon(Icons.check_circle_outline, color: Colors.white),
-              label: const Text('Use Photo'),
+              label: const Text('Sử dụng ảnh'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                 textStyle: const TextStyle(fontSize: 18),
               ),
             ),
