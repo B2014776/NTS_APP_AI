@@ -2,19 +2,20 @@ dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
 
 flutter_launcher_icons:
-  android: "launcher_icon"
+  android: 'ic_launcher'
   ios: true
-  image_path: "assets/NTLogo.png"
+  image_path: "assets/NTLogo.svg"
+  image_path_android :  "assets/NTLogo.svg"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "assets/NTLogo.png"
+    image_path: "assets/NTLogo.svg"
     background_color: "#hexcode"
     theme_color: "#hexcode"
   windows:
     generate: true
-    image_path: "assets/NTLogo.png"
+    image_path: "assets/NTLogo.svg"
     icon_size: 48 # min:48, max:256, default: 48
   macos:
     generate: true
-    image_path: "assets/NTLogo.png"
+    image_path: "assets/NTLogo.svg"
