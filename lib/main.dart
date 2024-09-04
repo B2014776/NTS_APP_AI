@@ -1,13 +1,14 @@
 import 'package:apptestai/views/home/home.dart';
+import 'package:apptestai/views/learn.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(
-      const MyApp()
-    // DevicePreview(builder: (context) => const MyApp() // Wrap your app
-    //     ),
+    // const MyApp()
+    DevicePreview(builder: (context) => const MyApp() // Wrap your app
+        ),
   );
 }
 
