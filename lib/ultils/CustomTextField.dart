@@ -10,12 +10,12 @@ class CustomTextFieldV3 extends StatelessWidget {
 
   const CustomTextFieldV3(
       {super.key,
-        required this.labelText,
-        required this.hintText,
-        required this.prefixIcon,
-        required this.validatorValue,
-        required this.controller,
-        required this.onChanged});
+      required this.labelText,
+      required this.hintText,
+      required this.prefixIcon,
+      required this.validatorValue,
+      required this.controller,
+      required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +123,7 @@ class CustomTextFieldV5 extends StatefulWidget {
   @override
   _CustomTextFieldV5State createState() => _CustomTextFieldV5State();
 }
+
 class CustomTextFieldV6 extends StatelessWidget {
   final TextEditingController controller;
   final String title;
@@ -153,31 +154,34 @@ class CustomTextFieldV6 extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w400,
-            color: Colors.black,  // Màu chữ đen
+            color: Colors.black, // Màu chữ đen
           ),
         ),
-        SizedBox(height: 5),  // Khoảng cách nhỏ giữa tiêu đề và ô nhập liệu
+        SizedBox(height: 5), // Khoảng cách nhỏ giữa tiêu đề và ô nhập liệu
         SizedBox(
-          width: 300,  // Chiều rộng mong muốn của ô nhập liệu
+          width: 300, // Chiều rộng mong muốn của ô nhập liệu
           height: 40,
           child: TextField(
             controller: controller,
-            style: textStyle,  // Áp dụng cỡ chữ cho nội dung nhập
+            style: textStyle, // Áp dụng cỡ chữ cho nội dung nhập
             decoration: InputDecoration(
               hintText: hintText,
-              contentPadding: EdgeInsets.only(top: 12),  // Điều chỉnh vị trí văn bản// Văn bản gợi ý
-              prefixIcon: icon,  // Icon từ bên ngoài
+              contentPadding: EdgeInsets.only(top: 12),
+              // Điều chỉnh vị trí văn bản// Văn bản gợi ý
+              prefixIcon: icon,
+              // Icon từ bên ngoài
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),  // Bo tròn viền
+                borderRadius: BorderRadius.circular(4), // Bo tròn viền
                 borderSide: BorderSide(
-                  color: Colors.grey,  // Màu viền khi chưa focus
+                  color: Colors.grey, // Màu viền khi chưa focus
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),  // Bo tròn viền khi focus
+                borderRadius: BorderRadius.circular(4),
+                // Bo tròn viền khi focus
                 borderSide: BorderSide(
-                  color: Colors.black,  // Màu viền khi focus vào ô
-                  width: 1.0,  // Độ dày viền khi focus
+                  color: Colors.black, // Màu viền khi focus vào ô
+                  width: 1.0, // Độ dày viền khi focus
                 ),
               ),
             ),
@@ -187,9 +191,6 @@ class CustomTextFieldV6 extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class _CustomTextFieldV5State extends State<CustomTextFieldV5> {
   bool isFocused = false;
@@ -219,13 +220,13 @@ class _CustomTextFieldV5State extends State<CustomTextFieldV5> {
           children: [
             Text(widget.title,
                 style:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
             widget.isRequired
                 ? const Text(' (*)',
-                style: TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13))
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13))
                 : const SizedBox(),
           ],
         ),
@@ -260,13 +261,13 @@ class _CustomTextFieldV5State extends State<CustomTextFieldV5> {
                     color: Colors.black.withOpacity(0.8), size: 20),
                 suffixIcon: widget.controller.text != ""
                     ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        widget.controller.text = "";
-                      });
-                    },
-                    icon: Icon(Icons.close,
-                        color: Colors.black.withOpacity(0.8), size: 20))
+                        onPressed: () {
+                          setState(() {
+                            widget.controller.text = "";
+                          });
+                        },
+                        icon: Icon(Icons.close,
+                            color: Colors.black.withOpacity(0.8), size: 20))
                     : null),
             focusNode: widget.focusNode,
             textAlignVertical: TextAlignVertical.center,

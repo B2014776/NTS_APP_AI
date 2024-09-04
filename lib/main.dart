@@ -1,3 +1,4 @@
+import 'package:apptestai/views/User/login.dart';
 import 'package:apptestai/views/home/home.dart';
 import 'package:apptestai/views/learn.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomePage(),
+      home: Login(),
     );
   }
 }
