@@ -68,7 +68,7 @@ class AgriExpert extends StatelessWidget {
       bottomNavigationBar: CustomBottomNavigationBar(
         currentIndex: 3,
         onTap: (index) {
-          // Xử lý điều hướng cho BottomNavigationBar
+
         },
         camera: camera,
       ),
