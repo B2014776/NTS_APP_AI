@@ -11,15 +11,15 @@ class UserController {
       phoneNumber: '0123456789',
       avatarUrl: '01f5e88f2a3c9aa14282135a21d5f0a1.png',
     );
-    try {
-      final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Blast');
-      if (response.statusCode == 200) {
-        user = User.fromJson(response.data);
-
-      }
-    } catch (error) {
-      print("Failed to load disease details: $error");
-    }
+    // try {
+    //   // final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Blast');
+    //   // if (response.statusCode == 200) {
+    //   //   user = User.fromJson(response.data);
+    //
+    //   }
+    // } catch (error) {
+    //   print("Failed to load disease details: $error");
+    // }
   }
   Future<void> updateUserToAPI(User updatedUser) async {
     try {
