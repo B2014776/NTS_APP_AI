@@ -15,7 +15,7 @@ class SocialMediaLogin extends StatelessWidget {
           textColor: Colors.white,
           onPressed: () {},
         ),
-        const SizedBox(height: 8), // Thay đổi khoảng cách giữa các nút nếu cần
+        const SizedBox(height: 8),
         _buildSocialButton(
           logoPath: 'assets/google.png',
           buttonText: 'Đăng nhập với Google',
@@ -23,7 +23,7 @@ class SocialMediaLogin extends StatelessWidget {
           textColor: Colors.black,
           onPressed: () {},
         ),
-        const SizedBox(height: 8), // Thay đổi khoảng cách giữa các nút nếu cần
+        const SizedBox(height: 8),
         _buildSocialButton(
           logoPath: 'assets/apple.png',
           buttonText: 'Đăng nhập với Apple',
@@ -32,9 +32,7 @@ class SocialMediaLogin extends StatelessWidget {
           onPressed: () {},
         ),
         const SizedBox(height: 16),
-        const Divider(
-          color: Colors.grey,
-        ),
+        const Divider(),
         const SizedBox(height: 16),
         Wrap(
           alignment: WrapAlignment.center,
@@ -51,7 +49,10 @@ class SocialMediaLogin extends StatelessWidget {
                 ),
               ),
             ),
-            const Text(" và "),
+            const Text(" và ",
+
+            ),
+
             InkWell(
               onTap: () {
                 // TODO: Open privacy policy
@@ -86,7 +87,7 @@ class SocialMediaLogin extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
         ),
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-        minimumSize: Size(280, 32),
+        minimumSize: Size(320, 32),
         side: BorderSide(color: Colors.grey.shade300),
       ),
       onPressed: onPressed,
@@ -95,8 +96,8 @@ class SocialMediaLogin extends StatelessWidget {
         children: [
           Image.asset(
             logoPath,
-            height: 24,
-            width: 24,
+            height: 28,
+            width: 28,
           ),
           const SizedBox(width: 8),
           Text(

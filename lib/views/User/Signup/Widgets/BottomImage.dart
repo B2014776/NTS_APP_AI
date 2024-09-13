@@ -5,12 +5,14 @@ class BottomImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: 300,
-      child: Image.asset(
-        'assets/bottomimage.png',
-        fit: BoxFit.cover,
+    return Container(
+      width: double.infinity,
+      height: 80,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/bottomimage2.png'),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

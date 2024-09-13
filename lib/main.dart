@@ -1,4 +1,4 @@
-import 'package:apptestai/views/User/login.dart';
+import 'package:apptestai/views/User/Login/login.dart';
 import 'package:apptestai/views/home/home.dart';
 import 'package:apptestai/views/learn.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +8,8 @@ import 'package:apptestai/views/User/Signup/signup.dart';
 
 void main() {
   runApp(
-    // const MyApp()
-    DevicePreview(builder: (context) => const MyApp() // Wrap your app
-        ),
+    const MyApp()
+
   );
 }
 
