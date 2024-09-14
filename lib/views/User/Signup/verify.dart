@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
+import '../../../controllers/auth/AuthController.dart';
+import '../../home/home.dart';
+
 class VerifyScreen extends StatefulWidget {
   final VerifyArg? arg;
   final SignupInfo? signupInfo;
+
   const VerifyScreen({super.key, this.arg, this.signupInfo});
 
   @override
@@ -13,7 +17,7 @@ class VerifyScreen extends StatefulWidget {
 }
 
 class _VerifyScreenState extends State<VerifyScreen> {
-
+  final SignUpController signUpController = Get.put(SignUpController());
   final _keyTimer = GlobalKey<CustomTimerState>();
 
   bool isRemember = false;
@@ -34,14 +38,14 @@ class _VerifyScreenState extends State<VerifyScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[600],
-        title: const Text('Xác thực thông tin người dùng',
+        title: const Text(
+          'Xác thực thông tin người dùng',
           style: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
-
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.white,
@@ -57,53 +61,56 @@ class _VerifyScreenState extends State<VerifyScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              widget.arg?.isPhone == true ? Image.asset("assets/mobile-lock-icon-design-vector.jpg", height: 200,)
-                  : Image.asset("assets/MailGuard.png", height: 200,),
-              SizedBox(height: 10,),
+              widget.arg?.isPhone == true
+                  ? Image.asset(
+                      "assets/mobile-lock-icon-design-vector.jpg",
+                      height: 200,
+                    )
+                  : Image.asset(
+                      "assets/MailGuard.png",
+                      height: 200,
+                    ),
+              SizedBox(
+                height: 10,
+              ),
               Text(
-                widget.arg?.isPhone == true ? "Xác thực số điện thoại để đăng ký tài khoản" : "Xác thực email để đăng ký tài khoản",
+                widget.arg?.isPhone == true
+                    ? "Xác thực số điện thoại để đăng ký tài khoản"
+                    : "Xác thực email để đăng ký tài khoản",
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 3,),
+              SizedBox(
+                height: 3,
+              ),
               const Text(
                 "mã xác thực gồm 6 kí tự đã được gửi tới",
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey
-                ),
+                style: TextStyle(fontSize: 16, color: Colors.grey),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 3,),
+              SizedBox(
+                height: 3,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "${widget.arg?.isPhone == true ? "+" : ""}${widget.arg?.value ?? " "} ",
                     style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                    ),
+                        fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                   InkWell(
                     child: Container(
                       decoration: const BoxDecoration(
                           border: Border(
-                              bottom: BorderSide(
-                                  color: Colors.blue,
-                                  width: 1
-                              )
-                          )
-                      ),
+                              bottom:
+                                  BorderSide(color: Colors.blue, width: 1))),
                       child: const Text(
                         "thay đổi",
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.blue
-                        ),
+                        style: TextStyle(fontSize: 16, color: Colors.blue),
                       ),
                     ),
                     onTap: () {
@@ -113,7 +120,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   )
                 ],
               ),
-              SizedBox(height: 40,),
+              SizedBox(
+                height: 40,
+              ),
               PinFieldAutoFill(
                 decoration: BoxLooseDecoration(
                   radius: Radius.circular(5),
@@ -124,23 +133,21 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   code = value ?? "";
                 },
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Row(
                 children: [
                   const Text(
                     "- Mã xác nhận(OTP) sẽ hết hạn sau ",
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey
-                    ),
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                   CustomTimer(
                       key: _keyTimer,
                       duration: Duration(minutes: 10),
                       onTimerFinish: () {
                         /// TODO: Timer finish
-                      }
-                  )
+                      })
                 ],
               ),
               Row(
@@ -148,10 +155,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 children: [
                   const Text(
                     "- ",
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey
-                    ),
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                   Expanded(
                     child: Wrap(
@@ -160,21 +164,14 @@ class _VerifyScreenState extends State<VerifyScreen> {
                       children: [
                         const Text(
                           "Không nhận được mã xác nhận? ",
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey
-                          ),
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
                         ),
                         InkWell(
                           child: Container(
                             decoration: const BoxDecoration(
                                 border: Border(
                                     bottom: BorderSide(
-                                        color: Colors.blue,
-                                        width: 1
-                                    )
-                                )
-                            ),
+                                        color: Colors.blue, width: 1))),
                             child: const Text(
                               "Gửi lại",
                               style: TextStyle(
@@ -183,14 +180,22 @@ class _VerifyScreenState extends State<VerifyScreen> {
                               ),
                             ),
                           ),
-                          onTap: () {
-                            /// TODO: Resend code
-
-                            // _keyTimer.currentState?.setTimer(duration: Duration(minutes: 10));
-                            // _keyTimer.currentState?.startTimer();
-
+                          onTap: () async {
+                            Map<String, dynamic> result =
+                                await signUpController.sendVerificationCode();
+                            if (result.containsKey('error')) {
+                              print(
+                                  'Gửi mã xác thực thất bại: ${result['error']}');
+                            } else {
+                              _keyTimer.currentState
+                                  ?.setTimer(duration: Duration(minutes: 10));
+                              _keyTimer.currentState?.startTimer();
+                              print(
+                                  "Mã xác thực đã được gửi lại và timer đã reset");
+                            }
                           },
                         ),
+
                         // Text(
                         //   " hoặc ",
                         //   style: TextStyle(
@@ -226,33 +231,83 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               InkWell(
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(2)
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(2),
                   ),
                   child: const Center(
                     child: Text(
                       "Xác nhận",
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                onTap: () {
-                  /// TODO: Verify code
+                onTap: () async {
+
+                  String phoneOrEmail = widget.arg?.value ?? "";
+
                   print("Code entered: $code");
-                  print ("PhoneOrEmail have to verify: ${widget.arg?.value}");
-                  print("SignupInfo: ${widget.signupInfo}");
+                  print("PhoneOrEmail have to verify: $phoneOrEmail");
+
+                  // Xác thực mã
+                  Map<String, dynamic> verifyResult = await signUpController.verifyCode(code);
+
+                  if (verifyResult.containsKey('error')) {
+                    // Hiển thị thông báo lỗi xác thực mã
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(verifyResult['error']),
+                      ),
+                    );
+                  } else {
+                    // Hiển thị thông báo xác thực thành công
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Xác thực thành công!'),
+                      ),
+                    );
+
+                    Map<String, dynamic> signUpResult = await signUpController.sendSignUpRequest();
+
+                    if (signUpResult.containsKey('error')) {
+                      // Hiển thị thông báo lỗi khi gửi yêu cầu đăng ký
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(signUpResult['error']),
+                        ),
+                      );
+                    } else {
+                      // Hiển thị thông báo thành công và điều hướng đến trang home
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Đăng ký thành công!'),
+                        ),
+                      );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                      );
+                    }
+                  }
                 },
               ),
-              SizedBox(height: 5,),
+
+
+              SizedBox(
+                height: 5,
+              ),
               // Row(
               //   children: [
               //     Checkbox(
@@ -367,10 +422,7 @@ class CustomTimerState extends State<CustomTimer> {
   Widget build(BuildContext context) {
     return Text(
       "$minutes:${seconds < 10 ? "0$seconds" : seconds}",
-      style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold
-      ),
+      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     );
   }
 }
@@ -381,6 +433,7 @@ class VerifyArg {
 
   VerifyArg({required this.isPhone, required this.value});
 }
+
 class SignupInfo {
   final String fullName;
   final String phoneOrEmail;
@@ -393,6 +446,7 @@ class SignupInfo {
     required this.password,
     required this.confirmPassword,
   });
+
   @override
   String toString() {
     return 'SignupInfo(fullName: $fullName, phoneOrEmail: $phoneOrEmail, password: $password, confirmPassword: $confirmPassword)';

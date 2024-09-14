@@ -15,7 +15,7 @@ class UserController {
     //   // final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Blast');
     //   // if (response.statusCode == 200) {
     //   //   user = User.fromJson(response.data);
-    //
+    //2
     //   }
     // } catch (error) {
     //   print("Failed to load disease details: $error");
