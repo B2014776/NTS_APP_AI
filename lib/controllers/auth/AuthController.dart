@@ -60,29 +60,39 @@ class SignUpController extends GetxController {
     }
   }
 
-  Future<void> sendVerificationCode() async {
+  Future<bool> sendVerificationCode() async {
     try {
       final response = await dio.post(
-        'https://d4f4-171-243-58-90.ngrok-free.app/verify/send-verify-code/',
+        'https://api-ai-1-6b81.onrender.com/verify/send-verify-code/',
         data: {
           'email': phoneOrEmail.value,
         },
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
       );
 
       if (response.statusCode == 200) {
         print('Mã xác thực đã được gửi.');
+        return true; // Thành công
       } else {
         print('Gửi mã xác thực thất bại: ${response.statusMessage}');
+        return false; // Thất bại
       }
     } catch (e) {
       print('Lỗi khi gửi mã xác thực: $e');
+      return false; // Thất bại
     }
   }
 
-  Future<void> verifyCode(String code) async {
+
+
+  Future<bool> verifyCode(String code) async {
     try {
       final response = await dio.post(
-        'https://d4f4-171-243-58-90.ngrok-free.app/verify/verify-code',
+        'https://api-ai-1-6b81.onrender.com/verify/verify-code',
         data: {
           'email': phoneOrEmail.value,
           'code': code,
@@ -91,15 +101,19 @@ class SignUpController extends GetxController {
 
       if (response.statusCode == 200) {
         print('Xác thực mã thành công.');
+        return true; // Thành công
       } else {
         print('Xác thực mã thất bại: ${response.statusMessage}');
+        return false; // Thất bại
       }
     } catch (e) {
       print('Lỗi khi xác thực mã: $e');
+      return false; // Thất bại
     }
   }
 
-  Future<void> sendSignUpRequest() async {
+
+  Future<bool> sendSignUpRequest() async {
     try {
       final response = await dio.post(
         'https://d4f4-171-243-58-90.ngrok-free.app/auth/signin',
@@ -114,13 +128,17 @@ class SignUpController extends GetxController {
 
       if (response.statusCode == 200) {
         print('Đăng ký thành công.');
+        return true; // Thành công
       } else {
         print('Đăng ký thất bại: ${response.statusMessage}');
+        return false; // Thất bại
       }
     } catch (e) {
       print('Lỗi khi gửi yêu cầu đăng ký: $e');
+      return false; // Thất bại
     }
   }
+
 
 
 }
