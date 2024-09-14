@@ -10,22 +10,22 @@ class DanhMuc {
   // Method to convert a DanhMuc object to a JSON map
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'tenDanhMuc': tenDanhMuc,
+      'MaDanhMuc': id,
+      'TenDanhMuc': tenDanhMuc,
     };
   }
 
   // Method to create a DanhMuc object from a JSON map
   factory DanhMuc.fromJson(Map<String, dynamic> json) {
     return DanhMuc(
-      id: json['id'],
-      tenDanhMuc: json['tenDanhMuc'],
+      id: json['MaDanhMuc'],
+      tenDanhMuc: json['TenDanhMuc'],
     );
   }
 
   // Override toString method for better debugging
   @override
-  String toString() => 'DanhMuc(id: $id, tenDanhMuc: $tenDanhMuc)';
+  String toString() => 'DanhMuc(id: $id, TenDanhMuc: $tenDanhMuc)';
 
   // Override equality operator
   @override

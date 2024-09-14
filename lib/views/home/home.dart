@@ -1,11 +1,12 @@
+import 'package:apptestai/controllers/categoryNews/CategoryNewsController.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import '../../ultils/CustomBottomNavigationBar.dart';
 import '../../ultils/Custom_drawer.dart';
 import 'MenuItems/Menuitems.dart';
-import 'map/map.dart';
 import 'market/cardMarketList.dart';
 import 'news/News.dart';
 import 'plant/Plant.dart';
@@ -19,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController searchController = TextEditingController();
+  final CategoryNewController _CategoryNewController = CategoryNewController();
   int _currentIndex = 0;
 
   final CameraDescription camera = const CameraDescription(
@@ -29,11 +31,30 @@ class _HomePageState extends State<HomePage> {
 
   final ImagePicker _picker = ImagePicker();
 
+  var dataCategoryNews = <dynamic>[].obs; // RxList
+
+
   void _onTap(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
+
+  @override
+  void initState() {
+    super.initState();
+    _testApiCall();
+  }
+
+  Future<void> _testApiCall() async {
+    try {
+      dataCategoryNews.assignAll(await _CategoryNewController.getAllCategoryNew());
+      print('Data CategoryNews: $dataCategoryNews');
+    } catch (e) {
+      print('Lỗi khi gọi API: $e');
+    }
+  }
+
 
   Future<void> _openGallery() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -70,7 +91,7 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 16),
           FloatingActionButton(
-            onPressed: _openGallery,
+            onPressed: _testApiCall,
             backgroundColor: Colors.blue,
             elevation: 4,
             shape: RoundedRectangleBorder(
@@ -175,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 16),
                       const Plant(),
                       const SizedBox(height: 16),
-                      NewsPage(),
+                      NewsPage(dataCategoryNews: dataCategoryNews),
                       // DiseaseMapPage()
                     ],
                   ),
@@ -211,7 +232,7 @@ class _HomePageState extends State<HomePage> {
                   prefixIcon: Icon(CupertinoIcons.search),
                   border: InputBorder.none,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
               ),
             ),

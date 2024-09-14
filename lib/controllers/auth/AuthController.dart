@@ -12,7 +12,6 @@ class SignUpController extends GetxController {
     isCheckLogin.value = value ?? false;
   }
 
-
 }
 
 class LoginController extends GetxController {

@@ -7,10 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(
-    // const MyApp()
-    DevicePreview(builder: (context) => const MyApp() // Wrap your app
-        ),
-  );
+      // const MyApp()
+      const MyApp()
+      //   DevicePreview(builder: (context) =>  // Wrap your app
+      //       ),
+      );
 }
 
 class MyApp extends StatelessWidget {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: LoginScreen(),
+      home: HomePage(),
     );
   }
 }
