@@ -52,6 +52,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   get: ^4.6.6
   flutter_login: ^5.0.0
+  sms_autofill: ^2.4.0
   #  google_maps_flutter: ^2.9.0
   #  google_maps_flutter_ios: ^2.13.0
 flutter_icons:

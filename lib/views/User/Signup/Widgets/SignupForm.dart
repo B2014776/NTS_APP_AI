@@ -1,21 +1,26 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../controllers/auth/AuthController.dart'; // Import AuthController
+import '../../../../controllers/auth/AuthController.dart';
+import '../verify.dart';
 import 'SocialMediaLogin.dart';
 
-class SignupForm extends StatelessWidget {
+class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final SignUpController signUpController =
-        Get.put(SignUpController()); // Khởi tạo SignUpController
+  _SignupFormState createState() => _SignupFormState();
+}
 
+class _SignupFormState extends State<SignupForm> {
+  final SignUpController signUpController = Get.put(SignUpController());
+
+  String phoneOrEmail = "";
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -30,7 +35,7 @@ class SignupForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 6),
+            padding: EdgeInsets.only(top: 16),
             child: Text(
               'Đăng ký tài khoản',
               style: TextStyle(
@@ -40,13 +45,13 @@ class SignupForm extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 25),
-
-          // TextField cho Họ và tên
+          const SizedBox(height: 37),
           TextField(
             onChanged: (value) {
-              signUpController.username.value = value;
-              signUpController.validateForm(); // Gọi hàm kiểm tra form
+              setState(() {
+                signUpController.username.value = value;
+                signUpController.validateForm();
+              });
             },
             decoration: InputDecoration(
               hintText: 'Họ và tên',
@@ -57,15 +62,31 @@ class SignupForm extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  color: Colors.grey,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  color: Colors.green,
+                ),
+              ),
+              errorText: signUpController.isUsernameValid.value
+                  ? null
+                  : 'Họ và tên không hợp lệ',
             ),
           ),
           const SizedBox(height: 15),
-
-          // TextField cho Số điện thoại hoặc email
           TextField(
             onChanged: (value) {
-              signUpController.phoneOrEmail.value = value;
-              signUpController.validateForm(); 
+              setState(() {
+                signUpController.phoneOrEmail.value = value;
+                signUpController.validateForm();
+                phoneOrEmail = value;
+              });
             },
             decoration: InputDecoration(
               hintText: 'Nhập số điện thoại hoặc email',
@@ -76,76 +97,211 @@ class SignupForm extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  color: Colors.grey,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  color: Colors.green,
+                ),
+              ),
+              errorText: signUpController.isPhoneOrEmailValid.value
+                  ? null
+                  : 'Số điện thoại hoặc email không hợp lệ',
             ),
           ),
           const SizedBox(height: 15),
-
+          Obx(
+            () => TextField(
+              onChanged: (value) {
+                setState(() {
+                  signUpController.password.value = value;
+                  signUpController.validateForm();
+                });
+              },
+              obscureText: !signUpController.isPasswordVisible.value,
+              decoration: InputDecoration(
+                hintText: 'Mật khẩu',
+                prefixIcon: const Icon(
+                  Icons.lock_outline,
+                  color: Colors.green,
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    signUpController.isPasswordVisible.value
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    signUpController.isPasswordVisible.value =
+                        !signUpController.isPasswordVisible.value;
+                  },
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Colors.grey,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Colors.green,
+                  ),
+                ),
+                errorText: signUpController.password.value.isNotEmpty
+                    ? null
+                    : 'Mật khẩu không được để trống',
+              ),
+            ),
+          ),
+          const SizedBox(height: 15),
+          Obx(
+            () => TextField(
+              onChanged: (value) {
+                setState(() {
+                  signUpController.confirmPassword.value = value;
+                  signUpController.validateForm();
+                });
+              },
+              obscureText: !signUpController.isConfirmPasswordVisible.value,
+              decoration: InputDecoration(
+                hintText: 'Nhập lại mật khẩu',
+                prefixIcon: const Icon(
+                  Icons.lock_outline,
+                  color: Colors.green,
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    signUpController.isConfirmPasswordVisible.value
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    signUpController.isConfirmPasswordVisible.value =
+                        !signUpController.isConfirmPasswordVisible.value;
+                  },
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Colors.grey,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: Colors.green,
+                  ),
+                ),
+                errorText: signUpController.isPasswordMatch.value
+                    ? null
+                    : 'Mật khẩu không khớp',
+              ),
+            ),
+          ),
           Obx(() => signUpController.showError.value
-              ? const Text(
-                  'Vui lòng điền đầy đủ thông tin để đăng ký',
-                  style: TextStyle(color: Colors.red),
+              ? const Padding(
+                  padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+                  child: Text(
+                    'Vui lòng điền đầy đủ thông tin để đăng ký',
+                    style: TextStyle(color: Colors.red),
+                  ),
                 )
               : const SizedBox.shrink()),
           const SizedBox(height: 15),
-
           Obx(() => Container(
-                height: 40,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: signUpController.isFormValid.value
-                      ? const Color(0xff538c51)
-                      : Colors.grey,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: MaterialButton(
-                  onPressed: signUpController.isFormValid.value
-                      ? () {
-                          signUpController.onSignupPressed();
-                        }
-                      : null,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: signUpController.isFormValid.value
+                    ? const Color(0xff538c51)
+                    : Colors.grey,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: MaterialButton(
+                onPressed: signUpController.isFormValid.value
+                    ? () {
+                        SignupInfo signupInfo = SignupInfo(
+                          fullName: signUpController.username.value,
+                          phoneOrEmail: signUpController.phoneOrEmail.value,
+                          password: signUpController.password.value,
+                          confirmPassword:
+                              signUpController.confirmPassword.value,
+                        );
+
+                        print("signupInfo $signupInfo");
+
+                        bool isPhone =
+                            phoneOrEmail.contains("@") ? false : true;
+
+                        VerifyArg arg =
+                            VerifyArg(isPhone: isPhone, value: phoneOrEmail);
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VerifyScreen(
+                              arg: arg,
+                              signupInfo: signupInfo,
+                            ),
+                          ),
+                        );
+                      }
+                    : null,
+                child: const Text(
+                  "Đồng ý với các điều khoản và đăng ký",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
-                  child: const Text(
-                    "Đồng ý với các điều khoản và đăng ký",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
                 ),
-              )),
+              ))),
           const SizedBox(height: 12),
           const Divider(),
           const SizedBox(height: 8),
-          const Center(
+          Center(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   "Bạn đã có tài khoản?",
                   style: TextStyle(fontSize: 16),
                 ),
-                SizedBox(width: 8),
-                Text(
-                  "Đăng nhập ngay",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF0D9C50),
-                    fontWeight: FontWeight.bold,
+                const SizedBox(width: 8),
+                InkWell(
+                  onTap: () {
+                    // TODO: navigate to signin screen
+                  },
+                  child: const Text(
+                    "Đăng nhập ngay",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Color(0xFF0D9C50),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-
           const SizedBox(height: 12),
           const Text(
             "Hoặc đăng nhập với",
             style: TextStyle(fontSize: 16),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 18),
           const SocialMediaLogin(),
         ],
       ),

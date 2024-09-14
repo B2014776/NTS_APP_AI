@@ -13,7 +13,7 @@ class HeaderWidget extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.fromLTRB(80, 50, 80, 20),
-            color: const Color(0xff538c51),
+            color: const Color(0xff1ECC44),
             height: 120,
             width: double.infinity,
             child: Row(

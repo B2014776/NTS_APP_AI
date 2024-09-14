@@ -11,13 +11,20 @@ class Signup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: SizedBox.expand(
+        child: Stack(
           children: [
-            HeaderWidget(),
-            SignupForm(),
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HeaderWidget(),
+                  SignupForm(),
+                  BottomImage(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
