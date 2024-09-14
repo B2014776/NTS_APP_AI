@@ -18,7 +18,6 @@ class Signup extends StatelessWidget {
           children: [
             HeaderWidget(),
             SignupForm(),
-
           ],
         ),
       ),

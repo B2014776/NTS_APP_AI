@@ -65,7 +65,7 @@ class SignupForm extends StatelessWidget {
           TextField(
             onChanged: (value) {
               signUpController.phoneOrEmail.value = value;
-              signUpController.validateForm(); // Gọi hàm kiểm tra form
+              signUpController.validateForm(); 
             },
             decoration: InputDecoration(
               hintText: 'Nhập số điện thoại hoặc email',
@@ -80,43 +80,42 @@ class SignupForm extends StatelessWidget {
           ),
           const SizedBox(height: 15),
 
-          // Thông báo lỗi nếu form không hợp lệ
           Obx(() => signUpController.showError.value
               ? const Text(
-            'Vui lòng điền đầy đủ thông tin để đăng ký',
-            style: TextStyle(color: Colors.red),
-          )
+                  'Vui lòng điền đầy đủ thông tin để đăng ký',
+                  style: TextStyle(color: Colors.red),
+                )
               : const SizedBox.shrink()),
           const SizedBox(height: 15),
 
           Obx(() => Container(
-            height: 40,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: signUpController.isFormValid.value
-                  ? const Color(0xff538c51)
-                  : Colors.grey,
-              borderRadius: BorderRadius.circular(5),
-            ),
-            child: MaterialButton(
-              onPressed: signUpController.isFormValid.value
-                  ? () {
-                signUpController.onSignupPressed();
-              }
-                  : null,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: const Text(
-                "Đồng ý với các điều khoản và đăng ký",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
+                height: 40,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: signUpController.isFormValid.value
+                      ? const Color(0xff538c51)
+                      : Colors.grey,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-              ),
-            ),
-          )),
+                child: MaterialButton(
+                  onPressed: signUpController.isFormValid.value
+                      ? () {
+                          signUpController.onSignupPressed();
+                        }
+                      : null,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Text(
+                    "Đồng ý với các điều khoản và đăng ký",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              )),
           const SizedBox(height: 12),
           const Divider(),
           const SizedBox(height: 8),
@@ -151,6 +150,5 @@ class SignupForm extends StatelessWidget {
         ],
       ),
     );
-
   }
 }
