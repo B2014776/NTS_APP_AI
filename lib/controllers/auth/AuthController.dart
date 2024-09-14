@@ -1,14 +1,10 @@
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 import '../../services/dio_config.dart';
 
-
-
 class SignUpController extends GetxController {
-
   var username = ''.obs;
   var fullName = ''.obs;
   var phoneOrEmail = ''.obs;
@@ -26,6 +22,7 @@ class SignUpController extends GetxController {
 
   Dio dio = Dio();
   final Dio _dio = DioConfig.createDio();
+
   bool isValidUsername(String input) {
     return input.isNotEmpty && input.length >= 3;
   }
@@ -68,9 +65,7 @@ class SignUpController extends GetxController {
 
   Future<bool> sendVerificationCode() async {
     try {
-      Map<String, dynamic> body = {
-        "email": "unnamedhomosapiens@gmail.com"
-      };
+      Map<String, dynamic> body = {"email": "unnamedhomosapiens@gmail.com"};
       var response = await _dio.post(
         '/verify/send-verify-code/',
         data: body,
@@ -88,7 +83,6 @@ class SignUpController extends GetxController {
       return false; // Thất bại
     }
   }
-
 
   Future<bool> verifyCode(String code) async {
     try {
@@ -135,6 +129,75 @@ class SignUpController extends GetxController {
       }
     } catch (e) {
       print('Lỗi khi gửi yêu cầu đăng ký: $e');
+      return false; // Thất bại
+    }
+  }
+}
+
+class SignInController extends GetxController {
+  var phoneOrEmail = ''.obs;
+  var password = ''.obs;
+  var isFormValid = false.obs;
+  var showError = false.obs;
+
+  var isPhoneOrEmailValid = false.obs;
+  var isPasswordValid = false.obs;
+  var isPasswordVisible = false.obs;
+
+  Dio dio = Dio();
+
+  bool isValidPhoneOrEmail(String input) {
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    final phoneRegex = RegExp(r'^\d{10,12}$');
+    return emailRegex.hasMatch(input) || phoneRegex.hasMatch(input);
+  }
+
+  bool isValidPassword(String input) {
+    return input.isNotEmpty && input.length >= 6;
+  }
+
+  void validateForm() {
+    isPhoneOrEmailValid.value = isValidPhoneOrEmail(phoneOrEmail.value);
+    isPasswordValid.value = isValidPassword(password.value);
+
+    if (isPhoneOrEmailValid.value && isPasswordValid.value) {
+      isFormValid.value = true;
+      showError.value = false;
+    } else {
+      isFormValid.value = false;
+      showError.value = true;
+    }
+  }
+
+  void onLoginPressed() {
+    validateForm();
+    if (isFormValid.value) {
+      sendLoginRequest();
+    } else {
+      print("Vui lòng điền đầy đủ thông tin để đăng nhập");
+    }
+  }
+
+  Future<bool> sendLoginRequest() async {
+    try {
+      final response = await dio.post(
+        'https://d4f4-171-243-58-90.ngrok-free.app/auth/login',
+        data: {
+          'email_or_phone': phoneOrEmail.value,
+          'password': password.value,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print('Đăng nhập thành công.');
+        // Handle token storage or navigation here
+        return true; // Thành công
+      } else {
+        print('Đăng nhập thất bại: ${response.statusMessage}');
+        return false; // Thất bại
+      }
+    } catch (e) {
+      print('Lỗi khi gửi yêu cầu đăng nhập: $e');
       return false; // Thất bại
     }
   }

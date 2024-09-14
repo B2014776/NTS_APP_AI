@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-
 class DioConfig {
   static Dio createDio() {
     final Dio dio = Dio();
