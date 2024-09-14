@@ -1,0 +1,14 @@
+import 'package:dio/dio.dart';
+
+class DioConfig {
+  static Dio createDio() {
+    final Dio dio = Dio();
+    String _token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJxdW9jZHVuZzExMjAwMSIsImV4cCI6MTcyNTcxMzU5N30.eTuV2t6IoAULD92M1_E6uIeneNLzX_PnfBxWI2O1tQg";
+    dio.options.baseUrl = 'https://api-ai-1-6b81.onrender.com';
+    dio.options.connectTimeout = const Duration(seconds: 15);
+    dio.options.receiveTimeout = const Duration(seconds: 3);
+    dio.options.headers['Authorization'] = 'Bearer ${_token}';
+    return dio;
+  }
+}
