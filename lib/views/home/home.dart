@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:camera/camera.dart';
@@ -51,6 +52,28 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  Future<void> login() async {
+    Dio dio = Dio();
+    Map<String, dynamic> data = {
+      "username": "batungx271@gmail.com",
+      "password": "12345678"
+    };
+
+    try {
+      Response response = await dio.post(
+        'https://api-ai-1-6b81.onrender.com/auth/signin',
+        data: data,
+      );
+
+      print('Response data: ${response.data}');
+    } catch (e) {
+      // In ra lỗi nếu có
+      print('Error: $e');
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +83,7 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
-            onPressed: _openCamera,
+            onPressed: login,
             backgroundColor: Colors.green,
             elevation: 4,
             shape: RoundedRectangleBorder(
@@ -211,7 +234,7 @@ class _HomePageState extends State<HomePage> {
                   prefixIcon: Icon(CupertinoIcons.search),
                   border: InputBorder.none,
                   contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
               ),
             ),
