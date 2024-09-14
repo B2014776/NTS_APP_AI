@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -31,7 +32,7 @@ class EditAccountController extends GetxController {
       final response = await http.post(
         Uri.parse('https://api-ai-1-6b81.onrender.com/api/?proc=Proc_Mobile_GetUserInfo'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode([{"name": "TaiKhoanID", "type": "guid", "value": "D748671B-AC85-4899-BA4E-BD86C02D826E"}]),
+        body: jsonEncode([{"name": "TaiKhoanID", "type": "guid", "value": "d748671b-ac85-4899-ba4e-bd86c02d826f"}]),
       );
 
       if (response.statusCode == 200) {
@@ -139,15 +140,77 @@ class EditAccountController extends GetxController {
       showError.value = true;
     }
   }
+  Future<void> updateUserData() async {
+    try {
+      isLoading.value = true; // Bắt đầu tải dữ liệu
 
-  // Xử lý khi nhấn nút lưu
-  void onSavePressed() {
-    validateForm();
-    if (isFormValid.value) {
-      // Logic lưu thông tin ở đây
-      print('Dữ liệu hợp lệ và sẵn sàng lưu.');
-    } else {
-      print('Dữ liệu không hợp lệ.');
+      // Xây dựng dữ liệu theo định dạng yêu cầu của stored procedure
+      final requestData = [
+        {"name": "Email", "type": "nvarchar", "value": email.value},
+        {"name": "SoDienThoai", "type": "nvarchar", "value": phone.value},
+        {"name": "GioiTinh", "type": "nvarchar", "value": gender.value},
+        {"name": "NgaySinh", "type": "date", "value": birthday.value},
+        {"name": "HoVaTen", "type": "nvarchar", "value": username.value},
+        {"name": "DiaChi", "type": "nvarchar", "value": location.value},
+        {"name": "TaiKhoanID", "type": "uniqueidentifier", "value": "d748671b-ac85-4899-ba4e-bd86c02d826f"},
+        {"name": "AnhDaiDien", "type": "nvarchar", "value": avatar.value.isEmpty ? null : avatar.value},
+      ];
+
+      final response = await http.post(
+        Uri.parse('https://api-ai-1-6b81.onrender.com/api/?proc=Proc_Mobile_UpdateUserInfo'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(requestData),
+      );
+
+      // In ra mã trạng thái và nội dung phản hồi từ API
+      print('Mã trạng thái phản hồi từ API: ${response.statusCode}');
+      print('Nội dung phản hồi từ API: ${response.body}');
+
+      if (response.statusCode == 200) {
+        // Hiển thị snackbar thành công
+        Get.snackbar(
+          'Thành công',
+          'Bạn đã lưu thông tin thành công',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+      } else {
+        // Thông báo lỗi nếu không thành công
+        Get.snackbar(
+          'Lỗi',
+          'Có lỗi xảy ra khi cập nhật thông tin: ${response.statusCode}',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      }
+    } catch (e) {
+      // Hiển thị thông báo lỗi nếu có lỗi
+      Get.snackbar(
+        'Lỗi',
+        'Đã xảy ra lỗi: $e',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    } finally {
+      isLoading.value = false; // Kết thúc quá trình tải dữ liệu
     }
   }
+
+
+
+
+
+  Future<void> onSavePressed() async {
+    validateForm();
+    if (isFormValid.value) {
+      await updateUserData(); // Gọi phương thức cập nhật dữ liệu
+    } else {
+      Get.snackbar('Lỗi', 'Thông tin không hợp lệ, vui lòng kiểm tra lại', backgroundColor: Colors.red, colorText: Colors.white);
+    }
+  }
+
+
+
+
+// Xử lý khi nhấn nút lưu
 }

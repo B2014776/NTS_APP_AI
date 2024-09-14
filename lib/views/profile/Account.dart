@@ -3,7 +3,6 @@ import 'package:apptestai/views/profile/widgets/function.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:apptestai/controllers/profile/AccountController.dart';
-import 'package:apptestai/views/profile/widgets/AccountInfoCard.dart';
 import '../../ultils/CustomBottomNavigationBar.dart';
 import '../../../models/UserModel.dart';
 

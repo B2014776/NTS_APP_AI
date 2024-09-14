@@ -83,13 +83,8 @@ class _EditAccountPageState extends State<EditAccountPage> {
                     height: 45,
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        controller.onSavePressed();
-                        if (controller.isFormValid.value) {
-                          Get.snackbar('Thành công', 'Thông tin đã được cập nhật');
-                        } else {
-                          Get.snackbar('Lỗi', 'Thông tin không hợp lệ, vui lòng kiểm tra lại');
-                        }
+                      onPressed: ()  {
+                        controller.onSavePressed(); // Gọi phương thức xử lý khi nhấn nút lưu
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
