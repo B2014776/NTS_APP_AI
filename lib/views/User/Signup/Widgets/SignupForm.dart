@@ -232,34 +232,39 @@ class _SignupFormState extends State<SignupForm> {
               child: MaterialButton(
                 onPressed: signUpController.isFormValid.value
                     ? () async {
-                  bool success = await signUpController.sendVerificationCode();
+                        Map<String, dynamic> result =
+                            await signUpController.sendVerificationCode();
+                        if (result.containsKey('error')) {
+                          print('Gửi mã xác thực thất bại: ${result['error']}');
+                        } else {
+                          bool isPhone =
+                              signUpController.phoneOrEmail.value.contains("@")
+                                  ? false
+                                  : true;
 
-                  if (success) {
-                    bool isPhone = signUpController.phoneOrEmail.value.contains("@") ? false : true;
+                          VerifyArg arg = VerifyArg(
+                              isPhone: isPhone,
+                              value: signUpController.phoneOrEmail.value);
 
-                    VerifyArg arg = VerifyArg(isPhone: isPhone, value: signUpController.phoneOrEmail.value);
+                          SignupInfo signupInfo = SignupInfo(
+                            fullName: signUpController.fullName.value,
+                            phoneOrEmail: signUpController.phoneOrEmail.value,
+                            password: signUpController.password.value,
+                            confirmPassword:
+                                signUpController.confirmPassword.value,
+                          );
 
-                    SignupInfo signupInfo = SignupInfo(
-                      fullName: signUpController.fullName.value,
-                      phoneOrEmail: signUpController.phoneOrEmail.value,
-                      password: signUpController.password.value,
-                      confirmPassword: signUpController.confirmPassword.value,
-                    );
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => VerifyScreen(
-                          arg: arg,
-                          signupInfo: signupInfo,
-                        ),
-                      ),
-                    );
-                  } else {
-                    // Xử lý trường hợp gửi mã thất bại
-                    print('Gửi mã xác thực thất bại.');
-                  }
-                }
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VerifyScreen(
+                                arg: arg,
+                                signupInfo: signupInfo,
+                              ),
+                            ),
+                          );
+                        }
+                      }
                     : null,
                 child: const Text(
                   "Đồng ý với các điều khoản và đăng ký",
