@@ -29,27 +29,47 @@ class EditAccountController extends GetxController {
     try {
       isLoading.value = true; // Bắt đầu tải dữ liệu
       final response = await http.post(
-        Uri.parse('https://api-ai-1-6b81.onrender.com/api/x?proc=Proc_Mobile_GetUserInfo'),
+        Uri.parse('https://api-ai-1-6b81.onrender.com/api/?proc=Proc_Mobile_GetUserInfo'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode([{"name": "TaiKhoanID", "type": "guid", "value": "D748671B-AC85-4899-BA4E-BD86C02D826E"}]),
       );
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
+        final decodedResponse = utf8.decode(response.bodyBytes); // Chuyển đổi mã hóa
+        final data = jsonDecode(decodedResponse);
         final userData = data['data'][0];
 
         // Cập nhật các giá trị trong controller
         username.value = userData['HoVaTen'];
         email.value = userData['Email'];
         phone.value = userData['SoDienThoai'];
-        gender.value = userData['GioiTinh'];
-        birthday.value = userData['NgaySinh'];
-        location.value = userData['DiaChi'];
+
+        // Kiểm tra và hiển thị giới tính
+        if (userData['GioiTinh'] == 'Nam' || userData['GioiTinh'] == 'Nữ') {
+          gender.value = userData['GioiTinh'];
+        } else {
+          gender.value = 'Không xác định'; // Giá trị mặc định nếu giới tính không hợp lệ
+        }
+
+        // Chuyển đổi và định dạng ngày sinh
+        birthday.value = formatDate(userData['NgaySinh']);
+
+        // Xử lý địa chỉ và avatar
+        location.value = userData['DiaChi']?.isEmpty ?? true ? 'Không có địa chỉ' : userData['DiaChi'];
+        // avatar.value = userData['AnhDaiDien']?.isEmpty ?? true ? 'default_avatar_url' : userData['AnhDaiDien'];
         avatar.value = userData['AnhDaiDien'];
+
+        print('Username: ${username.value}');
+        print('Email: ${email.value}');
+        print('Phone: ${phone.value}');
+        print('Gender: ${gender.value}');
+        print('Birthday: ${birthday.value}');
+        print('Location: ${location.value}');
+        print('Avatar: ${avatar.value}');
 
         isLoading.value = false; // Dữ liệu đã được tải xong
       } else {
-        print("Lỗi khi gọi API: ${response.statusCode}");
+        print("Lỗi khi gọi API: ${response.statusCode}, nội dung: ${response.body}");
         isLoading.value = false; // Dữ liệu không tải được
       }
     } catch (e) {
@@ -58,20 +78,37 @@ class EditAccountController extends GetxController {
     }
   }
 
+  // Chuyển đổi chuỗi ngày sinh thành DateTime
+  String formatDate(String dateStr) {
+    try {
+      final parts = dateStr.split('/');
+      final day = int.parse(parts[0]);
+      final month = int.parse(parts[1]);
+      final year = int.parse(parts[2]);
+      return DateTime(year, month, day).toIso8601String(); // Chuyển về định dạng chuẩn ISO8601
+    } catch (e) {
+      return dateStr; // Trả về giá trị gốc nếu có lỗi
+    }
+  }
+
+  // Kiểm tra tính hợp lệ của số điện thoại
   bool isValidPhone(String input) {
     final phoneRegex = RegExp(r'^\d{10,12}$');
     return phoneRegex.hasMatch(input);
   }
 
+  // Kiểm tra tính hợp lệ của email
   bool isValidEmail(String input) {
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     return emailRegex.hasMatch(input);
   }
 
+  // Kiểm tra tính hợp lệ của giới tính
   bool isValidGender(String input) {
-    return input == 'Nam' || input == 'Nữ'; // Chỉ cho phép chọn "Nam" hoặc "Nữ"
+    return input == 'Nam' || input == 'Nữ'; // Chỉ cho phép "Nam" hoặc "Nữ"
   }
 
+  // Xác thực form
   void validateForm() {
     // Kiểm tra từng trường chỉ khi nó không rỗng
     if (username.value.isNotEmpty) {
@@ -90,7 +127,7 @@ class EditAccountController extends GetxController {
       isGenderValid.value = isValidGender(gender.value);
     }
 
-    // Nếu trường nào có giá trị và không hợp lệ, báo lỗi
+    // Nếu tất cả các trường hợp lệ, form được xác thực
     if (isUsernameValid.value &&
         isPhoneValid.value &&
         isEmailValid.value &&
@@ -103,6 +140,7 @@ class EditAccountController extends GetxController {
     }
   }
 
+  // Xử lý khi nhấn nút lưu
   void onSavePressed() {
     validateForm();
     if (isFormValid.value) {

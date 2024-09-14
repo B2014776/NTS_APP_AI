@@ -22,9 +22,14 @@ class GenderDropdownField extends StatelessWidget {
           SizedBox(width: 15),
           Expanded(
             child: Obx(() {
+              // Debugging: Print gender value
+              print('Gender value in GenderDropdownField: ${controller.gender.value}');
+
               return Text(
-                controller.gender.value.isNotEmpty ? controller.gender.value : 'Giới tính',
-                style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                controller.gender.value.isNotEmpty
+                    ? controller.gender.value
+                    : 'Giới tính',
+                style: TextStyle(fontSize: 15, color: Colors.grey[800]),
               );
             }),
           ),
@@ -58,3 +63,4 @@ class GenderDropdownField extends StatelessWidget {
     );
   }
 }
+

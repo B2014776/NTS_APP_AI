@@ -1,13 +1,14 @@
-import 'package:apptestai/views/profile/widgets/localtionInput.dart';
+import 'package:apptestai/views/profile/widgets/BirthdayTextfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/auth/EditAccountController.dart';
 import 'widgets/Avatar.dart';
-import 'widgets/birthPicker.dart';
+import 'widgets/birthPicker.dart'; // Đảm bảo bạn nhập đúng đường dẫn
 import 'widgets/emailField.dart';
-import 'widgets/genderPicker.dart';
+import 'widgets/genderDropdownField.dart'; // Nhập đúng đường dẫn
 import 'widgets/phoneField.dart';
 import 'widgets/usernameField.dart';
+import 'widgets/localtionInput.dart';
 
 class EditAccountPage extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
   @override
   void initState() {
     super.initState();
-    // Load user data
+    // Tải dữ liệu người dùng
     controller.fetchUserData();
   }
 
@@ -54,7 +55,7 @@ class _EditAccountPageState extends State<EditAccountPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Avatar
+                // Widget Avatar
                 AvatarWidget(avatarUrl: controller.avatar),
                 SizedBox(height: 16),
                 // Trường tên người dùng
@@ -67,10 +68,10 @@ class _EditAccountPageState extends State<EditAccountPage> {
                 PhoneField(controller: controller),
                 SizedBox(height: 16),
                 // Trường giới tính
-                GenderPicker(controller: controller),
+                GenderDropdownField(controller: controller), // Gọi GenderDropdownField với controller
                 SizedBox(height: 16),
                 // Trường ngày sinh
-                BirthdayPicker(controller: controller),
+                DateOfBirthPicker(birthday: controller.birthday),
                 SizedBox(height: 16),
                 // Trường vị trí
                 LocationInput(controller: controller),
