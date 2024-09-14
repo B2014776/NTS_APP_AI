@@ -1,6 +1,6 @@
+import 'package:apptestai/views/profile/edit_account/presentation/controller/edit_account_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controllers/auth/EditAccountController.dart';
 
 class EmailField extends StatefulWidget {
   final EditAccountController controller;
@@ -25,9 +25,9 @@ class _EmailFieldState extends State<EmailField> {
           ),
           child: Obx(() {
             return TextField(
-              controller: TextEditingController(text: widget.controller.email.value),
+              controller: TextEditingController(text: widget.controller.emailInput.value.text),
               onChanged: (value) {
-                widget.controller.email.value = value;
+                widget.controller.emailInput.value.text = value;
                 widget.controller.validateForm();
               },
               style: TextStyle(
@@ -35,7 +35,7 @@ class _EmailFieldState extends State<EmailField> {
                 color: Colors.grey[800],
               ),
               cursorColor: Colors.black45,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Email',
                 hintStyle: const TextStyle(fontSize: 15, color: Colors.grey),
                 prefixIcon: const Icon(
@@ -51,19 +51,19 @@ class _EmailFieldState extends State<EmailField> {
           }),
         ),
         Obx(() {
-          if (!widget.controller.isEmailValid.value && widget.controller.email.value.isNotEmpty) {
-            return Padding(
+          if (!widget.controller.isEmailValid.value && widget.controller.emailInput.value.text.isNotEmpty) {
+            return const Padding(
               padding: const EdgeInsets.only(top: 5, left: 10),
-              child: Text(
+              child: const Text(
                 'Email không hợp lệ',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.red,
                   fontSize: 12,
                 ),
               ),
             );
           } else {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           }
         }),
       ],

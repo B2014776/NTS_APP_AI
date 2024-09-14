@@ -1,6 +1,8 @@
+import 'package:apptestai/models/UserModel.dart';
+import 'package:apptestai/routes/routes.dart';
 import 'package:flutter/material.dart';
-import '../../../models/UserModel.dart';
-import '../EditAccount.dart';
+import 'package:get/get.dart';
+
 import 'function.dart';
 
 class AccountInfoCard2 extends StatefulWidget {
@@ -24,9 +26,9 @@ class _AccountInfoCard2State extends State<AccountInfoCard2> {
   Widget build(BuildContext context) {
     return Card(
       color: Colors.white,
-      margin: EdgeInsets.all(0),
+      margin: const EdgeInsets.all(0),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -38,18 +40,18 @@ class _AccountInfoCard2State extends State<AccountInfoCard2> {
                     'assets/${widget.user.avatarUrl}',
                   ),
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Chào ${widget.user.name}', style: TextStyle(fontSize: 16),),
-                    Text('${widget.user.phoneNumber}', style: TextStyle(fontSize: 12, color: Colors.green),),
-                    Text('${widget.user.email}', style: TextStyle(fontSize: 12, color: Colors.green),),
+                    Text('Chào ${widget.user.name}', style: const TextStyle(fontSize: 16),),
+                    Text('${widget.user.phoneNumber}', style: const TextStyle(fontSize: 12, color: Colors.green),),
+                    Text('${widget.user.email}', style: const TextStyle(fontSize: 12, color: Colors.green),),
                   ],
                 ),
               ],
             ),
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
 
             // Use a Container to wrap the ListView and define its height
             CustomMenuItem(
@@ -57,12 +59,7 @@ class _AccountInfoCard2State extends State<AccountInfoCard2> {
               functionName: 'Thông tin cá nhân',
               nextIcon: Icons.arrow_forward_ios,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EditAccountPage(), // Replace with your actual EditAccount widget
-                  ),
-                ); // Đóng ngoặc đầy đủ cho Navigator.push
+                Get.toNamed(Routes.editAccount);
               },
             ),
             CustomMenuItem(

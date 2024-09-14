@@ -1,24 +1,28 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+// ignore: depend_on_referenced_packages
+import 'package:http/http.dart' as http;
+
 class EditAccountController extends GetxController {
-  var username = ''.obs;
-  var email = ''.obs;
+
   var phone = ''.obs;
   var gender = ''.obs;
   var birthday = ''.obs;
   var location = ''.obs;
   var avatar = ''.obs;
 
-  var isLoading = false.obs; // Trạng thái tải dữ liệu
+  var isLoading = false.obs;
   var isUsernameValid = true.obs;
   var isPhoneValid = true.obs;
   var isEmailValid = true.obs;
   var isGenderValid = true.obs;
   var isFormValid = false.obs;
   var showError = false.obs;
+
+  Rx<TextEditingController> userName = TextEditingController().obs;
+  Rx<TextEditingController> emailInput = TextEditingController().obs;
 
   @override
   void onInit() {
@@ -28,11 +32,11 @@ class EditAccountController extends GetxController {
 
   Future<void> fetchUserData() async {
     try {
-      isLoading.value = true; // Bắt đầu tải dữ liệu
+      isLoading.value = true;
       final response = await http.post(
         Uri.parse('https://api-ai-1-6b81.onrender.com/api/?proc=Proc_Mobile_GetUserInfo'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode([{"name": "TaiKhoanID", "type": "guid", "value": "d748671b-ac85-4899-ba4e-bd86c02d826f"}]),
+        body: jsonEncode([{"name": "TenDangNhap", "type": "guid", "value": "batungx27231@gmail.com"}]),
       );
 
       if (response.statusCode == 200) {
@@ -40,12 +44,11 @@ class EditAccountController extends GetxController {
         final data = jsonDecode(decodedResponse);
         final userData = data['data'][0];
 
-        // Cập nhật các giá trị trong controller
-        username.value = userData['HoVaTen'];
-        email.value = userData['Email'];
+        userName.value.text = userData['HoVaTen'];
+        emailInput.value.text = userData['Email'];
+        emailInput.value.text = userData['Email'];
         phone.value = userData['SoDienThoai'];
 
-        // Kiểm tra và hiển thị giới tính
         if (userData['GioiTinh'] == 'Nam' || userData['GioiTinh'] == 'Nữ') {
           gender.value = userData['GioiTinh'];
         } else {
@@ -59,14 +62,6 @@ class EditAccountController extends GetxController {
         location.value = userData['DiaChi']?.isEmpty ?? true ? 'Không có địa chỉ' : userData['DiaChi'];
         // avatar.value = userData['AnhDaiDien']?.isEmpty ?? true ? 'default_avatar_url' : userData['AnhDaiDien'];
         avatar.value = userData['AnhDaiDien'];
-
-        print('Username: ${username.value}');
-        print('Email: ${email.value}');
-        print('Phone: ${phone.value}');
-        print('Gender: ${gender.value}');
-        print('Birthday: ${birthday.value}');
-        print('Location: ${location.value}');
-        print('Avatar: ${avatar.value}');
 
         isLoading.value = false; // Dữ liệu đã được tải xong
       } else {
@@ -112,16 +107,16 @@ class EditAccountController extends GetxController {
   // Xác thực form
   void validateForm() {
     // Kiểm tra từng trường chỉ khi nó không rỗng
-    if (username.value.isNotEmpty) {
-      isUsernameValid.value = username.value.length >= 1;
+    if (userName.value.text.isNotEmpty) {
+      isUsernameValid.value = userName.value.text.isNotEmpty;
     }
 
     if (phone.value.isNotEmpty) {
       isPhoneValid.value = isValidPhone(phone.value);
     }
 
-    if (email.value.isNotEmpty) {
-      isEmailValid.value = isValidEmail(email.value);
+    if (emailInput.value.text.isNotEmpty) {
+      isEmailValid.value = isValidEmail(emailInput.value.text);
     }
 
     if (gender.value.isNotEmpty) {
@@ -146,13 +141,13 @@ class EditAccountController extends GetxController {
 
       // Xây dựng dữ liệu theo định dạng yêu cầu của stored procedure
       final requestData = [
-        {"name": "Email", "type": "nvarchar", "value": email.value},
+        {"name": "Email", "type": "nvarchar", "value": emailInput.value.text},
         {"name": "SoDienThoai", "type": "nvarchar", "value": phone.value},
         {"name": "GioiTinh", "type": "nvarchar", "value": gender.value},
         {"name": "NgaySinh", "type": "date", "value": birthday.value},
-        {"name": "HoVaTen", "type": "nvarchar", "value": username.value},
+        {"name": "HoVaTen", "type": "nvarchar", "value": userName.value.text},
         {"name": "DiaChi", "type": "nvarchar", "value": location.value},
-        {"name": "TaiKhoanID", "type": "uniqueidentifier", "value": "d748671b-ac85-4899-ba4e-bd86c02d826f"},
+        {"name": "TenDangNhap", "type": "nvarchar", "value": "batungx27231@gmail.com"},
         {"name": "AnhDaiDien", "type": "nvarchar", "value": avatar.value.isEmpty ? null : avatar.value},
       ];
 
@@ -161,10 +156,6 @@ class EditAccountController extends GetxController {
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode(requestData),
       );
-
-      // In ra mã trạng thái và nội dung phản hồi từ API
-      print('Mã trạng thái phản hồi từ API: ${response.statusCode}');
-      print('Nội dung phản hồi từ API: ${response.body}');
 
       if (response.statusCode == 200) {
         // Hiển thị snackbar thành công
@@ -212,5 +203,4 @@ class EditAccountController extends GetxController {
 
 
 
-// Xử lý khi nhấn nút lưu
 }

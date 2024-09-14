@@ -1,6 +1,6 @@
+import 'package:apptestai/views/profile/edit_account/presentation/controller/edit_account_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controllers/auth/EditAccountController.dart';
 
 class GenderDropdownField extends StatelessWidget {
   final EditAccountController controller;
@@ -15,11 +15,11 @@ class GenderDropdownField extends StatelessWidget {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(5),
       ),
-      padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
       child: Row(
         children: [
-          Icon(Icons.transgender_outlined, color: Colors.green, size: 20),
-          SizedBox(width: 15),
+          const Icon(Icons.transgender_outlined, color: Colors.green, size: 20),
+          const SizedBox(width: 15),
           Expanded(
             child: Obx(() {
               // Debugging: Print gender value
@@ -34,21 +34,21 @@ class GenderDropdownField extends StatelessWidget {
             }),
           ),
           PopupMenuButton<String>(
-            icon: Icon(Icons.arrow_drop_down, color: Colors.green, size: 30),
+            icon: const Icon(Icons.arrow_drop_down, color: Colors.green, size: 30),
             onSelected: (String value) {
               controller.gender.value = value;
               controller.validateForm();
             },
             itemBuilder: (BuildContext context) {
               return [
-                PopupMenuItem<String>(
+                const PopupMenuItem<String>(
                   value: 'Nam',
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Text('Nam', style: TextStyle(fontSize: 16)),
                   ),
                 ),
-                PopupMenuItem<String>(
+                const PopupMenuItem<String>(
                   value: 'Nữ',
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),

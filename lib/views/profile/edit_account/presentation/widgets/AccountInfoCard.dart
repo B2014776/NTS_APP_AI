@@ -1,5 +1,5 @@
+import 'package:apptestai/models/UserModel.dart';
 import 'package:flutter/material.dart';
-import '../../../models/UserModel.dart';
 
 class AccountInfoCard extends StatefulWidget {
   final User user;
@@ -14,7 +14,7 @@ class _AccountInfoCardState extends State<AccountInfoCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -32,10 +32,10 @@ class _AccountInfoCardState extends State<AccountInfoCard> {
                       children: [
                         Text(
                           '${widget.user.name}',
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         IconButton(
-                          icon: Icon(Icons.edit, color: Colors.grey),
+                          icon: const Icon(Icons.edit, color: Colors.grey),
                           onPressed: () {
 
                           },
@@ -48,18 +48,18 @@ class _AccountInfoCardState extends State<AccountInfoCard> {
                     padding: const EdgeInsets.fromLTRB(16.0,0.0, 0.0, 0.0 ),
                     child: Text(
                       '${widget.user.email}',
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16.0,0.0, 0.0, 0.0 ),
                     child: Text(
                       '${widget.user.phoneNumber}',
-                      style: TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                 ],
               ),
             ),

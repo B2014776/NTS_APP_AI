@@ -15,16 +15,16 @@ class CustomMenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(width: 0.5, color: Colors.grey),
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+          padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -34,7 +34,7 @@ class CustomMenuItem extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
                     functionName,
-                    style: TextStyle(fontSize: 14.0),
+                    style: const TextStyle(fontSize: 14.0),
                   ),
                 ),
               ),

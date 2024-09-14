@@ -1,6 +1,6 @@
+import 'package:apptestai/views/profile/edit_account/presentation/controller/edit_account_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controllers/auth/EditAccountController.dart';
 
 class PhoneField extends StatelessWidget {
   final EditAccountController controller;
@@ -42,7 +42,7 @@ class PhoneField extends StatelessWidget {
                 color: Colors.grey[800],
               ),
               cursorColor: Colors.black45,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Số điện thoại',
                 hintStyle: const TextStyle(fontSize: 15, color: Colors.grey),
                 prefixIcon: const Icon(
@@ -59,18 +59,18 @@ class PhoneField extends StatelessWidget {
         ),
         Obx(() {
           if (!controller.isPhoneValid.value && controller.phone.value.isNotEmpty) {
-            return Padding(
+            return const Padding(
               padding: const EdgeInsets.only(top: 5, left: 10),
-              child: Text(
+              child: const Text(
                 'Số điện thoại không hợp lệ',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.red,
                   fontSize: 12,
                 ),
               ),
             );
           } else {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           }
         }),
       ],

@@ -1,6 +1,5 @@
+import 'package:apptestai/views/profile/edit_account/presentation/controller/edit_account_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../controllers/auth/EditAccountController.dart';
 
 class LocationInput extends StatefulWidget {
   final EditAccountController controller;
@@ -50,7 +49,7 @@ class _LocationInputState extends State<LocationInput> {
           color: Colors.grey[800],
         ),
         cursorColor: Colors.black45,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Địa chỉ',
           hintStyle: const TextStyle(fontSize: 15, color: Colors.grey),
           prefixIcon: const Icon(

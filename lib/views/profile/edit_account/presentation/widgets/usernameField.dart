@@ -1,6 +1,6 @@
+import 'package:apptestai/views/profile/edit_account/presentation/controller/edit_account_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../controllers/auth/EditAccountController.dart';
 
 class UsernameField extends StatefulWidget {
   final EditAccountController controller;
@@ -25,9 +25,9 @@ class _UsernameFieldState extends State<UsernameField> {
           ),
           child: Obx(() {
             return TextField(
-              controller: TextEditingController(text: widget.controller.username.value),
+              controller: TextEditingController(text: widget.controller.userName.value.text),
               onChanged: (value) {
-                widget.controller.username.value = value;
+                widget.controller.userName.value.text = value;
                 widget.controller.validateForm();
               },
               style: TextStyle(
@@ -35,7 +35,7 @@ class _UsernameFieldState extends State<UsernameField> {
                 color: Colors.grey[800],
               ),
               cursorColor: Colors.black45,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Tên tài khoản',
                 hintStyle: const TextStyle(fontSize: 15, color: Colors.grey),
                 prefixIcon: const Icon(
@@ -51,20 +51,20 @@ class _UsernameFieldState extends State<UsernameField> {
           }),
         ),
         Obx(() {
-          if (widget.controller.username.value.isNotEmpty &&
+          if (widget.controller.userName.value.text.isNotEmpty &&
               !widget.controller.isUsernameValid.value) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 5, left: 10),
+            return const Padding(
+              padding: EdgeInsets.only(top: 5, left: 10),
               child: Text(
                 'Tên tài khoản không hợp lệ',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.red,
                   fontSize: 12,
                 ),
               ),
             );
           } else {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           }
         }),
       ],

@@ -1,6 +1,6 @@
+import 'package:apptestai/views/profile/edit_account/presentation/controller/edit_account_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../controllers/auth/EditAccountController.dart';
+
 // Đảm bảo đường dẫn chính xác
 
 class BirthdayPicker extends StatefulWidget {
@@ -40,13 +40,13 @@ class _BirthdayPickerState extends State<BirthdayPicker> {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
       child: GestureDetector(
         onTap: () => _selectBirthday(context),
         child: Row(
           children: [
-            Icon(Icons.calendar_today_outlined, color: Colors.green, size: 20),
-            SizedBox(width: 15),
+            const Icon(Icons.calendar_today_outlined, color: Colors.green, size: 20),
+            const SizedBox(width: 15),
             Expanded(
               child: Text(
                 widget.controller.birthday.value.isEmpty

@@ -1,6 +1,5 @@
+import 'package:apptestai/views/profile/edit_account/presentation/controller/edit_account_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../controllers/auth/EditAccountController.dart';
  // Đảm bảo đường dẫn chính xác
 
 class GenderPicker extends StatefulWidget {
@@ -21,11 +20,11 @@ class _GenderPickerState extends State<GenderPicker> {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
       child: Row(
         children: [
-          Icon(Icons.transgender_outlined, color: Colors.green, size: 20),
-          SizedBox(width: 15),
+          const Icon(Icons.transgender_outlined, color: Colors.green, size: 20),
+          const SizedBox(width: 15),
           Expanded(
             child: Text(
               widget.controller.gender.value.isEmpty
@@ -35,7 +34,7 @@ class _GenderPickerState extends State<GenderPicker> {
             ),
           ),
           PopupMenuButton<String>(
-            icon: Icon(Icons.arrow_drop_down, color: Colors.green, size: 30),
+            icon: const Icon(Icons.arrow_drop_down, color: Colors.green, size: 30),
             onSelected: (String value) {
               setState(() {
                 widget.controller.gender.value = value;
@@ -45,16 +44,16 @@ class _GenderPickerState extends State<GenderPicker> {
 
             itemBuilder: (BuildContext context) {
               return [
-                PopupMenuItem<String>(
+                const PopupMenuItem<String>(
                   value: 'Nam',
-                  child: Padding(
+                  child:  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Text('Nam', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   ),
                 ),
-                PopupMenuItem<String>(
+                const PopupMenuItem<String>(
                   value: 'Nữ',
-                  child: Padding(
+                  child:  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Text('Nữ', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
                   ),

@@ -1,7 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 
 class AvatarWidget extends StatefulWidget {
   final RxString avatarUrl;
@@ -25,20 +26,18 @@ class _AvatarWidgetState extends State<AvatarWidget> {
           children: [
             Obx(() {
               return CircleAvatar(
-                radius: 35,
-                backgroundImage: widget.avatarUrl.value.isNotEmpty
-                    ? FileImage(File(widget.avatarUrl.value))
-                    : AssetImage('assets/avatar.jpg') as ImageProvider,
-                child: widget.avatarUrl.value.isEmpty
-                    ? Icon(Icons.person, size: 35, color: Colors.grey[700])
-                    : null,
-              );
+                  radius: 35,
+                  backgroundImage: widget.avatarUrl.value.isNotEmpty
+                      ? FileImage(File(widget.avatarUrl.value))
+                      : const AssetImage('assets/avatar.jpg') as ImageProvider,
+                  child: null);
             }),
             Positioned(
               bottom: 10,
               right: 10,
               child: IconButton(
-                icon: Icon(Icons.camera_alt, color: Colors.grey, size: 20),
+                icon:
+                    const Icon(Icons.camera_alt, color: Colors.grey, size: 20),
                 onPressed: () {
                   _pickImage();
                 },
@@ -59,22 +58,24 @@ class _AvatarWidgetState extends State<AvatarWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
-                leading: Icon(Icons.camera_alt),
-                title: Text('Chụp ảnh từ camera'),
+                leading: const Icon(Icons.camera_alt),
+                title: const Text('Chụp ảnh từ camera'),
                 onTap: () async {
                   Navigator.pop(context);
-                  final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+                  final XFile? image =
+                      await _picker.pickImage(source: ImageSource.camera);
                   if (image != null) {
                     widget.avatarUrl.value = image.path;
                   }
                 },
               ),
               ListTile(
-                leading: Icon(Icons.photo_library),
-                title: Text('Chọn từ thư viện'),
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Chọn từ thư viện'),
                 onTap: () async {
                   Navigator.pop(context);
-                  final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+                  final XFile? image =
+                      await _picker.pickImage(source: ImageSource.gallery);
                   if (image != null) {
                     widget.avatarUrl.value = image.path;
                   }
