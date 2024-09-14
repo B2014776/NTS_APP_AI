@@ -1,8 +1,14 @@
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
+import '../../services/dio_config.dart';
+
+
+
 class SignUpController extends GetxController {
+
   var username = ''.obs;
   var fullName = ''.obs;
   var phoneOrEmail = ''.obs;
@@ -19,7 +25,7 @@ class SignUpController extends GetxController {
   var isConfirmPasswordVisible = false.obs;
 
   Dio dio = Dio();
-
+  final Dio _dio = DioConfig.createDio();
   bool isValidUsername(String input) {
     return input.isNotEmpty && input.length >= 3;
   }
@@ -62,31 +68,26 @@ class SignUpController extends GetxController {
 
   Future<bool> sendVerificationCode() async {
     try {
-      final response = await dio.post(
-        'https://api-ai-1-6b81.onrender.com/verify/send-verify-code/',
-        data: {
-          'email': phoneOrEmail.value,
-        },
-        options: Options(
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        ),
+      Map<String, dynamic> body = {
+        "email": "unnamedhomosapiens@gmail.com"
+      };
+      var response = await _dio.post(
+        '/verify/send-verify-code/',
+        data: body,
       );
-
-      if (response.statusCode == 200) {
-        print('Mã xác thực đã được gửi.');
-        return true; // Thành công
-      } else {
-        print('Gửi mã xác thực thất bại: ${response.statusMessage}');
-        return false; // Thất bại
+      if (response.statusCode == 307) {
+        // Handle redirect
+        var redirectUrl = response.headers.value('location');
+        print('Redirecting to: $redirectUrl');
+        // You might want to follow the redirect manually
       }
+      print(response);
+      return true;
     } catch (e) {
       print('Lỗi khi gửi mã xác thực: $e');
       return false; // Thất bại
     }
   }
-
 
 
   Future<bool> verifyCode(String code) async {
@@ -112,7 +113,6 @@ class SignUpController extends GetxController {
     }
   }
 
-
   Future<bool> sendSignUpRequest() async {
     try {
       final response = await dio.post(
@@ -121,7 +121,7 @@ class SignUpController extends GetxController {
           'username': phoneOrEmail.value,
           'password': password.value,
           'full_name': fullName.value,
-          'activation_method': 2,       // 1: He thong, 2 Email, 3: SDT, 4: Apple Id
+          'activation_method': 2, // 1: He thong, 2 Email, 3: SDT, 4: Apple Id
           'status_id': 11,
         },
       );
@@ -138,7 +138,4 @@ class SignUpController extends GetxController {
       return false; // Thất bại
     }
   }
-
-
-
 }

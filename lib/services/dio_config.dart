@@ -9,6 +9,9 @@ class DioConfig {
     dio.options.connectTimeout = const Duration(seconds: 15);
     dio.options.receiveTimeout = const Duration(seconds: 3);
     dio.options.headers['Authorization'] = 'Bearer ${_token}';
+    dio.options.validateStatus = (status) {
+      return status! < 500; // Accept all status codes less than 500
+    };
     return dio;
   }
 }
