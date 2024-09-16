@@ -235,23 +235,23 @@ class _VerifyScreenState extends State<VerifyScreen> {
                 height: 30,
               ),
               InkWell(
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Xác nhận",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Xác nhận",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
                   onTap: () async {
                     String phoneOrEmail = widget.arg?.value ?? "";
 
@@ -259,10 +259,10 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     print("PhoneOrEmail have to verify: $phoneOrEmail");
 
                     // Xác thực mã OTP
-                    Map<String, dynamic> result = await signUpController.verifyCode(code);
+                    Map<String, dynamic> result =
+                        await signUpController.verifyCode(code);
 
                     if (result.containsKey('error')) {
-                      // Hiển thị modal thông báo lỗi và nút quay về trang xác thực
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -281,7 +281,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         },
                       );
                     } else {
-                      Map<String, dynamic> signUpResult = await signUpController.sendSignUpRequest();
+                      Map<String, dynamic> signUpResult =
+                          await signUpController.sendSignUpRequest();
 
                       if (signUpResult.containsKey('error')) {
                         showDialog(
@@ -301,13 +302,14 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             );
                           },
                         );
-                      } else {
+                      } else if (signUpResult['success'] == true) {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
                               title: const Text('Xác thực thành công'),
-                              content: const Text('Bạn đã xác thực và đăng ký thành công!'),
+                              content: const Text(
+                                  'Bạn đã xác thực và đăng ký thành công!'),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -324,12 +326,28 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             );
                           },
                         );
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Đăng ký thất bại'),
+                              content:
+                                  Text(signUpResult['msg'] ?? 'Lý do không rõ'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Thử lại'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       }
                     }
-                  }
-
-
-              ),
+                  }),
 
               SizedBox(
                 height: 5,

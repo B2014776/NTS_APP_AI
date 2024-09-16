@@ -221,60 +221,81 @@ class _SignupFormState extends State<SignupForm> {
               : const SizedBox.shrink()),
           const SizedBox(height: 15),
           Obx(() => Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: signUpController.isFormValid.value
-                    ? const Color(0xff538c51)
-                    : Colors.grey,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: MaterialButton(
-                onPressed: signUpController.isFormValid.value
-                    ? () async {
-                        Map<String, dynamic> result =
-                            await signUpController.sendVerificationCode();
-                        if (result.containsKey('error')) {
-                          print('Gửi mã xác thực thất bại: ${result['error']}');
-                        } else {
-                          bool isPhone =
-                              signUpController.phoneOrEmail.value.contains("@")
-                                  ? false
-                                  : true;
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: signUpController.isFormValid.value
+                      ? const Color(0xff538c51)
+                      : Colors.grey,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: MaterialButton(
+                  onPressed: signUpController.isFormValid.value
+                      ? () async {
+                          Map<String, dynamic> result =
+                              await signUpController.sendVerificationCode();
 
-                          VerifyArg arg = VerifyArg(
+                          if (result['success'] == false) {
+                            // Hiển thị dialog khi số điện thoại hay email đã được sử dụng
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text('Lỗi'),
+                                  content: Text(
+                                      'Số điện thoại hay email đã được sử dụng.'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('Đóng'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            bool isPhone = signUpController.phoneOrEmail.value
+                                    .contains("@")
+                                ? false
+                                : true;
+
+                            VerifyArg arg = VerifyArg(
                               isPhone: isPhone,
-                              value: signUpController.phoneOrEmail.value);
+                              value: signUpController.phoneOrEmail.value,
+                            );
 
-                          SignupInfo signupInfo = SignupInfo(
-                            fullName: signUpController.fullName.value,
-                            phoneOrEmail: signUpController.phoneOrEmail.value,
-                            password: signUpController.password.value,
-                            confirmPassword:
-                                signUpController.confirmPassword.value,
-                          );
+                            SignupInfo signupInfo = SignupInfo(
+                              fullName: signUpController.fullName.value,
+                              phoneOrEmail: signUpController.phoneOrEmail.value,
+                              password: signUpController.password.value,
+                              confirmPassword:
+                                  signUpController.confirmPassword.value,
+                            );
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => VerifyScreen(
-                                arg: arg,
-                                signupInfo: signupInfo,
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VerifyScreen(
+                                  arg: arg,
+                                  signupInfo: signupInfo,
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          }
                         }
-                      }
-                    : null,
-                child: const Text(
-                  "Đồng ý với các điều khoản và đăng ký",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                      : null,
+                  child: const Text(
+                    "Đồng ý với các điều khoản và đăng ký",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ))),
+              )),
           const SizedBox(height: 12),
           const Divider(),
           const SizedBox(height: 8),

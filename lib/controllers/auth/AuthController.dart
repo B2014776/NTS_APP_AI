@@ -24,7 +24,7 @@ class SignUpController extends GetxController {
   var isPasswordVisible = false.obs;
   var isConfirmPasswordVisible = false.obs;
 
-  Dio dio = Dio();
+
   final Dio _dio = DioConfig.createDio();
   bool isValidUsername(String input) {
     return input.isNotEmpty && input.length >= 3;
@@ -70,10 +70,6 @@ class SignUpController extends GetxController {
     Map<String, dynamic> result = {};
 
     try {
-      Dio dio = Dio();
-      dio.options.followRedirects = true;
-      dio.options.maxRedirects = 5;
-
       Map<String, dynamic> body = {
         "email": phoneOrEmail.value,
       };
@@ -90,7 +86,7 @@ class SignUpController extends GetxController {
         result = response.data;
       } else if (response.statusCode == 307) {
         var redirectUrl = response.headers.value('location');
-        final redirectResponse = await dio.post(redirectUrl!, data: body);
+        final redirectResponse = await _dio.post(redirectUrl!, data: body);
 
         if (redirectResponse.statusCode == 200) {
           result = redirectResponse.data;
@@ -113,10 +109,6 @@ class SignUpController extends GetxController {
     Map<String, dynamic> result = {};
 
     try {
-      Dio dio = Dio();
-      dio.options.followRedirects = true;
-      dio.options.maxRedirects = 5;
-
       Map<String, dynamic> body = {
         'email': phoneOrEmail.value,
         'code': code,
@@ -132,7 +124,7 @@ class SignUpController extends GetxController {
         print('Xác thực mã thành công.');
       } else if (response.statusCode == 307) {
         var redirectUrl = response.headers.value('location');
-        final redirectResponse = await dio.post(redirectUrl!, data: body);
+        final redirectResponse = await _dio.post(redirectUrl!, data: body);
 
         if (redirectResponse.statusCode == 200) {
           result = redirectResponse.data;
@@ -157,10 +149,6 @@ class SignUpController extends GetxController {
     Map<String, dynamic> result = {};
 
     try {
-      Dio dio = Dio();
-      dio.options.followRedirects = true;
-      dio.options.maxRedirects = 5;
-
       Map<String, dynamic> body = {
         'username': phoneOrEmail.value,
         'password': password.value,
@@ -176,27 +164,38 @@ class SignUpController extends GetxController {
 
       if (response.statusCode == 200) {
         result = response.data;
-        print('Đăng ký thành công.');
+        if (result['success'] == true) {
+          print('Đăng ký thành công.');
+        } else {
+          result['error'] = 'Đăng ký thất bại: ${result['msg'] ?? 'Thông tin xác thực không chính xác'}';
+        }
       } else if (response.statusCode == 307) {
         var redirectUrl = response.headers.value('location');
-        final redirectResponse = await dio.post(redirectUrl!, data: body);
-
-        if (redirectResponse.statusCode == 200) {
-          result = redirectResponse.data;
-          print('Đăng ký thành công sau khi chuyển hướng.');
+        if (redirectUrl != null) {
+          final redirectResponse = await _dio.post(redirectUrl, data: body);
+          if (redirectResponse.statusCode == 200) {
+            result = redirectResponse.data;
+            if (result['success'] == true) {
+              print('Đăng ký thành công');
+            } else {
+              result['error'] = 'Đăng ký thất bại: ${result['msg'] ?? 'Thông tin xác thực không chính xác'}';
+            }
+          } else {
+            result['error'] = 'Đăng ký thất bại sau khi chuyển hướng: ${redirectResponse.statusMessage}';
+          }
         } else {
-          result['error'] = 'Đăng ký thất bại sau khi chuyển hướng';
+          result['error'] = 'Chuyển hướng không thành công: Không có URL chuyển hướng';
         }
-
-        result['redirect'] = redirectUrl;
-        print('Redirecting to: $redirectUrl');
       } else {
         result['error'] = 'Đăng ký thất bại: ${response.statusMessage}';
       }
     } catch (error) {
       result['error'] = 'Lỗi khi gửi yêu cầu đăng ký: $error';
     }
+
     return result;
   }
+
+
 
 }
