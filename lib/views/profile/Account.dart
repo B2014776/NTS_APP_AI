@@ -1,3 +1,4 @@
+import 'package:apptestai/views/User/Login/login.dart';
 import 'package:apptestai/views/profile/widgets/AccountInforCard2.dart';
 import 'package:apptestai/views/profile/widgets/function.dart';
 import 'package:camera/camera.dart';
@@ -48,41 +49,51 @@ class _AccountState extends State<Account> {
                   height: 176,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/fdbba029e959749c39816f3b6c7b42f5.jpg'),
+                      image: AssetImage(
+                          'assets/fdbba029e959749c39816f3b6c7b42f5.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 Positioned(
                   top: 140,
-                  left: 8,  // Căn chỉnh trái sát màn hình
+                  left: 8, // Căn chỉnh trái sát màn hình
                   right: 8, // Căn chỉnh phải sát màn hình
                   child: _isLoading
                       ? Center(child: CircularProgressIndicator())
                       : _user != null
-                      ? AccountInfoCard2(user: _user!)
-                      : Center(child: Text('No user data')),
+                          ? AccountInfoCard2(user: _user!)
+                          : Center(child: Text('No user data')),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 95,), // Khoảng cách phía trên của ListView
+          SizedBox(
+            height: 95,
+          ), // Khoảng cách phía trên của ListView
           Expanded(
             child: Container(
-              color: Colors.white, // Thay đổi màu nền của Container bao quanh ListView
+              color: Colors.white,
+              // Thay đổi màu nền của Container bao quanh ListView
               child: ListView(
-                padding: EdgeInsets.fromLTRB(8, 0, 8, 0), // Padding cho ListView
+                padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                // Padding cho ListView
                 children: [
                   Container(
                     padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
                     decoration: BoxDecoration(
-                      color: Colors.white, // Màu nền của Container
-                      borderRadius: BorderRadius.circular(10), // Bo góc với bán kính 10
+                      color: Colors.white,
+                      // Màu nền của Container
+                      borderRadius: BorderRadius.circular(10),
+                      // Bo góc với bán kính 10
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5), // Màu bóng với độ mờ
-                          spreadRadius: 5, // Độ lan rộng của bóng
-                          blurRadius: 7,   // Độ mờ của bóng
+                          color: Colors.grey.withOpacity(0.5),
+                          // Màu bóng với độ mờ
+                          spreadRadius: 5,
+                          // Độ lan rộng của bóng
+                          blurRadius: 7,
+                          // Độ mờ của bóng
                           offset: Offset(0, 3), // Vị trí bóng (x, y)
                         ),
                       ],
@@ -90,10 +101,17 @@ class _AccountState extends State<Account> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Cài đặt ứng dụng', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
-                        SizedBox(height: 15,),
+                        Text(
+                          'Cài đặt ứng dụng',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0), // Padding xung quanh CustomMenuItem
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                          // Padding xung quanh CustomMenuItem
                           child: Column(
                             children: [
                               CustomMenuItem(
@@ -118,17 +136,24 @@ class _AccountState extends State<Account> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 8,),
+                  SizedBox(
+                    height: 8,
+                  ),
                   Container(
                     padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
                     decoration: BoxDecoration(
-                      color: Colors.white, // Màu nền của Container
-                      borderRadius: BorderRadius.circular(10), // Bo góc với bán kính 10
+                      color: Colors.white,
+                      // Màu nền của Container
+                      borderRadius: BorderRadius.circular(10),
+                      // Bo góc với bán kính 10
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5), // Màu bóng với độ mờ
-                          spreadRadius: 5, // Độ lan rộng của bóng
-                          blurRadius: 7,   // Độ mờ của bóng
+                          color: Colors.grey.withOpacity(0.5),
+                          // Màu bóng với độ mờ
+                          spreadRadius: 5,
+                          // Độ lan rộng của bóng
+                          blurRadius: 7,
+                          // Độ mờ của bóng
                           offset: Offset(0, 3), // Vị trí bóng (x, y)
                         ),
                       ],
@@ -136,10 +161,17 @@ class _AccountState extends State<Account> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Điều khoản và hỗ trợ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
-                        SizedBox(height: 15,),
+                        Text(
+                          'Điều khoản và hỗ trợ',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0), // Padding xung quanh CustomMenuItem
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                          // Padding xung quanh CustomMenuItem
                           child: Column(
                             children: [
                               CustomMenuItem(
@@ -180,17 +212,24 @@ class _AccountState extends State<Account> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 8,),
+                  SizedBox(
+                    height: 8,
+                  ),
                   Container(
                     padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
                     decoration: BoxDecoration(
-                      color: Colors.white, // Màu nền của Container
-                      borderRadius: BorderRadius.circular(10), // Bo góc với bán kính 10
+                      color: Colors.white,
+                      // Màu nền của Container
+                      borderRadius: BorderRadius.circular(10),
+                      // Bo góc với bán kính 10
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.5), // Màu bóng với độ mờ
-                          spreadRadius: 5, // Độ lan rộng của bóng
-                          blurRadius: 7,   // Độ mờ của bóng
+                          color: Colors.grey.withOpacity(0.5),
+                          // Màu bóng với độ mờ
+                          spreadRadius: 5,
+                          // Độ lan rộng của bóng
+                          blurRadius: 7,
+                          // Độ mờ của bóng
                           offset: Offset(0, 3), // Vị trí bóng (x, y)
                         ),
                       ],
@@ -198,10 +237,17 @@ class _AccountState extends State<Account> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Các chức năng khác', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
-                        SizedBox(height: 15,),
+                        Text(
+                          'Các chức năng khác',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0), // Padding xung quanh CustomMenuItem
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                          // Padding xung quanh CustomMenuItem
                           child: Column(
                             children: [
                               CustomMenuItem(
@@ -225,6 +271,11 @@ class _AccountState extends State<Account> {
                                 functionName: 'Đăng xuất',
                                 nextIcon: Icons.arrow_forward_ios,
                                 onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MyLogin()));
                                   // Handle tap action
                                 },
                               ),
@@ -238,7 +289,6 @@ class _AccountState extends State<Account> {
               ),
             ),
           ),
-
         ],
       ),
       bottomNavigationBar: CustomBottomNavigationBar(

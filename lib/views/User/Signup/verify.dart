@@ -63,13 +63,13 @@ class _VerifyScreenState extends State<VerifyScreen> {
             children: [
               widget.arg?.isPhone == true
                   ? Image.asset(
-                      "assets/mobile-lock-icon-design-vector.jpg",
-                      height: 200,
-                    )
+                "assets/mobile-lock-icon-design-vector.jpg",
+                height: 200,
+              )
                   : Image.asset(
-                      "assets/MailGuard.png",
-                      height: 200,
-                    ),
+                "assets/MailGuard.png",
+                height: 200,
+              ),
               SizedBox(
                 height: 10,
               ),
@@ -107,7 +107,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                       decoration: const BoxDecoration(
                           border: Border(
                               bottom:
-                                  BorderSide(color: Colors.blue, width: 1))),
+                              BorderSide(color: Colors.blue, width: 1))),
                       child: const Text(
                         "thay đổi",
                         style: TextStyle(fontSize: 16, color: Colors.blue),
@@ -182,7 +182,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           ),
                           onTap: () async {
                             Map<String, dynamic> result =
-                                await signUpController.sendVerificationCode();
+                            await signUpController.sendVerificationCode();
                             if (result.containsKey('error')) {
                               print(
                                   'Gửi mã xác thực thất bại: ${result['error']}');
@@ -195,8 +195,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                             }
                           },
                         ),
-
-                        // Text(
+// Text(
                         //   " hoặc ",
                         //   style: TextStyle(
                         //       fontSize: 16,
@@ -259,52 +258,30 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   print("Code entered: $code");
                   print("PhoneOrEmail have to verify: $phoneOrEmail");
 
-                  // Xác thực mã
-                  Map<String, dynamic> verifyResult = await signUpController.verifyCode(code);
+                  Map<String, dynamic> result = await signUpController.verifyCode(code);
 
-                  if (verifyResult.containsKey('error')) {
-                    // Hiển thị thông báo lỗi xác thực mã
+                  if (result.containsKey('error')) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(verifyResult['error']),
+                        content: Text(result['error']),
                       ),
                     );
                   } else {
-                    // Hiển thị thông báo xác thực thành công
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('Xác thực thành công!'),
                       ),
                     );
-
-                    Map<String, dynamic> signUpResult = await signUpController.sendSignUpRequest();
-
-                    if (signUpResult.containsKey('error')) {
-                      // Hiển thị thông báo lỗi khi gửi yêu cầu đăng ký
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(signUpResult['error']),
-                        ),
-                      );
-                    } else {
-                      // Hiển thị thông báo thành công và điều hướng đến trang home
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Đăng ký thành công!'),
-                        ),
-                      );
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
-                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
                   }
                 },
               ),
-
-
               SizedBox(
                 height: 5,
               ),

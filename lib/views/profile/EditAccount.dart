@@ -68,7 +68,8 @@ class _EditAccountPageState extends State<EditAccountPage> {
                 PhoneField(controller: controller),
                 SizedBox(height: 16),
                 // Trường giới tính
-                GenderDropdownField(controller: controller), // Gọi GenderDropdownField với controller
+                GenderDropdownField(controller: controller),
+                // Gọi GenderDropdownField với controller
                 SizedBox(height: 16),
                 // Trường ngày sinh
                 DateOfBirthPicker(birthday: controller.birthday),
@@ -83,8 +84,9 @@ class _EditAccountPageState extends State<EditAccountPage> {
                     height: 45,
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: ()  {
-                        controller.onSavePressed(); // Gọi phương thức xử lý khi nhấn nút lưu
+                      onPressed: () {
+                        controller
+                            .onSavePressed(); // Gọi phương thức xử lý khi nhấn nút lưu
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
@@ -92,7 +94,11 @@ class _EditAccountPageState extends State<EditAccountPage> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: Text('Lưu thông tin', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold)),
+                      child: Text('Lưu thông tin',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold)),
                     ),
                   ),
                 ),

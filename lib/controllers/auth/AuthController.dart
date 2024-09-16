@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -66,76 +65,136 @@ class SignUpController extends GetxController {
     }
   }
 
-  Future<bool> sendVerificationCode() async {
+  Future<Map<String, dynamic>> sendVerificationCode() async {
+    Map<String, dynamic> result = {};
+
     try {
+      Dio dio = Dio();
+      dio.options.followRedirects = true;
+      dio.options.maxRedirects = 5;
+
       Map<String, dynamic> body = {
-        "email": "unnamedhomosapiens@gmail.com"
+        "email": phoneOrEmail.value,
       };
-      var response = await _dio.post(
+
+      final response = await _dio.post(
         '/verify/send-verify-code/',
         data: body,
       );
-      if (response.statusCode == 307) {
-        // Handle redirect
+
+      print('Response Status: ${response.statusCode}');
+      print('Response Data: ${response.data}');
+
+      if (response.statusCode == 200) {
+        result = response.data;
+      } else if (response.statusCode == 307) {
         var redirectUrl = response.headers.value('location');
+        final redirectResponse = await dio.post(redirectUrl!, data: body);
+
+        if (redirectResponse.statusCode == 200) {
+          result = redirectResponse.data;
+        } else {
+          result['error'] = 'Failed to send verification code after redirect';
+        }
+
+        result['redirect'] = redirectUrl;
         print('Redirecting to: $redirectUrl');
-        // You might want to follow the redirect manually
+      } else {
+        result['error'] = 'Failed to send verification code';
       }
-      print(response);
-      return true;
-    } catch (e) {
-      print('Lỗi khi gửi mã xác thực: $e');
-      return false; // Thất bại
+    } catch (error) {
+      result['error'] = 'Error: $error';
     }
+    return result;
   }
 
+  Future<Map<String, dynamic>> verifyCode(String code) async {
+    Map<String, dynamic> result = {};
 
-  Future<bool> verifyCode(String code) async {
     try {
-      final response = await dio.post(
-        'https://api-ai-1-6b81.onrender.com/verify/verify-code',
-        data: {
-          'email': phoneOrEmail.value,
-          'code': code,
-        },
+      Dio dio = Dio();
+      dio.options.followRedirects = true;
+      dio.options.maxRedirects = 5;
+
+      Map<String, dynamic> body = {
+        'email': phoneOrEmail.value,
+        'code': code,
+      };
+
+      final response = await _dio.post(
+        '/verify/verify-code',
+        data: body,
       );
 
       if (response.statusCode == 200) {
+        result = response.data;
         print('Xác thực mã thành công.');
-        return true; // Thành công
+      } else if (response.statusCode == 307) {
+        var redirectUrl = response.headers.value('location');
+        final redirectResponse = await dio.post(redirectUrl!, data: body);
+
+        if (redirectResponse.statusCode == 200) {
+          result = redirectResponse.data;
+          print('Xác thực mã thành công sau khi chuyển hướng.');
+        } else {
+          result['error'] = 'Xác thực mã thất bại sau khi chuyển hướng';
+        }
+        result['redirect'] = redirectUrl;
+        print('Redirecting to: $redirectUrl');
       } else {
-        print('Xác thực mã thất bại: ${response.statusMessage}');
-        return false; // Thất bại
+        result['error'] = 'Xác thực mã thất bại: ${response.statusMessage}';
       }
-    } catch (e) {
-      print('Lỗi khi xác thực mã: $e');
-      return false; // Thất bại
+    } catch (error) {
+      result['error'] = 'Lỗi khi xác thực mã: $error';
     }
+    return result;
   }
 
-  Future<bool> sendSignUpRequest() async {
+
+  Future<Map<String, dynamic>> sendSignUpRequest() async {
+    Map<String, dynamic> result = {};
+
     try {
-      final response = await dio.post(
-        'https://d4f4-171-243-58-90.ngrok-free.app/auth/signin',
-        data: {
-          'username': phoneOrEmail.value,
-          'password': password.value,
-          'full_name': fullName.value,
-          'activation_method': 2, // 1: He thong, 2 Email, 3: SDT, 4: Apple Id
-          'status_id': 11,
-        },
+      Dio dio = Dio();
+      dio.options.followRedirects = true;
+      dio.options.maxRedirects = 5;
+
+      Map<String, dynamic> body = {
+        'username': phoneOrEmail.value,
+        'password': password.value,
+        'full_name': fullName.value,
+        'activation_method': 2, // 1: He thong, 2 Email, 3: SDT, 4: Apple Id
+        'status_id': 11,
+      };
+
+      final response = await _dio.post(
+        '/auth/signup',
+        data: body,
       );
 
       if (response.statusCode == 200) {
+        result = response.data;
         print('Đăng ký thành công.');
-        return true; // Thành công
+      } else if (response.statusCode == 307) {
+        var redirectUrl = response.headers.value('location');
+        final redirectResponse = await dio.post(redirectUrl!, data: body);
+
+        if (redirectResponse.statusCode == 200) {
+          result = redirectResponse.data;
+          print('Đăng ký thành công sau khi chuyển hướng.');
+        } else {
+          result['error'] = 'Đăng ký thất bại sau khi chuyển hướng';
+        }
+
+        result['redirect'] = redirectUrl;
+        print('Redirecting to: $redirectUrl');
       } else {
-        print('Đăng ký thất bại: ${response.statusMessage}');
-        return false; // Thất bại
+        result['error'] = 'Đăng ký thất bại: ${response.statusMessage}';
       }
-    } catch (e) {
-      print('Lỗi khi gửi yêu cầu đăng ký: $e');
-      return false; // Thất bại
+    } catch (error) {
+      result['error'] = 'Lỗi khi gửi yêu cầu đăng ký: $error';
     }
+    return result;
   }
+
 }
