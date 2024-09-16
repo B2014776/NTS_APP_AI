@@ -181,7 +181,7 @@ class SignInController extends GetxController {
   Future<bool> sendLoginRequest() async {
     try {
       final response = await dio.post(
-        'https://d4f4-171-243-58-90.ngrok-free.app/auth/login',
+        'https://d4f4-171-243-58-90.ngrok-free.app/auth/signup',
         data: {
           'email_or_phone': phoneOrEmail.value,
           'password': password.value,

@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
       title: 'NTSOFT - AI',
       // locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-
       theme: ThemeData(
         textTheme: GoogleFonts.latoTextTheme(
           Theme.of(context).textTheme,
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  HomePage(),
+      home:  const MyLogin(),
     );
   }
 }
