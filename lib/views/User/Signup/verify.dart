@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 import '../../../controllers/auth/AuthController.dart';
+import '../../../helper/ToastHelper.dart';
 import '../../home/home.dart';
 
 class VerifyScreen extends StatefulWidget {
@@ -263,45 +264,47 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         await signUpController.verifyCode(code);
 
                     if (result.containsKey('error')) {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Xác thực thất bại'),
-                            content: Text(result['error']),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text('Quay lại trang xác thực'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (BuildContext context) {
+                      //     return AlertDialog(
+                      //       title: const Text('Xác thực thất bại'),
+                      //       content: Text(result['error']),
+                      //       actions: [
+                      //         TextButton(
+                      //           onPressed: () {
+                      //             Navigator.pop(context);
+                      //           },
+                      //           child: const Text('Quay lại trang xác thực'),
+                      //         ),
+                      //       ],
+                      //     );
+                      //   },
+                      // );
+                      ToastHelper.showErrorToast('Mã xác thực không chính xác');
                     } else {
                       Map<String, dynamic> signUpResult =
                           await signUpController.sendSignUpRequest();
 
                       if (signUpResult.containsKey('error')) {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Đăng ký thất bại'),
-                              content: Text(signUpResult['error']),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('Thử lại'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) {
+                        //     return AlertDialog(
+                        //       title: const Text('Đăng ký thất bại'),
+                        //       content: Text(signUpResult['error']),
+                        //       actions: [
+                        //         TextButton(
+                        //           onPressed: () {
+                        //             Navigator.pop(context);
+                        //           },
+                        //           child: const Text('Thử lại'),
+                        //         ),
+                        //       ],
+                        //     );
+                        //   },
+                        // );
+                        ToastHelper.showErrorToast('Đăng ký thất bại');
                       } else if (signUpResult['success'] == true) {
                         showDialog(
                           context: context,
@@ -327,28 +330,28 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           },
                         );
                       } else {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Đăng ký thất bại'),
-                              content:
-                                  Text(signUpResult['msg'] ?? 'Lý do không rõ'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('Thử lại'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) {
+                        //     return AlertDialog(
+                        //       title: const Text('Đăng ký thất bại'),
+                        //       content:
+                        //           Text(signUpResult['msg'] ?? 'Lý do không rõ'),
+                        //       actions: [
+                        //         TextButton(
+                        //           onPressed: () {
+                        //             Navigator.pop(context);
+                        //           },
+                        //           child: const Text('Thử lại'),
+                        //         ),
+                        //       ],
+                        //     );
+                        //   },
+                        // );
+                        ToastHelper.showErrorToast('Đăng ký không thành công');
                       }
                     }
                   }),
-
               SizedBox(
                 height: 5,
               ),

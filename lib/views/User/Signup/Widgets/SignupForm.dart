@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../controllers/auth/AuthController.dart';
+import '../../../../helper/ToastHelper.dart';
 import '../verify.dart';
 import 'SocialMediaLogin.dart';
 
@@ -9,6 +10,7 @@ class SignupForm extends StatefulWidget {
 
   @override
   _SignupFormState createState() => _SignupFormState();
+
 }
 
 class _SignupFormState extends State<SignupForm> {
@@ -16,6 +18,11 @@ class _SignupFormState extends State<SignupForm> {
 
   String phoneOrEmail = "";
 
+  @override
+  void initState() {
+    super.initState();
+    ToastHelper.init(context);
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -237,24 +244,25 @@ class _SignupFormState extends State<SignupForm> {
 
                           if (result['success'] == false) {
                             // Hiển thị dialog khi số điện thoại hay email đã được sử dụng
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('Lỗi'),
-                                  content: Text(
-                                      'Số điện thoại hay email đã được sử dụng.'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text('Đóng'),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                            // showDialog(
+                            //   context: context,
+                            //   builder: (BuildContext context) {
+                            //     return AlertDialog(
+                            //       title: Text('Lỗi'),
+                            //       content: Text(
+                            //           'Số điện thoại hay email đã được sử dụng.'),
+                            //       actions: <Widget>[
+                            //         TextButton(
+                            //           child: Text('Đóng'),
+                            //           onPressed: () {
+                            //             Navigator.of(context).pop();
+                            //           },
+                            //         ),
+                            //       ],
+                            //     );
+                            //   },
+                            // );
+                            ToastHelper.showErrorToast('Số điện thoại hay email đã được sử dụng');
                           } else {
                             bool isPhone = signUpController.phoneOrEmail.value
                                     .contains("@")

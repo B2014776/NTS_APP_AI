@@ -144,10 +144,8 @@ class SignUpController extends GetxController {
     return result;
   }
 
-
   Future<Map<String, dynamic>> sendSignUpRequest() async {
     Map<String, dynamic> result = {};
-
     try {
       Map<String, dynamic> body = {
         'username': phoneOrEmail.value,
@@ -195,7 +193,4 @@ class SignUpController extends GetxController {
 
     return result;
   }
-
-
-
 }
