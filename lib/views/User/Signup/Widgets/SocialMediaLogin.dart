@@ -1,3 +1,4 @@
+import 'package:apptestai/views/User/Login/login.dart';
 import 'package:flutter/material.dart';
 
 class SocialMediaLogin extends StatelessWidget {
@@ -30,6 +31,19 @@ class SocialMediaLogin extends StatelessWidget {
           buttonColor: Colors.white,
           textColor: Colors.black,
           onPressed: () {},
+        ),
+        const SizedBox(height: 8),
+        _buildSocialButton(
+          logoPath: 'assets/apple.png',
+          buttonText: 'Đăng nhập với tài khoản',
+          buttonColor: Colors.white,
+          textColor: Colors.black,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MyLogin()),
+            );
+          },
         ),
         const SizedBox(height: 16),
         const Divider(),
