@@ -37,12 +37,10 @@ class _MyLoginState extends State<MyLogin> {
         MaterialPageRoute(builder: (context) => HomePage()),
       );
       if (isChecked) {
-        // Save email and password if "Remember Me" is checked
         await storage.write(key: 'email', value: email.text);
         await storage.write(key: 'password', value: password.text);
       }
     } else {
-      // Show error message if login fails
       ToastHelper.showErrorToast(
           'Login failed: ${authController.loginErrorMessage.value}');
     }
