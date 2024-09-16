@@ -252,58 +252,84 @@ class _VerifyScreenState extends State<VerifyScreen> {
                     ),
                   ),
                 ),
-                onTap: () async {
+                  onTap: () async {
+                    String phoneOrEmail = widget.arg?.value ?? "";
 
-                  String phoneOrEmail = widget.arg?.value ?? "";
+                    print("Code entered: $code");
+                    print("PhoneOrEmail have to verify: $phoneOrEmail");
 
-                  print("Code entered: $code");
-                  print("PhoneOrEmail have to verify: $phoneOrEmail");
+                    // Xác thực mã OTP
+                    Map<String, dynamic> result = await signUpController.verifyCode(code);
 
-                  // Xác thực mã
-                  Map<String, dynamic> verifyResult = await signUpController.verifyCode(code);
-
-                  if (verifyResult.containsKey('error')) {
-                    // Hiển thị thông báo lỗi xác thực mã
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(verifyResult['error']),
-                      ),
-                    );
-                  } else {
-                    // Hiển thị thông báo xác thực thành công
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Xác thực thành công!'),
-                      ),
-                    );
-
-                    Map<String, dynamic> signUpResult = await signUpController.sendSignUpRequest();
-
-                    if (signUpResult.containsKey('error')) {
-                      // Hiển thị thông báo lỗi khi gửi yêu cầu đăng ký
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(signUpResult['error']),
-                        ),
+                    if (result.containsKey('error')) {
+                      // Hiển thị modal thông báo lỗi và nút quay về trang xác thực
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Xác thực thất bại'),
+                            content: Text(result['error']),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Quay lại trang xác thực'),
+                              ),
+                            ],
+                          );
+                        },
                       );
                     } else {
-                      // Hiển thị thông báo thành công và điều hướng đến trang home
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Đăng ký thành công!'),
-                        ),
-                      );
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomePage(),
-                        ),
-                      );
+                      Map<String, dynamic> signUpResult = await signUpController.sendSignUpRequest();
+
+                      if (signUpResult.containsKey('error')) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Đăng ký thất bại'),
+                              content: Text(signUpResult['error']),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Thử lại'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Xác thực thành công'),
+                              content: const Text('Bạn đã xác thực và đăng ký thành công!'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => HomePage(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text('Đến trang chủ'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
                     }
                   }
-                },
-              ),
 
+
+              ),
 
               SizedBox(
                 height: 5,

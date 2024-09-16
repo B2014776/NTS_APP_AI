@@ -164,7 +164,7 @@ class SignUpController extends GetxController {
       Map<String, dynamic> body = {
         'username': phoneOrEmail.value,
         'password': password.value,
-        'full_name': fullName.value,
+        'full_name': username.value,
         'activation_method': 2, // 1: He thong, 2 Email, 3: SDT, 4: Apple Id
         'status_id': 11,
       };
