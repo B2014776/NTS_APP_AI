@@ -1,330 +1,202 @@
-// import 'package:apptestai/views/home.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:get/get.dart';
-// import '../../controllers/auth/AuthController.dart';
-// import '../../ultils/CustomTextField.dart';
-//
-// class Login extends StatelessWidget {
-//   const Login({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final LoginController loginController = Get.put(LoginController());
-//     void handleLogin() {
-//       print(loginController.username.value);
-//       if (loginController.username.value == 'admin' &&
-//           loginController.password.value == 'admin') {
-//         Get.offAll(() => HomePage());
-//       } else {
-//         Get.snackbar(
-//             'Lỗi đăng nhập', 'Tên đăng nhập hoặc mật khẩu không chính xác',
-//             backgroundColor: Colors.red, colorText: Colors.white);
-//       }
-//     }
-//
-//     return Scaffold(
-//       body: SingleChildScrollView(
-//         child: Column(
-//             mainAxisAlignment: MainAxisAlignment.start,
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Container(
-//                 color: Colors.white,
-//                 child: Stack(
-//                   children: [
-//                     Container(
-//                       padding: const EdgeInsets.fromLTRB(30, 80, 30, 0),
-//                       color: const Color(0xff538c51),
-//                       height: 250,
-//                       width: double.infinity,
-//                       child: Row(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                           Expanded(
-//                               flex: 3,
-//                               child: SvgPicture.asset(
-//                                 'assets/iconNTLogo.svg',
-//                                 width: 65,
-//                                 height: 65,
-//                               )),
-//                           const Spacer(),
-//                           const Expanded(
-//                               flex: 11,
-//                               child: Column(
-//                                 mainAxisAlignment: MainAxisAlignment.start,
-//                                 children: [
-//                                   Text(
-//                                     'Nông nghiệp thông minh',
-//                                     style: TextStyle(
-//                                         fontSize: 20, color: Colors.white),
-//                                   ),
-//                                   Text('Nhất Tâm',
-//                                       style: TextStyle(
-//                                           fontSize: 20, color: Colors.white))
-//                                 ],
-//                               ))
-//                         ],
-//                       ),
-//                     ),
-//                     Padding(
-//                       padding: const EdgeInsets.fromLTRB(30, 160, 30, 20),
-//                       child: Container(
-//                         decoration: BoxDecoration(
-//                           color: Colors.white,
-//                           borderRadius: BorderRadius.circular(10),
-//                           boxShadow: [
-//                             BoxShadow(
-//                               color: Colors.grey.withOpacity(0.5),
-//                               spreadRadius: 5,
-//                               blurRadius: 7,
-//                               offset: const Offset(0, 3),
-//                             ),
-//                           ],
-//                         ),
-//                         padding: const EdgeInsets.symmetric(
-//                             horizontal: 20, vertical: 15),
-//                         child: Column(
-//                           mainAxisAlignment: MainAxisAlignment.center,
-//                           children: [
-//                             const Padding(
-//                               padding: EdgeInsets.only(top: 6),
-//                               child: Text(
-//                                 'Đăng ký',
-//                                 style: TextStyle(
-//                                     fontSize: 20,
-//                                     fontWeight: FontWeight.w500,
-//                                     color: Colors.black),
-//                               ),
-//                             ),
-//                             const SizedBox(height: 6),
-//                             CustomTextFieldV6(
-//                               controller: TextEditingController(
-//                                   text: loginController.username.value),
-//                               title: 'Tên tài khoản',
-//                               isRequired: false,
-//                               icon: const Icon(
-//                                 Icons.account_circle_outlined,
-//                                 color: Colors.green,
-//                               ),
-//                               textStyle: const TextStyle(fontSize: 14),
-//                               hintText: 'Nhập tên tài khoản',
-//                             ),
-//                             const SizedBox(height: 8),
-//                             CustomTextFieldV6(
-//                               controller: TextEditingController(
-//                                   text: loginController.password.value),
-//                               title: 'Mật khẩu',
-//                               isRequired: false,
-//                               icon: const Icon(
-//                                 Icons.lock_outline,
-//                                 color: Colors.green,
-//                               ),
-//                               textStyle: const TextStyle(fontSize: 14),
-//                               hintText: 'Nhập mật khẩu vào đây',
-//                               customIcon:
-//                                   Image.asset('assets/iconPassword.png'),
-//                             ),
-//                             Obx(() => Row(
-//                                   mainAxisAlignment:
-//                                       MainAxisAlignment.spaceBetween,
-//                                   children: [
-//                                     Expanded(
-//                                       flex: 1,
-//                                       child: Row(
-//                                         children: [
-//                                           Padding(
-//                                             padding: const EdgeInsets.only(
-//                                                 left: 0.0),
-//                                             child: Checkbox(
-//                                               value: loginController
-//                                                   .isCheckLogin.value,
-//                                               onChanged: loginController
-//                                                   .toggleCheckLogin,
-//                                             ),
-//                                           ),
-//                                           const SizedBox(width: 0),
-//                                           const Expanded(
-//                                             child: Text(
-//                                               "Nhớ mật khẩu",
-//                                               style: TextStyle(fontSize: 14),
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                     ),
-//                                     Padding(
-//                                       padding:
-//                                           const EdgeInsets.only(right: 0.0),
-//                                       child: TextButton(
-//                                         onPressed: () {},
-//                                         child: const Text(
-//                                           "Quên Mật Khẩu ?",
-//                                           style: TextStyle(
-//                                               color: Colors.green,
-//                                               fontSize: 14),
-//                                         ),
-//                                       ),
-//                                     ),
-//                                   ],
-//                                 )),
-//                             const SizedBox(height: 0),
-//                             Container(
-//                               height: 40,
-//                               width: double.infinity,
-//                               decoration: BoxDecoration(
-//                                 color: const Color(0xff538c51),
-//                                 borderRadius: BorderRadius.circular(5),
-//                               ),
-//                               child: MaterialButton(
-//                                 onPressed: () {
-//                                   handleLogin();
-//                                 },
-//                                 child: const Text(
-//                                   "Đăng Nhập",
-//                                   style: TextStyle(
-//                                       color: Colors.white,
-//                                       fontSize: 16,
-//                                       fontWeight: FontWeight.bold),
-//                                 ),
-//                               ),
-//                             ),
-//                             Row(
-//                               mainAxisAlignment: MainAxisAlignment.center,
-//                               children: [
-//                                 const Text(
-//                                   "Bạn chưa có tài khoản?",
-//                                   style: TextStyle(fontSize: 14),
-//                                 ),
-//                                 TextButton(
-//                                     onPressed: () {},
-//                                     child: const Text(
-//                                       "Đăng ký",
-//                                       style: TextStyle(
-//                                           fontWeight: FontWeight.bold,
-//                                           fontSize: 14,
-//                                           color: Color(0xff006400)),
-//                                     )),
-//                               ],
-//                             ),
-//                             const Text(
-//                               "Hoặc đăng nhập với",
-//                               style: TextStyle(fontSize: 16),
-//                             ),
-//                             const SizedBox(height: 8),
-//                             Row(
-//                               mainAxisAlignment: MainAxisAlignment.center,
-//                               children: [
-//                                 MaterialButton(
-//                                   padding: EdgeInsets.zero,
-//                                   minWidth: 0,
-//                                   onPressed: () {},
-//                                   child: SvgPicture.asset(
-//                                       'assets/ic_facebook_logo.svg'),
-//                                 ),
-//                                 const SizedBox(width: 0),
-//                                 MaterialButton(
-//                                   padding: EdgeInsets.zero,
-//                                   minWidth: 0,
-//                                   onPressed: () {},
-//                                   child: SvgPicture.asset(
-//                                       'assets/ic_google_logo.svg'),
-//                                 ),
-//                               ],
-//                             )
-//                           ],
-//                         ),
-//                       ),
-//                     )
-//                   ],
-//                 ),
-//               ),
-//               SizedBox(
-//                 width: MediaQuery.of(context).size.width * 2,
-//                 height: 200,
-//                 child: Image.asset(
-//                   'assets/bottomimage.png',
-//                   fit: BoxFit.cover,
-//                 ),
-//               ),
-//             ]),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
-import 'package:flutter_login/flutter_login.dart';
-import 'package:apptestai/views/home/home.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
+import '../../../controllers/auth/SignInController.dart';
+import '../../../helper/ToastHelper.dart';
+import '../../home/home.dart';
 
-const users = {
-  'admin@gmail.com': '12345',
-  'admin123@gmail.com': 'hunter',
-};
+class MyLogin extends StatefulWidget {
+  const MyLogin({Key? key}) : super(key: key);
+  @override
+  _MyLoginState createState() => _MyLoginState();
+}
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
-  Duration get loginTime => const Duration(milliseconds: 2250);
-
-  Future<String?> _authUser(LoginData data) {
-    debugPrint('Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(data.name)) {
-        return 'User not exists';
-      }
-      if (users[data.name] != data.password) {
-        return 'Password does not match';
-      }
-      return null;
-    });
+class _MyLoginState extends State<MyLogin> {
+  @override
+  void initState() {
+    super.initState();
+    ToastHelper.init(context);
   }
 
-  Future<String?> _signupUser(SignupData data) {
-    debugPrint('Signup Name: ${data.name}, Password: ${data.password}');
-    return Future.delayed(loginTime).then((_) {
-      return null;
-    });
-  }
+  bool isChecked = false;
+  TextEditingController email =
+      TextEditingController(text: 'batungx271@gmail.com');
+  TextEditingController password = TextEditingController(text: '12345678');
+  final authController = Get.put(SignInController());
+  final storage = const FlutterSecureStorage();
 
-  Future<String> _recoverPassword(String name) {
-    debugPrint('Name: $name');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(name)) {
-        return 'User not exists';
+  Future<void> login() async {
+    authController.isLoginLoading.value = true;
+    Map<String, dynamic> result =
+        await authController.loginUser(email.text, password.text);
+    if (result.isNotEmpty && result['error'] == null) {
+      ToastHelper.showSuccessToast('Đăng nhập thành công!');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+      if (isChecked) {
+        await storage.write(key: 'email', value: email.text);
+        await storage.write(key: 'password', value: password.text);
       }
-      return '';
-    });
+    } else {
+      ToastHelper.showErrorToast(
+          'Login failed: ${authController.loginErrorMessage.value}');
+    }
+    authController.isLoginLoading.value = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return FlutterLogin(
-      title: 'NTS',
-      logo: const AssetImage('assets/Fruits_Valley.png'),
-      onLogin: _authUser,
-      onSignup: _signupUser,
-      theme: LoginTheme(
-        primaryColor: Colors.teal,
-
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/login.png'),
+          fit: BoxFit.cover,
+        ),
       ),
-      messages: LoginMessages(
-        userHint: 'Email của bạn',
-        passwordHint: 'Mật khẩu',
-        confirmPasswordHint: 'Xác nhận mật khẩu',
-        loginButton: 'ĐĂNG NHẬP',
-        signupButton: 'ĐĂNG KÝ',
-        forgotPasswordButton: 'Quên mật khẩu?',
-        recoverPasswordButton: 'GỬI LẠI MẬT KHẨU',
-        recoverPasswordDescription: 'Nhập email để lấy lại mật khẩu.',
-        recoverPasswordSuccess: 'Mật khẩu đã được gửi đến email của bạn!',
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: [
+            Container(),
+            Container(
+              padding: const EdgeInsets.only(left: 35, top: 130),
+              child: const Text(
+                'Welcome\nBack',
+                style: TextStyle(color: Colors.white, fontSize: 33),
+              ),
+            ),
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(left: 35, right: 35),
+                      child: Column(
+                        children: [
+                          TextField(
+                            controller: email,
+                            style: const TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey.shade100,
+                              filled: true,
+                              hintText: "Email",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+                          TextField(
+                            controller: password,
+                            style: const TextStyle(),
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              fillColor: Colors.grey.shade100,
+                              filled: true,
+                              hintText: "Password",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 40),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Remember Me",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              Checkbox(
+                                value: isChecked,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isChecked = value ?? false;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                          Obx(() {
+                            return authController.isLoginLoading.value
+                                ? const CircularProgressIndicator() // Show loading indicator when logging in
+                                : Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        'Sign in',
+                                        style: TextStyle(
+                                          fontSize: 27,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      CircleAvatar(
+                                        radius: 30,
+                                        backgroundColor:
+                                            const Color(0xff4c505b),
+                                        child: IconButton(
+                                          color: Colors.white,
+                                          onPressed: () {
+                                            login(); // Call login method
+                                          },
+                                          icon: const Icon(Icons.arrow_forward),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                          }),
+                          const SizedBox(height: 40),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, 'register');
+                                },
+                                style: const ButtonStyle(),
+                                child: const Text(
+                                  'Sign Up',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Color(0xff4c505b),
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  // Show error message for forgot password feature
+                                  ToastHelper.showErrorToast(
+                                      'Forgot Password feature not implemented');
+                                },
+                                child: const Text(
+                                  'Forgot Password',
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Color(0xff4c505b),
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ));
-      },
-      onRecoverPassword: _recoverPassword,
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'Widgets/BottomImage.dart';
 import 'Widgets/Header.dart';
 import 'Widgets/SignupForm.dart';

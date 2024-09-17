@@ -10,12 +10,14 @@ class UserController {
       email: 'Tung@Tung.com',
       phoneNumber: '0123456789',
       avatarUrl: '01f5e88f2a3c9aa14282135a21d5f0a1.png',
+      dateOfBirth: '20-02-2021',
+      gender: '123 Lê Văn Thái, Quận 1, TP. HCM',
     );
     // try {
     //   // final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Blast');
     //   // if (response.statusCode == 200) {
     //   //   user = User.fromJson(response.data);
-    //2
+    //
     //   }
     // } catch (error) {
     //   print("Failed to load disease details: $error");

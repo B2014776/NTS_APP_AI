@@ -11,7 +11,6 @@ class DioConfig {
     dio.options.followRedirects = true;
     dio.options.maxRedirects = 5;
     dio.options.headers['Authorization'] = 'Bearer $_token';
-
     dio.options.validateStatus = (status) {
       return status != null && status < 500;
     };
