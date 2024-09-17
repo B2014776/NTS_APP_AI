@@ -7,7 +7,6 @@ import '../../home/home.dart';
 
 class MyLogin extends StatefulWidget {
   const MyLogin({Key? key}) : super(key: key);
-
   @override
   _MyLoginState createState() => _MyLoginState();
 }

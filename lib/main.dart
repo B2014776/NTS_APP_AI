@@ -1,10 +1,7 @@
 import 'package:apptestai/views/User/Login/login.dart';
-import 'package:apptestai/views/home/home.dart';
-import 'package:apptestai/views/learn.dart';
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:apptestai/views/User/Signup/signup.dart';
 
 void main() {
   runApp(
@@ -22,7 +19,6 @@ class MyApp extends StatelessWidget {
       title: 'NTSOFT - AI',
       // locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-
       theme: ThemeData(
         textTheme: GoogleFonts.latoTextTheme(
           Theme.of(context).textTheme,
@@ -30,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  Signup(),
+      home:  MyLogin(),
     );
   }
 }
