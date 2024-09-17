@@ -55,12 +55,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
             ),
           );
         } else if (index == 4) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Account(), // Chuyển đến trang Community
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) =>null, // Chuyển đến trang Community
+          //   ),
+          // );
         }
         // Thêm điều kiện cho các index khác nếu cần
         onTap(index); // Gọi hàm onTap nếu bạn có xử lý thêm ngoài điều hướng
