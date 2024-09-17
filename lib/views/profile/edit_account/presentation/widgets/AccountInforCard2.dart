@@ -34,6 +34,7 @@ class _AccountInfoCard2State extends State<AccountInfoCard2> {
           children: [
             Row(
               children: [
+
                 CircleAvatar(
                   radius: 30,
                   backgroundImage: AssetImage(
