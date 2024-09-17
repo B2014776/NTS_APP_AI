@@ -31,13 +31,13 @@ class _ExpertCardState extends State<ExpertCard> {
           Row(
             children: [
               Padding(
-                padding: EdgeInsets.all(0.0), // Hoặc EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0)
+                padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
                 child: Image.network(
                   imageUrl, // Sử dụng biến chứa URL hình ảnh
                   width: 86,
                   height: 104,
                   errorBuilder: (context, error, stackTrace) {
-                    return Icon(Icons.error); // Hiển thị icon lỗi nếu không tải được hình ảnh
+                    return Icon(Icons.error);
                   },
                 ),
               ),

@@ -1,13 +1,15 @@
-import 'package:apptestai/views/home/MenuItems/Menuitems.dart';
-import 'package:apptestai/views/home/plant/Plant.dart';
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import '../../ultils/CustomBottomNavigationBar.dart';
 import '../../ultils/Custom_drawer.dart';
+import 'MenuItems/Menuitems.dart';
+import 'map/map.dart';
 import 'market/cardMarketList.dart';
 import 'news/News.dart';
+import 'plant/Plant.dart';
 import 'weather/weather.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +20,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TextEditingController searchController = TextEditingController();
-
   int _currentIndex = 0;
 
   final CameraDescription camera = const CameraDescription(
@@ -27,31 +28,80 @@ class _HomePageState extends State<HomePage> {
     sensorOrientation: 0,
   );
 
+  final ImagePicker _picker = ImagePicker();
+
   void _onTap(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
 
+  Future<void> _openGallery() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      print('Image path: ${image.path}');
+    }
+  }
+
+  Future<void> _openCamera() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+
+    if (image != null) {
+      print('Image path: ${image.path}');
+    }
+  }
+
+  Future<void> login() async {
+    Dio dio = Dio();
+    Map<String, dynamic> data = {
+      "username": "batungx271@gmail.com",
+      "password": "12345678"
+    };
+
+    try {
+      Response response = await dio.post(
+        'https://api-ai-1-6b81.onrender.com/auth/signin',
+        data: data,
+      );
+
+      print('Response data: ${response.data}');
+    } catch (e) {
+      // In ra lỗi nếu có
+      print('Error: $e');
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       drawer: CustomDrawer(),
-      floatingActionButton: SizedBox(
-        child: FloatingActionButton.extended(
-          onPressed: () {},
-          backgroundColor: Colors.white,
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0), // Softer corners
-            side: const BorderSide(color: Colors.black26), // Lighter border
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: login,
+            backgroundColor: Colors.green,
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            child: const Icon(Icons.camera_alt, color: Colors.white),
           ),
-          icon: Image.asset('assets/Thongminh.png'),
-          label: const AutoSizeText(
-            '',
+          const SizedBox(height: 16),
+          FloatingActionButton(
+            onPressed: _openGallery,
+            backgroundColor: Colors.blue,
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            child: const Icon(Icons.photo_library, color: Colors.white),
           ),
-        ),
+        ],
       ),
       body: Stack(
         children: [
@@ -80,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                       onPressed: () {
@@ -91,7 +142,11 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.white,
                       ),
                     ),
-                    const Spacer(),
+                    Image.asset(
+                      'assets/logo_ver2.png',
+                      fit: BoxFit.cover,
+                      filterQuality: FilterQuality.high,
+                    ),
                     Stack(
                       children: <Widget>[
                         IconButton(
@@ -126,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -136,14 +191,15 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       const SizedBox(height: 20),
                       const Weather(),
-                      const SizedBox(height: 16),
-                      const Menuitems(),
+                      // const SizedBox(height: 16),
+                      // const Menuitems(),
                       const SizedBox(height: 16),
                       const CardMarketList(),
                       const SizedBox(height: 16),
                       const Plant(),
                       const SizedBox(height: 16),
                       NewsPage(),
+                      // DiseaseMapPage()
                     ],
                   ),
                 ),
@@ -151,7 +207,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(30, 120, 30, 0),
+            padding: const EdgeInsets.fromLTRB(20, 120, 20, 0),
             child: Container(
               height: 50,
               decoration: BoxDecoration(

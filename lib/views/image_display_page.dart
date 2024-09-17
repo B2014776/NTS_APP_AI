@@ -1,13 +1,12 @@
-import 'package:apptestai/controllers/detection/DiseaseDetectionController.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
+import 'package:apptestai/controllers/detection/DiseaseDetectionController.dart';
 import 'detection/DiseaseDetection.dart';
 
 class ImageDisplayPage extends StatefulWidget {
   final String imagePath;
 
-  const ImageDisplayPage({required this.imagePath});
+  const ImageDisplayPage({required this.imagePath, Key? key}) : super(key: key);
 
   @override
   _ImageDisplayPageState createState() => _ImageDisplayPageState();
@@ -25,8 +24,8 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
     });
 
     try {
-      final decodedResponse = await _diseaseController.uploadImageAndFetchDetails(widget.imagePath);
-      print("decodedResponse : $decodedResponse");
+      final decodedResponse =
+          await _diseaseController.uploadImageAndFetchDetails(widget.imagePath);
       if (decodedResponse.containsKey('error')) {
         setState(() {
           _className = decodedResponse['error'];
@@ -46,7 +45,6 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
         );
       }
     } catch (e) {
-      print('An error occurred: $e');
       setState(() {
         _className = 'An error occurred';
         _probability = null;
@@ -62,46 +60,61 @@ class _ImageDisplayPageState extends State<ImageDisplayPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ảnh đã chụp', style: TextStyle(fontSize: 25)),
+        title: const Text('Ảnh đã chụp', style: TextStyle(fontSize: 25)),
         backgroundColor: Colors.green,
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            child: Align(
-              alignment: Alignment.topCenter,
+            child: Center(
               child: Image.file(
                 File(widget.imagePath),
                 width: double.infinity,
+                height: double.infinity,
                 fit: BoxFit.cover,
               ),
             ),
           ),
           if (_isLoading)
-            Center(
-              child: CircularProgressIndicator(),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           if (_className != null && !_isLoading)
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Class: $_className\nProbability: ${_probability?.toStringAsFixed(2) ?? 'N/A'}',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+              child: Column(
+                children: [
+                  Text(
+                    'Class: $_className',
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Probability: ${_probability?.toStringAsFixed(2) ?? 'N/A'}',
+                    style: const TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
-          Container(
-            color: Colors.black,
-            padding: EdgeInsets.symmetric(vertical: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.check_circle_outline, color: Colors.green),
-                  onPressed: _uploadImage,
-                  iconSize: 80,
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 16.0 ),
+            child: ElevatedButton.icon(
+              onPressed: _uploadImage,
+              icon: const Icon(Icons.check_circle_outline, color: Colors.white),
+              label: const Text('Sử dụng ảnh'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                textStyle: const TextStyle(fontSize: 18),
+              ),
             ),
           ),
         ],

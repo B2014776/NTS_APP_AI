@@ -1,62 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import '../../../../models/NewsModel.dart';
 
 class NewsCards extends StatelessWidget {
-  final List<TinTuc> newsList;
+  final List<TinTuc> news;
 
-  const NewsCards({Key? key, required this.newsList}) : super(key: key);
+  const NewsCards({
+    Key? key,
+    required this.news,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.symmetric(vertical: 2),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
-        children: newsList.map((news) {
+        children: news.map((newsItem) {
           return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-            color: Colors.white,
+            margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            elevation: 3,
+            shadowColor: Colors.grey.withOpacity(0.5),
             child: SizedBox(
-              width: 300, // You can adjust the width as needed
-              child: Row(
+              width: 280,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: 120, // Adjust the width of the image
-                    height: double.infinity,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.network(
-                        news.img,
-                        fit: BoxFit.cover,
+                  Stack(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        height: 140,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(10.0)),
+                          child: Image.asset(
+                            'assets/${newsItem.img}',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
-                    ),
+                      Container(
+                        width: double.infinity,
+                        height: 140,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(10.0)),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.black.withOpacity(0.6),
+                              Colors.transparent
+                            ],
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-
-                          Text(
-                            news.tieuDe,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AutoSizeText(
+                          newsItem.tieuDe,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16.0,
+                            color: Colors.black87,
                           ),
-                          SizedBox(height: 4.0),
-                          Text(
-                            news.noiDung,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 14.0, color: Colors.grey[600]),
-                          ),
-                        ],
-                      ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: 6.0),
+                        AutoSizeText(
+                          newsItem.noiDung,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 14.0, color: Colors.grey[700]),
+                        ),
+                      ],
                     ),
                   ),
                 ],

@@ -4,35 +4,42 @@ import '../../models/UserModel.dart';
 class UserController {
   User? user;
 
-  // Hàm này sẽ sử dụng dữ liệu giả thay vì gửi yêu cầu đến một API
   Future<void> fetchUserFromAPI() async {
-    // Dữ liệu giả để mô phỏng phản hồi từ API
-    await Future.delayed(Duration(seconds: 1)); // Giả lập thời gian tải dữ liệu
     user = User(
       name: 'Ba Tung',
       email: 'Tung@Tung.com',
       phoneNumber: '0123456789',
-      avatarUrl: 'avatar.jpg',
-      dateOfBirth: '1990-01-01', // Ngày sinh giả
-      gender: 'Nam', // Giới tính giả
+      avatarUrl: '01f5e88f2a3c9aa14282135a21d5f0a1.png',
+      dateOfBirth: '20-02-2021',
+      gender: '123 Lê Văn Thái, Quận 1, TP. HCM',
     );
+    // try {
+    //   // final response = await Dio().get('https://api-ai-l1r8.onrender.com/disease_iden_demo/Blast');
+    //   // if (response.statusCode == 200) {
+    //   //   user = User.fromJson(response.data);
+    //
+    //   }
+    // } catch (error) {
+    //   print("Failed to load disease details: $error");
+    // }
   }
-
-  // Hàm cập nhật dữ liệu người dùng
   Future<void> updateUserToAPI(User updatedUser) async {
     try {
-      // Giả lập cập nhật dữ liệu người dùng
-      await Future.delayed(Duration(seconds: 1)); // Giả lập thời gian cập nhật
-      user = updatedUser; // Cập nhật thông tin người dùng với dữ liệu mới
+      final response = await Dio().put(
+        'https://example.com/update_user',
+        data: updatedUser.toJson(),
+      );
+      if (response.statusCode == 200) {
+        user = updatedUser;
+      }
     } catch (error) {
       print("Failed to update user details: $error");
     }
   }
 
-  // Hàm trả về thông tin người dùng dưới dạng chuỗi
   String getUserDetails() {
     if (user != null) {
-      return "Tên: ${user!.name}\nEmail: ${user!.email}\nSố điện thoại: ${user!.phoneNumber}\nNgày sinh: ${user!.dateOfBirth ?? 'Chưa có'}\nGiới tính: ${user!.gender ?? 'Chưa có'}";
+      return "Tên: ${user!.name}\nEmail: ${user!.email}\nSố điện thoại: ${user!.phoneNumber ?? 'Chưa có'}";
     } else {
       return "Chưa có dữ liệu người dùng.";
     }
